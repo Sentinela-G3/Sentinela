@@ -1,2 +1,2 @@
 # Sentinela
-Projeto Sentinela
+Site do Sentinela
