@@ -1,9 +1,9 @@
 import time
+import math
 
 # Configuração do Banco de Dados
 from mysql.connector import (connection)
-mydb = connection.MySQLConnection(host='10.18.32.28', user='sentinelaSelect', password='Sentinela@123', database='sentinela')
-# mydb = connection.MySQLConnection(host='localhost', user='root', password='Gg1502@#', database='sentinela')
+mydb = connection.MySQLConnection(host='localhost', user='sentinelaSelect', password='sentinela@123', database='sentinela')
 mycursor = mydb.cursor()
 
 # Listar as máquinas existentes e selecionar uma
@@ -16,9 +16,6 @@ def listarMaquinas():
   mydb.commit()
   
   i = 0
-
-  #converter os valores recebidos
-  #arrumar o loop qnd a maquina nao tem dados
   
   print("\nMáquinas cadastradas no banco de dados:\n")
   while i < len(arrayMaquinas):
@@ -50,9 +47,10 @@ def listarMaquinas():
 def exibirDados(idMaquina):
 
   if idMaquina == -1:
-    return print("MAQUINA NÃO SELECIONADA")
+    print("MAQUINA NÃO SELECIONADA")
+    return  
   elif idMaquina == -2:
-    return False
+    return -2
 
 # VIEW CPU
   mycursor.execute("SELECT c.nome, cpu.porcentagemUso, cpu.tempoAtivoPorcentagem, cpu.tempoInativoPorcentagem, cpu.frequencia, cpu.tempoColeta from componente as c join processador as cpu on cpu.fkComponente = c.idComponente where fkMaquina = %s order by tempoColeta desc limit 1; ", [idMaquina])
@@ -79,9 +77,7 @@ def exibirDados(idMaquina):
   has_dataBATERIA = True
   has_dataREDE = True
   has_dataDISCO = True
-  
-  print(arrayDISCO)
-  
+    
   if len(arrayCPU) == 0:
     print('Sem dados de CPU para esta maquina')
     has_dataCPU = False
@@ -108,14 +104,14 @@ def exibirDados(idMaquina):
     cpu_porcentagemUso = arrayCPU[0][1]
     cpu_porcentagemAtivo = arrayCPU[0][2]
     cpu_porcentagemInativo = arrayCPU[0][3]
-    cpu_frequencia = arrayCPU[0][4]
+    cpu_frequencia = arrayCPU[0][4] / 1000
     cpu_tempoColeta = arrayCPU[0][5]
   
   # Mostrar dados RAM
   if has_dataRAM:
     ram_nome = arrayRAM[0][0]
-    ram_capacidadeTotal = arrayRAM[0][1]
-    ram_capacidadeDisp = arrayRAM[0][2]
+    ram_capacidadeTotal = arrayRAM[0][1] / 2**30
+    ram_capacidadeDisp = arrayRAM[0][2] / 2**30
     ram_porcentagemUso = arrayRAM[0][3]
     ram_tempoColeta = arrayRAM[0][4]
   
@@ -127,13 +123,13 @@ def exibirDados(idMaquina):
 
   if has_dataREDE:
     rede_nome = arrayREDE[0][0]
-    rede_byteEnviado = arrayREDE[0][1]
+    rede_byteEnviado = (arrayREDE[0][1] * 8) / (1000 * 17) # 17 = segs
     rede_tempoColeta = arrayREDE[0][2]
 
   if has_dataDISCO:
     disco_nome = arrayDISCO[0][0]
-    disco_capacidadeTotal = arrayDISCO[0][1]
-    disco_capacidadeDisponivel = arrayDISCO[0][2]
+    disco_capacidadeTotal = arrayDISCO[0][1] / 2**30
+    disco_capacidadeDisponivel = arrayDISCO[0][2] / 2**30
     disco_tempoColeta = arrayDISCO[0][3]
   
   if has_dataCPU:
@@ -146,7 +142,7 @@ def exibirDados(idMaquina):
     |                                  
     | % INATIVA - {cpu_porcentagemInativo}         
     |                                  
-    | FREQUÊNCIA - {cpu_frequencia}                 
+    | FREQUÊNCIA - {round(cpu_frequencia)} GHz                 
     |                                  
     | HORÁRIO DO REGISTRO - {cpu_tempoColeta}             
     <:---------------------------------------------------------:>""")
@@ -157,9 +153,9 @@ def exibirDados(idMaquina):
     <:---------------------------------------------------------:>
     | % USO - {ram_porcentagemUso}             
     |                                  
-    | CAPACIDADE TOTAL - {ram_capacidadeTotal}           
+    | CAPACIDADE TOTAL - {round(ram_capacidadeTotal)} Gb           
     |                                  
-    | CAPACIDADE DISPONIVEL - {ram_capacidadeDisp}         
+    | CAPACIDADE DISPONIVEL - {round(ram_capacidadeDisp)} Gb         
     |                                  
     | HORÁRIO DO REGISTRO - {ram_tempoColeta}             
     <:---------------------------------------------------------:>""")
@@ -177,7 +173,7 @@ def exibirDados(idMaquina):
     print(f"""                                 
     {rede_nome}
     <:---------------------------------------------------------:>
-    | CAPACIDADE DISPONIVEL - {rede_byteEnviado}         
+    | CAPACIDADE DISPONIVEL - {math.floor(rede_byteEnviado)} Kbps        
     |                                  
     | HORÁRIO DO REGISTRO - {rede_tempoColeta}             
     <:---------------------------------------------------------:>""")
@@ -186,13 +182,12 @@ def exibirDados(idMaquina):
     print(f"""
     {disco_nome}
     <:---------------------------------------------------------:>
-    | CAPACIDADE TOTAL - {disco_capacidadeTotal}           
+    | CAPACIDADE TOTAL - {math.floor(disco_capacidadeTotal)} Gb          
     |                                  
-    | CAPACIDADE DISPONIVEL - {disco_capacidadeDisponivel}         
+    | CAPACIDADE DISPONIVEL - {math.floor(disco_capacidadeDisponivel)} Gb         
     |                                  
     | HORÁRIO DO REGISTRO - {disco_tempoColeta}          
-    <:---------------------------------------------------------:>\n\n""")
-    
+    <:---------------------------------------------------------:>\n\n""")    
     return True
 
   
@@ -201,7 +196,7 @@ while True:
   listarMaquinas()
   retornoFuncao = exibirDados(idSelecionado)
   
-  if not retornoFuncao:
+  if retornoFuncao == -2:
     break
   
   time.sleep(2)
