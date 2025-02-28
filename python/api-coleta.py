@@ -4,7 +4,7 @@ import mysql.connector
 import datetime
 
 mydb = mysql.connector.connect(
-  host="127.0.0.1",
+  host="10.18.32.10",
   user="sentinelaInsert",
   password="Sentinela@123",
   database="sentinela"
@@ -52,17 +52,16 @@ while tempoSegundos > 0:
     mycursor.execute(sql, val)
     mydb.commit()
 
-    # MEU COMPUTADOR NÃO TEM BATERIA ENTÃO ESSE COMANDO NÃO RODOU
-    # bateriaPorcentagematual = psutil.sensors_battery().percent
-    # bateriaTemporestante = psutil.sensors_battery().secsleft
+    bateriaPorcentagematual = psutil.sensors_battery().percent
+    bateriaTemporestante = psutil.sensors_battery().secsleft
 
-    # print("Bateria\n")
-    # print("Porcentagem da carga atual da bateria: ", bateriaPorcentagematual)
-    # print("Tempo Restante em segundos da bateria: ", bateriaTemporestante, "\n")
-    # sql = "INSERT INTO bateria VALUES (default, %s, %s, %s, 1, 1)"
-    # val = (bateriaPorcentagematual, bateriaTemporestante, now)
-    # mycursor.execute(sql, val)
-    # mydb.commit()
+    print("Bateria\n")
+    print("Porcentagem da carga atual da bateria: ", bateriaPorcentagematual)
+    print("Tempo Restante em segundos da bateria: ", bateriaTemporestante, "\n")
+    sql = "INSERT INTO bateria VALUES (default, %s, %s, %s, 1, 1)"
+    val = (bateriaPorcentagematual, bateriaTemporestante, now)
+    mycursor.execute(sql, val)
+    mydb.commit()
 
     redeBytesenviados = psutil.net_io_counters().bytes_sent
 
