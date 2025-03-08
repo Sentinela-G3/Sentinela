@@ -13,7 +13,6 @@ CREATE TABLE usuario (
     sobrenome VARCHAR(45),
     email VARCHAR(45),
     cpf CHAR(11),
-    cargo VARCHAR(45),
     senha CHAR(64),
     fkCargo INT,
     constraint fkUsuarioCargo foreign key (fkCargo) references cargo (idCargo)
@@ -76,7 +75,14 @@ CREATE TABLE dados (
 );
 
 insert into empresa values
-(default, 'Quicktron', '11111111111111', 'fabricante', '2025-02-25');
+(1, 'Quicktron', '11111111111111', 'fabricante', '2025-02-25');
+
+insert into cargo values
+(1, 'Gerente', 1),
+(2, 'Analista', 3);
+
+insert into usuario values
+(1, 'Ronaldo Alves', null, 'ronaldoalves@quicktron.com', 12345678901, 'Quicktron#123', 1);
 
 insert into endereco values
 (default, 'Rua João Silva', '04911111', 'sp', '', 1);
