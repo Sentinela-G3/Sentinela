@@ -1,15 +1,22 @@
 create database sentinela;
 use sentinela;
 
+CREATE TABLE cargo (
+	idCargo INT PRIMARY KEY AUTO_INCREMENT,
+    nomeCargo VARCHAR(45),
+    nivelAcesso INT
+);
+
 CREATE TABLE usuario (
     idUsuario INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(45),
     sobrenome VARCHAR(45),
     email VARCHAR(45),
     cpf CHAR(11),
-    contato CHAR(11),
     cargo VARCHAR(45),
-    senha CHAR(64)
+    senha CHAR(64),
+    fkCargo INT,
+    constraint fkUsuarioCargo foreign key (fkCargo) references cargo (idCargo)
 );
 
 CREATE TABLE empresa (
@@ -58,57 +65,14 @@ CREATE TABLE componente (
     FOREIGN KEY (fkMaquina) REFERENCES maquina(idMaquina)
 );
 
-CREATE TABLE processador (
-    idProcessador INT AUTO_INCREMENT PRIMARY KEY,
-    porcentagemUso DECIMAL(4,1),
-    tempoAtivoPorcentagem DECIMAL(4,1),
-    tempoInativoPorcentagem DECIMAL(4,1),
-    frequencia float,
+CREATE TABLE dados (
+	idDados INT AUTO_INCREMENT PRIMARY KEY,
+    tipo VARCHAR(45),
+    valor FLOAT,
     tempoColeta DATETIME,
     alerta TINYINT,
     fkComponente INT,
-    FOREIGN KEY (fkComponente) REFERENCES componente(idComponente)
-);
-
-CREATE TABLE memoria (
-    idMemoria INT AUTO_INCREMENT PRIMARY KEY,
-    memoriaInutilizada FLOAT,
-    capacidadeDisp FLOAT,
-    capacidadeTotal FLOAT,
-    porcentagemUso DECIMAL(4,1),
-    tempoColeta DATETIME,
-    alerta TINYINT,
-    fkComponente INT,
-    FOREIGN KEY (fkComponente) REFERENCES componente(idComponente)
-);
-
-CREATE TABLE bateria (
-    idBateria INT AUTO_INCREMENT PRIMARY KEY,
-    porcentagemAtual INT,
-    tempoRestante INT,
-	tempoColeta DATETIME,
-    alerta TINYINT,
-    fkComponente INT,
-    FOREIGN KEY (fkComponente) REFERENCES componente(idComponente)
-);
-
-CREATE TABLE armazenamento (
-    idArmazenamento INT AUTO_INCREMENT PRIMARY KEY,
-    capacidadeTotal FLOAT,
-    capacidadeDisp FLOAT,
-    tempoColeta DATETIME,
-    alerta TINYINT,
-    fkComponente INT,
-    FOREIGN KEY (fkComponente) REFERENCES componente(idComponente)
-);
-
-CREATE TABLE redeChip (
-    idRedeChip INT AUTO_INCREMENT PRIMARY KEY,
-    byteEnviado INT,
-    tempoColeta DATETIME,
-    alerta TINYINT,
-    fkComponente INT,
-    FOREIGN KEY (fkComponente) REFERENCES componente(idComponente)
+    constraint fkDadosComponente foreign key (fkComponente) references componente (idComponente)
 );
 
 insert into empresa values
