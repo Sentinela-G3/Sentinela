@@ -13,6 +13,7 @@ CREATE TABLE usuario (
     sobrenome VARCHAR(45),
     email VARCHAR(45),
     cpf CHAR(11),
+    contato CHAR(11),
     senha CHAR(64),
     fkCargo INT,
     constraint fkUsuarioCargo foreign key (fkCargo) references cargo (idCargo)
@@ -82,11 +83,16 @@ insert into cargo values
 (2, 'Analista', 3);
 
 insert into usuario values
-(1, 'Ronaldo Alves', null, 'ronaldoalves@quicktron.com', 12345678901, 'Quicktron#123', 1);
+(1, 'Ronaldo Alves', null, 'ronaldoalves@quicktron.com', 12345678901, 12345678901, 'Quicktron#123', 1);
 
 insert into endereco values
-(default, 'Rua João Silva', '04911111', 'sp', '', 1);
+(1, 'Rua João Silva', '04911111', 'sp', '', 1);
 
+insert into usuarioEndereco  values
+(1, 1, 2);
+
+        SELECT idUsuario, nome, email, fkCargo, idEmpresa FROM usuario join usuarioEndereco on idUsuario = fkUsuario join endereco on 
+idEndereco = fkEndereco join empresa on idEmpresa = fkEmpresa WHERE email = 'ronaldoalves@quicktron.com' AND senha = 'Quicktron#123'; 
 insert into maquina values
 (default, 'ativo', 'M60', 'Quicktron', 1, 1);
 
@@ -96,3 +102,5 @@ insert into componente values
 (default, 'Bateria', 'Cr2032', 1),
 (default, 'redeChip', 'PCI-EXPRESS', 1),
 (default, 'Armazenamento', 'Kingston A400', 1);
+
+select * from usuario;

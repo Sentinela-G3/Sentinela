@@ -23,11 +23,11 @@ function autenticar(req, res) {
                             .then((resultadoAquarios) => {
                                 if (resultadoAquarios.length > 0) {
                                     res.json({
-                                        id: resultadoAutenticar[0].id,
+                                        id: resultadoAutenticar[0].idUsuario,
                                         email: resultadoAutenticar[0].email,
                                         nome: resultadoAutenticar[0].nome,
                                         senha: resultadoAutenticar[0].senha,
-                                        aquarios: resultadoAquarios
+                                        fkEmpresa: resultadoAutenticar[0].idEmpresa
                                     });
                                 } else {
                                     res.status(204).json({ aquarios: [] });
@@ -56,9 +56,7 @@ function cadastrar(req, res) {
     var email = req.body.emailServer;
     var cpf = req.body.cpfServer;
     var contato = req.body.contatoServer;
-    var cargo = req.body.cargoServer;
     var senha = req.body.senhaServer;
-    var fkEmpresa = req.body.idEmpresaServer;
 
     // Faça as validações dos valores
     if (nome == undefined) {
@@ -69,16 +67,12 @@ function cadastrar(req, res) {
         res.status(400).send("Seu cpf está undefined!");
     } else if (contato == undefined) {
         res.status(400).send("Seu contato está undefined!");
-    } else if (cargo == undefined) {
-        res.status(400).send("Seu cargo está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
-    } else if (fkEmpresa == undefined) {
-        res.status(400).send("Sua empresa a vincular está undefined!");
     } else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, email, cpf, contato, cargo, senha, fkEmpresa)
+        usuarioModel.cadastrar(nome, email, cpf, contato, senha)
             .then(
                 function (resultado) {
                     res.json(resultado);

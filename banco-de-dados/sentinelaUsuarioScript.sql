@@ -1,10 +1,6 @@
 create user 'sentinelaInsertDados'@'%' identified by 'Sentinela@123';
 
-grant insert on sentinela.processador to 'sentinelaInsertDados'@'%';
-grant insert on sentinela.memoria to 'sentinelaInsertDados'@'%';
-grant insert on sentinela.bateria to 'sentinelaInsertDados'@'%';
-grant insert on sentinela.redeChip to 'sentinelaInsertDados'@'%';
-grant insert on sentinela.armazenamento to 'sentinelaInsertDados'@'%';
+grant insert on sentinela.dados to 'sentinelaInsertDados'@'%';
 
 create user 'sentinelaSelect'@'%' identified by 'Sentinela@123';
 
@@ -16,5 +12,11 @@ grant insert on sentinela.usuario to 'sentinelaInsertCadastro'@'%';
 grant insert on sentinela.endereco to 'sentinelaInsertCadastro'@'%';
 grant insert on sentinela.empresa to 'sentinelaInsertCadastro'@'%';
 grant insert on sentinela.usuarioEndereco to 'sentinelaInsertCadastro'@'%';
+grant insert on sentinela.maquina to 'sentinelaInsertCadastro'@'%';
+grant insert on sentinela.componente to 'sentinelaInsertCadastro'@'%';
+
+create user 'sentinelTestes'@'%' identified by 'Sentinela@123';
+
+grant all on sentinela.* to 'sentinelaTestes'@'%';
 
 flush privileges;
