@@ -30,11 +30,11 @@ Senha: <input type="text" id="input_senha"><br>
 //         senhaServer: senha,
 //         idEmpresaServer: idEmpresa
 function cadastrar(){
-    var nome = input_nome
-    var email = input_email
-    var cpf = input_cpf
-    var contato = input_contato
-    var senha = input_senha
+    var nome = input_nome.value;
+    var email = input_email.value;
+    var cpf = input_cpf.value;
+    var contato = input_contato.value;
+    var senha = input_senha.value;
     // var idEmpresa = sessionStorage.idEmpresa;
 
     fetch("/usuarios/cadastrar", {
@@ -55,17 +55,10 @@ function cadastrar(){
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-          cardErro.style.display = "block";
-
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
           setTimeout(() => {
-            window.location = "login.html";
+            window.location = "./login.html";
           }, "2000");
-
-          limparFormulario();
-          finalizarAguardar();
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
