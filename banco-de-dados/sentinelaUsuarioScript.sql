@@ -15,7 +15,7 @@ grant insert on sentinela.usuarioEndereco to 'sentinelaInsertCadastro'@'%';
 grant insert on sentinela.maquina to 'sentinelaInsertCadastro'@'%';
 grant insert on sentinela.componente to 'sentinelaInsertCadastro'@'%';
 
-create user 'sentinelTestes'@'%' identified by 'Sentinela@123';
+create user 'sentinelaTestes'@'%' identified by 'Sentinela@123';
 
 grant all on sentinela.* to 'sentinelaTestes'@'%';
 
