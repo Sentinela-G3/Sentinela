@@ -16,7 +16,9 @@ CREATE TABLE usuario (
     contato CHAR(11),
     senha CHAR(64),
     fkCargo INT,
-    constraint fkUsuarioCargo foreign key (fkCargo) references cargo (idCargo)
+    fkDono INT,
+    constraint fkUsuarioCargo foreign key (fkCargo) references cargo (idCargo),
+    constraint fkUsuarioDono foreign key (fkDono) references empresa (idEmpresa)
 );
 
 CREATE TABLE empresa (
@@ -44,6 +46,13 @@ CREATE TABLE usuarioEndereco (
     PRIMARY KEY (fkUsuario, fkEndereco),
     FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
     FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco)
+);
+
+CREATE TABLE modelo (
+    idModelo INT AUTO_INCREMENT PRIMARY KEY,
+    nomeModelo VARCHAR(45),
+    fkEmpresa INT,
+    constraint fkModeloEmpresa (fkEmpresa) references empresa (idEmpresa)
 );
 
 CREATE TABLE maquina (
