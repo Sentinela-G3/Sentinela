@@ -1,4 +1,91 @@
-.Header{
-    font-family: Poppins;
-    font-size: 50px;
+html {
+    scroll-behavior: smooth; /*Rolagem suave da página ao clicar no botão*/
+  }
+  
+body {
+  margin: 0;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+}
+
+/* .main_container {
+  margin: 0 auto;
+  padding: 20px;
+} */
+
+
+/* Nav Bar */
+
+.container_nav {
+  padding: 10px 0;
+}
+
+nav {
+  color: #1a1a1a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.logo span {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.box_nav {
+  display: flex;
+  justify-content: center;
+}
+
+.itens_nav {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.itens_nav li {
+  list-style: none;
+  margin-right: 25px;
+}
+
+.itens_nav a {
+  color: #1a1a1a;
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.itens_nav a:hover {
+  color: #f39c12;
+}
+
+.itens_nav li:last-child {
+  margin-right: 0;
+}
+
+.btns_nav {
+  text-align: right;
+}
+
+.btn_sentinelas {
+  background-color: #FBE969;
+  color: #1a1a1a;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.btn_sentinelas:hover {
+  background-color: #fdcf00;
+}
+
+.botaoTopo {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
 }
