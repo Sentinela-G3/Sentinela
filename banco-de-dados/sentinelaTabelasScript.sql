@@ -7,6 +7,14 @@ CREATE TABLE cargo (
     nivelAcesso INT
 );
 
+CREATE TABLE empresa (
+    idEmpresa INT AUTO_INCREMENT PRIMARY KEY,
+    nomeFantasia VARCHAR(45),
+    cnpj CHAR(14),
+    categoria VARCHAR(45),
+    dataInicio DATE
+);
+
 CREATE TABLE usuario (
     idUsuario INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(45),
@@ -19,14 +27,6 @@ CREATE TABLE usuario (
     fkDono INT,
     constraint fkUsuarioCargo foreign key (fkCargo) references cargo (idCargo),
     constraint fkUsuarioDono foreign key (fkDono) references empresa (idEmpresa)
-);
-
-CREATE TABLE empresa (
-    idEmpresa INT AUTO_INCREMENT PRIMARY KEY,
-    nomeFantasia VARCHAR(45),
-    cnpj CHAR(14),
-    categoria VARCHAR(45),
-    dataInicio DATE
 );
 
 CREATE TABLE endereco (
@@ -52,7 +52,7 @@ CREATE TABLE modelo (
     idModelo INT AUTO_INCREMENT PRIMARY KEY,
     nomeModelo VARCHAR(45),
     fkEmpresa INT,
-    constraint fkModeloEmpresa (fkEmpresa) references empresa (idEmpresa)
+    constraint fkModeloEmpresa foreign key (fkEmpresa) references empresa (idEmpresa)
 );
 
 CREATE TABLE maquina (
@@ -78,7 +78,7 @@ CREATE TABLE tipo (
     idTipo INT AUTO_INCREMENT PRIMARY KEY,
     tipoDado VARCHAR(45),
     fkComponente INT,
-    constraint fkTipoComponente (fkComponente) references componente (idComponente)
+    constraint fkTipoComponente foreign key (fkComponente) references componente (idComponente)
 );
 
 CREATE TABLE dados (
@@ -98,7 +98,7 @@ insert into cargo values
 (2, 'Analista', 3);
 
 insert into usuario values
-(1, 'Ronaldo Alves', null, 'ronaldoalves@quicktron.com', 12345678901, 12345678901, 'Quicktron#123', 1);
+(1, 'Ronaldo Alves', null, 'ronaldoalves@quicktron.com', 12345678901, 12345678901, 'Quicktron#123', 1, null);
 
 insert into endereco values
 (1, 'Rua João Silva', '04911111', 'sp', '', 1);
