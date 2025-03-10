@@ -7,7 +7,12 @@
 </head>
 <body>
     
-Insira o nome do modelo: <input type="text" id="input_modelo">
+Insira o logradouro: <input type="text" id="input_logradouro">
+Insira o CEP: <input type="number" id="input_cep" maxlength="8">
+Insira o estado: <input type="text" id="input_estado">
+Insira o complemento: <input type="text" id="input_complemento">
+
+<button onclick="cadastrar()">Cadastrar</button>
 
 </body>
 </html>
@@ -15,17 +20,21 @@ Insira o nome do modelo: <input type="text" id="input_modelo">
 <script>
 
 function cadastrar(){
-    var modelo = input_modelo.value;
-    var idEmpresa = sessionStorage.idEmpresa;
+    var logradouro = input_logradouro.value;
+    var cep = input_cep.value;
+    var estado = input_estado.value;
+    var complemento = input_complemento.value;
 
-    fetch("/modelos/cadastrar", {
+    fetch("/empresas/cadastrarEndereco", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        modeloServer: modelo,
-        idEmpresaServer: idEmpresa
+        logradouroServer: logradouro,
+        cepServer: cep,
+        estadoServer: estado,
+        complementoServer: complemento
       }),
     })
       .then(function (resposta) {
