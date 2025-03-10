@@ -2,12 +2,15 @@ var modeloModel = require("../models/modeloModel");
 
 function cadastrar(req ,res){
     var nomeModelo = req.body.nomeServer;
+    var idEmpresa = req.body.idEmpresaServer;
 
     if (nomeModelo == undefined) {
         res.status(400).send("Seu nome do modelo está undefined!");
+    } else if (nomeModelo == undefined) {
+        res.status(400).send("Seu idEmpresa está undefined!");
     }
 
-     modeloModel.cadastrar(nomeModelo)
+     modeloModel.cadastrar(nomeModelo, idEmpresa)
                 .then(
                     function (resultado) {
                         res.json(resultado);

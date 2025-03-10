@@ -7,7 +7,42 @@
 </head>
 <body>
     
-Insira o nome do modelo:
+Insira o nome do modelo: <input type="text" id="input_modelo">
 
 </body>
 </html>
+
+<script>
+
+function cadastrar(){
+    var modelo = input_modelo.value;
+    var idEmpresa = sessionStorage.idEmpresa;
+
+    h("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        modeloServer: modelo,
+        idEmpresaServer: idEmpresa
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+
+          setTimeout(() => {
+          }, "2000");
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+}
+
+</script>
