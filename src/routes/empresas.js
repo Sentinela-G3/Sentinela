@@ -8,4 +8,8 @@ router.post("/cadastrar", function (req, res) {
     empresaController.cadastrar(req, res);
 })
 
+router.post("/cadastrarEndereco", function (req, res){
+    empresaController.cadastrarEndereco(req, res);
+})
+
 module.exports = router;
