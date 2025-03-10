@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Sentinela</title>
+</head>
+<body>
+    
+    Nome Empresa: <input type="text" id="input_nome">
+    CNPJ: <input type="number" id="input_cnpj" maxlength="11">
+    Categoria: <select name="select_categoria" id="select_categoria">
+        <option value="Distribuidora">Distribuidora</option>
+        <option value="Fabricante">Fabricante</option>
+    </select>
+    
+    <button onclick="cadastrar()">Cadastrar</button>
+
+</body>
+</html>
+
+<script>
+
+function cadastrar(){
+    var nomeFantasia = input_nome.value;
+    var cnpj = input_cnpj.value;
+    var categoria = select_categoria.value;
+
+    fetch("/empresas/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nomeFantasiaServer: nomeFantasia,
+        cnpjServer: cnpj,
+        categoriaServer: categoria
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+
+          setTimeout(() => {
+          }, "2000");
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+}
+
+</script>
