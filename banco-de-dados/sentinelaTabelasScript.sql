@@ -65,14 +65,20 @@ CREATE TABLE componente (
     FOREIGN KEY (fkMaquina) REFERENCES maquina(idMaquina)
 );
 
+CREATE TABLE tipo (
+    idTipo INT AUTO_INCREMENT PRIMARY KEY,
+    tipoDado VARCHAR(45),
+    fkComponente INT,
+    constraint fkTipoComponente (fkComponente) references componente (idComponente)
+);
+
 CREATE TABLE dados (
 	idDados INT AUTO_INCREMENT PRIMARY KEY,
-    tipo VARCHAR(45),
     valor FLOAT,
     tempoColeta DATETIME,
     alerta TINYINT,
-    fkComponente INT,
-    constraint fkDadosComponente foreign key (fkComponente) references componente (idComponente)
+    fkTipo INT,
+    constraint fkDadosTipo foreign key (fkTipo) references tipo (idTipo)
 );
 
 insert into empresa values
