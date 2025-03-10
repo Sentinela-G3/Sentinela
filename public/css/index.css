@@ -84,8 +84,144 @@ nav {
   background-color: #fdcf00;
 }
 
-.botaoTopo {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+
+/*Section 1 */
+
+.container_section1 {
+    padding: 60px 0;
+  }
+  
+  .section1_titulo {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .section1_desc {
+    font-size: 18px;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  
+  .quatroMotivos {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  .motivoUm,
+  .motivoDois,
+  .motivoTres,
+  .motivoQuatro {
+    background-color: #dadada;
+    padding: 20px;
+    border-radius: 5px;
+    width: 12%;
+    height: 300px;
+    text-align: center;
+  }
+  
+  .motivoUm_titulo,
+  .motivoDois_titulo,
+  .motivoTres_titulo,
+  .motivoQuatro_titulo {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .motivoUm_desc,
+  .motivoDois_desc,
+  .motivoTres_desc,
+  .motivoQuatro_desc {
+    font-size: 16px;
+  }
+  
+
+  /* Section 2 */
+  
+  .container_section2 {
+    background-color: #FFE792;
+    padding: 60px 0;
+  }
+  
+  .section2_titulo {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+  }
+  
+  .section2_desc {
+    font-size: 18px;
+    color: #1a1a1a;
+    margin-bottom: 40px;
+    text-align: center;
+    justify-content: end;
+  }
+  
+  .quatroFunc {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  .funcUm,
+  .funcDois,
+  .funcTres,
+  .funcQuatro {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 15%;
+    height: 300px;
+    text-align: center;
+  }
+  
+  .funcUm_texto,
+  .funcDois_texto,
+  .funcTres_texto,
+  .funcQuatro_texto {
+    font-size: 16px;
+  }
+  
+  .funcUm_texto b,
+  .funcDois_texto b,
+  .funcTres_texto b,
+  .funcQuatro_texto b {
+    font-weight: bold;
+  }
+
+  
+/* Tentativa de Responsividade */
+@media (max-width: 768px) {
+  .itens_nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .itens_nav li {
+    margin-bottom: 10px;
+  }
+
+  .quatroMotivos {
+    flex-direction: column;
+  }
+
+  .quatroFunc {
+    flex-direction: column;
+  }
+
+  .motivoUm,
+  .motivoDois,
+  .motivoTres,
+  .motivoQuatro,
+  .funcUm,
+  .funcDois,
+  .funcTres,
+  .funcQuatro {
+    width: 80%;
+  }
 }
