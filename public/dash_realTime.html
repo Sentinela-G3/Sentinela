@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/navbar.css">
     <link rel="stylesheet" href="./css/dashboardRT.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Tempo Real</title>
@@ -9,22 +10,22 @@
 
 
 <body class="body_dashRealTime" id="dash_RT">
-
     <div class="container_navDashRT">
         <nav>
-            <div class="logo">
-                <span>Sentinela</span>
+            <div class="perfil">
+                <div class="logo">
+                    <span>Sentinela</span>
+                </div>
+                <span>Olá, Boas-vindas!</span>
             </div>
-            <div class="div_btn_perfil">
-                <a class="btn_perfil" onclick="btn_perfil">Perfil</a>
-            </div>
-            <div class="itens_nav" id="dash_RT">
-                <li><a href="#anls_RT">Análise em tempo real</a></li>
-                <li><a href="#ansl_hist">Análise histórica</a></li>
-                <li><a href="#ger_func">Gerenciamento de funcionários</a></li>
-                <li><a href="#ger_disp">Gerenciamento de Dispositivo</a></li>
-                <li><a href="#alertas">Alertas</a></li>
-                <li><a href="#ger_endereco">Gerenciamento de Endereços</a></select></li>
+            <div class="btn_nav">
+                <li><button onclick="btn_rt()">Análise em tempo real</button></li>
+                <li><button onclick="btn_hist()">Análise histórica</button></li>
+                <li><button onclick="btn_geral()">Ańálise geral</button></li>
+                <li><button onclick="btn_func()">Gerenciamento de funcionário</button></li>
+                <li><button onclick="btn_disp()">Gerenciamento de Dispositivo</button></li>
+                <li><button onclick="btn_alerta()">Alertas</button></li>
+                <li><button onclick="btn_endereco()">Gerenciamento de Endereços</button></li>
             </div>
         </nav>
     </div>

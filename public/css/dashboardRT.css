@@ -1,70 +1,17 @@
 *{
-margin: 0;
-background-color: #ffffff;
-font-family: 'Poppins', sans-serif;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 body{
-display: flex;
-}
-
-
-.container_navDashRT{
-border: 0.5px solid grey;
-display: flex;
-flex-direction: column;
-height: 100vh;
-width: 230px;
-padding: 20px;
-}
-
-.logo{
-text-align: center;
-font-size: 30px;
-padding: 20px;
-color: gray;
-}
-
-.div_btn_perfil{
-padding: 25px;
-display: flex;
-justify-content: center;
-}
-
-.btn_perfil{
-cursor: pointer;
-}
-
-.itens_nav :hover{
-color: rgb(93, 93, 116);
-}
-
-.itens_nav li {
-border: 1px solid rgba(71, 104, 119, 0.2);
-list-style: none;
-padding: 7px;
-text-decoration: none;
-height: 30px;
-display: flex;
-align-items: center;
-}
-
-.itens_nav a {
-font-size: 16px;
-font-weight: 500;
-padding: 1px;
-display: flex;
-text-decoration: none;
-color: black;
+    display: flex;
 }
 
 .section1{
-    border: 1px solid green;
     display: flex;
     justify-content: space-between;
     height: 30vh;
     width: 100%;
-
 }
 
 .titulo_dashRT{
@@ -72,13 +19,11 @@ color: black;
     font-size: 35px;
     padding: 30px;
     color: rgb(71, 71, 71);
-    border: 1px solid blue;
     height: 20px;
     width: 500px;
 }
 
 .div_select_setor{
-    /* border: 1px solid red; */
     display: flex;
     width: 200px;
     height: 30px;
@@ -86,34 +31,24 @@ color: black;
 }
 
 .select_setor{
-    /* border: 1px solid blue; */
     display: flex;
     width: 120px;
     height: 30px;
-    /* margin-right: 20px; */
 }
 
 .box_kpi{
-    border: 1px solid blue;
     display: flex;
     height: 60px;
     width: 90%;
     justify-content: space-around;
     font-size: 15px;
-    /* margin-top: 20px; */
     justify-self: center;
+    border: 0.5px solid rgba(128, 128, 128, 0.452);
 }
 
 .inicio_dashboard_RT{
     width: 100%;
-    border: 1px solid red;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
 }
-
-/* .kpi_maqAtiva,
-.kpi_maqInativa,
-.qtd_alertas{
-    margin-top: 10px;
-} */

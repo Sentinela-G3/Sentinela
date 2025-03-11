@@ -1,0 +1,59 @@
+/* VARIÁVEIS DE TAMANHO */
+
+:root {
+    --tamanho-largura-nav: 35vh;
+    --tamanho-altura-nav: 100vh;
+    --tamanho-header: 80px;
+    --tamanho-pagina: 90vh;
+    --tamanho-footer: 30vh;
+}
+
+/* NAVBAR */
+
+.container_navDashRT {
+    border-right: 0.5px solid rgba(128, 128, 128, 0.452);
+    display: flex;
+    height: var(--tamanho-altura-nav);
+    width: var(--tamanho-largura-nav);
+}
+
+.perfil {
+    border: 2px solid red;
+    height: 30%;
+    width: var(--tamanho-largura-nav);
+}
+
+.logo{
+    text-align: center;
+    font-size: 30px;
+    color: gray;
+}
+
+/* BOTÕES */
+
+.btn_nav {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid red;
+}
+
+.btn_nav li {
+    width: 100%;
+    border-bottom: 1px solid rgba(71, 104, 119, 0.2);
+    list-style: none;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.btn_nav button {
+    width: 100%;
+    height: 5vh;
+    font-size: 16px;
+    /* background-color: #ffffff; */
+    border: none;
+}
+
+.btn_nav :hover{
+    color: rgb(93, 93, 116);
+}
