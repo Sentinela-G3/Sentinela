@@ -1,0 +1,53 @@
+*{
+margin: 0;
+background-color: #ffffff;
+color: #000000;
+font-family: 'Poppins', sans-serif;
+}
+
+.container_navDashRT{
+border: 0.5px solid grey;
+display: flex;
+flex-direction: column;
+height: 100vh;
+width: 250px;
+}
+
+.logo{
+text-align: center;
+font-size: 25px;
+padding: 20px;
+}
+
+.div_btn_perfil{
+padding: 25px;
+display: flex;
+justify-content: center;
+}
+
+.btn_perfil{
+cursor: pointer;
+}
+
+.itens_nav :hover{
+color: rgb(93, 93, 116);
+}
+
+.itens_nav li {
+border: 1px solid rgba(128, 128, 128, 20%);
+list-style: none;
+padding: 7px;
+text-decoration: none;
+height: 30px;
+display: flex;
+
+}
+
+.itens_nav a {
+font-size: 16px;
+font-weight: 500;
+padding: 1px;
+display: flex;
+text-decoration: none;
+}
+
