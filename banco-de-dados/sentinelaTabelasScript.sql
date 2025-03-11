@@ -108,8 +108,11 @@ insert into usuarioEndereco  values
 
         SELECT idUsuario, nome, email, fkCargo, idEmpresa FROM usuario join usuarioEndereco on idUsuario = fkUsuario join endereco on 
 idEndereco = fkEndereco join empresa on idEmpresa = fkEmpresa WHERE email = 'ronaldoalves@quicktron.com' AND senha = 'Quicktron#123'; 
+insert into modelo values
+(default, 'M60', 1);
+
 insert into maquina values
-(default, 'ativo', 'M60', 'Quicktron', 1, 1);
+(default, "ativo", "EG209", "Quicktrom", 1, 1);
 
 insert into componente values
 (default, 'Processador', 'Ryzen 3', 1),
