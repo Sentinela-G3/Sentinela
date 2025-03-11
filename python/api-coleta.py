@@ -4,8 +4,8 @@ import mysql.connector
 import datetime
 
 from mysql.connector import (connection)
-# mydb = connection.MySQLConnection(host='10.18.32.48', user='sentinelaInsert', password='Sentinela@123', database='sentinela')
-mydb = connection.MySQLConnection(host='localhost', user='root', password='Gg1502@#', database='sentinela')
+mydb = connection.MySQLConnection(host='10.18.32.10', user='sentinelaInsert', password='Sentinela@123', database='sentinela')
+# mydb = connection.MySQLConnection(host='localhost', user='root', password='Gg1502@#', database='sentinela')
 
 mycursor = mydb.cursor()
 tempoSegundos = int(input("Insira quantos segundos deseja monitorar: "))
