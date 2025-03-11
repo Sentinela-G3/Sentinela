@@ -115,10 +115,27 @@ insert into maquina values
 (default, "ativo", "EG209", "Quicktrom", 1, 1);
 
 insert into componente values
-(default, 'Processador', 'Ryzen 3', 1),
-(default, 'Memoria', 'XPG Gammix D35', 1),
-(default, 'Bateria', 'Cr2032', 1),
-(default, 'redeChip', 'PCI-EXPRESS', 1),
-(default, 'Armazenamento', 'Kingston A400', 1);
+(1, 'Processador', 'Ryzen 3', 1),
+(2, 'Memoria', 'XPG Gammix D35', 1),
+(3, 'Bateria', 'Cr2032', 1),
+(4, 'redeChip', 'PCI-EXPRESS', 1),
+(5, 'Armazenamento', 'Kingston A400', 1);
+
+insert into tipo values
+(1, "Tempo da CPU ativa em porcentagem", 1),
+(2, "Tempo inativo da CPU em porcentagem", 1),
+(3, "Porcentagem atual de uso da CPU", 1),
+(4, "Frequência da CPU", 1),
+(5, "Memória disponivel", 2),
+(6, "Memória utilizada em porcentagem", 2),
+(7, "Memória não utilizada", 2),
+(8, "Memória total", 2),
+(9, "Bateria atual em porcentagem", 3),
+(10, "Quantidade de bytes enviado", 4),
+(11, "Armazenamento disponivel em bytes", 5),
+(12, "Armazenamento total em bytes", 5);
 
 select * from usuario;
+
+insert into dados values
+(default, 87, now(), 1, 1);

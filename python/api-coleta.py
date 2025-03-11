@@ -4,7 +4,7 @@ import mysql.connector
 import datetime
 
 from mysql.connector import (connection)
-mydb = connection.MySQLConnection(host='10.18.32.10', user='sentinelaInsert', password='Sentinela@123', database='sentinela')
+mydb = connection.MySQLConnection(host='10.18.32.24', user='sentinelaTestes', password='Sentinela@123', database='sentinela')
 # mydb = connection.MySQLConnection(host='localhost', user='root', password='Gg1502@#', database='sentinela')
 
 mycursor = mydb.cursor()
@@ -30,36 +30,53 @@ while tempoSegundos > 0:
     porcentagemUsoProcessador = psutil.cpu_percent()
     frequenciaProcessador = psutil.cpu_freq().current
 
-    sql = "INSERT INTO processador VALUES (default, %s, %s, %s, %s, %s, 1, %s)"
-    val = (porcentagemUsoProcessador, tempoAtivo, tempoInativo, frequenciaProcessador, now, fkComponenteCPU)
+    sql = "INSERT INTO dados VALUES(default, %s, now(), 1, 1);"
+    val = (porcentagemUsoProcessador,)
     mycursor.execute(sql, val)
 
-    mydb.commit()
+    sql = "INSERT INTO dados VALUES(default, %s, now(), 1, 2);"
+    val = (tempoAtivo,)
+    mycursor.execute(sql, val)
+
+
+    sql = "INSERT INTO dados VALUES(default, %s, now(), 1, 4);"
+    val = (frequenciaProcessador,)
+    mycursor.execute(sql, val)
+
 
     memoriaDisponivel = psutil.virtual_memory().available
     memoriaUtilizadaporcentagem = psutil.virtual_memory().percent
     memoriaNaousada = psutil.virtual_memory().free
     memoriaTotal = psutil.virtual_memory().total
 
-    sql = "INSERT INTO memoria VALUES (default, %s, %s, %s, %s, %s, 1, %s)"
-    val = (memoriaNaousada, memoriaDisponivel, memoriaTotal, memoriaUtilizadaporcentagem, now, fkComponenteRAM)
+    sql = "INSERT INTO dados VALUES(default, %s, now(), 1, 5);"
+    val = (memoriaDisponivel,)
     mycursor.execute(sql, val)
-    mydb.commit()
+    
+    sql = "INSERT INTO dados VALUES(default, %s, now(), 1, 6);"
+    val = (memoriaUtilizadaporcentagem,)
+    mycursor.execute(sql, val)
+
+    sql = "INSERT INTO dados VALUES(default, %s, now(), 1, 7);"
+    val = (memoriaNaousada,)
+    mycursor.execute(sql, val)
+
+    sql = "INSERT INTO dados VALUES(default, %s, now(), 1, 8);"
+    val = (memoriaTotal,)
+    mycursor.execute(sql, val)
 
     bateriaPorcentagematual = psutil.sensors_battery().percent
     # bateriaTemporestante = psutil.sensors_battery().secsleft
 
-    sql = "INSERT INTO bateria VALUES (default, %s, 0, %s, 1, %s)"
-    val = (bateriaPorcentagematual, now, fkComponenteBATERIA)
+    sql = "INSERT INTO dados VALUES(default, %s, now(), 1, 9);"
+    val = (bateriaPorcentagematual,)
     mycursor.execute(sql, val)
-    mydb.commit()
 
     redeBytesenviados = psutil.net_io_counters().bytes_sent
 
-    sql = "INSERT INTO redeChip VALUES (default, %s, %s, 1, %s)"
-    val = (redeBytesenviados, now, fkComponenteREDE)
+    sql = "INSERT INTO dados VALUES(default, %s, now(), 1, 10);"
+    val = (redeBytesenviados,)
     mycursor.execute(sql, val)
-    mydb.commit()
 
     if isLinux:
         armazenamentoDisponivel = psutil.disk_usage('/').free
@@ -68,9 +85,14 @@ while tempoSegundos > 0:
         armazenamentoDisponivel = psutil.disk_usage('C:').free
         armazenamentoTotal = psutil.disk_usage('C:').total
 
-    sql = "INSERT INTO armazenamento VALUES (default, %s, %s, %s, 1, %s)"
-    val = (armazenamentoTotal, armazenamentoDisponivel, now, fkComponenteDISCO)
+    sql = "INSERT INTO dados VALUES(default, %s, now(), 1, 11);"
+    val = (armazenamentoDisponivel,)
     mycursor.execute(sql, val)
+
+    sql = "INSERT INTO dados VALUES(default, %s, now(), 1, 12);"
+    val = (armazenamentoTotal,)
+    mycursor.execute(sql, val)
+
     mydb.commit()
     
     print("Processador:\n")
