@@ -4,6 +4,11 @@ background-color: #ffffff;
 font-family: 'Poppins', sans-serif;
 }
 
+body{
+display: flex;
+}
+
+
 .container_navDashRT{
 border: 0.5px solid grey;
 display: flex;
@@ -35,7 +40,7 @@ color: rgb(93, 93, 116);
 }
 
 .itens_nav li {
-border: 1px solid rgba(128, 128, 128, 20%);
+border: 1px solid rgba(71, 104, 119, 0.2);
 list-style: none;
 padding: 7px;
 text-decoration: none;
@@ -52,3 +57,63 @@ display: flex;
 text-decoration: none;
 color: black;
 }
+
+.section1{
+    border: 1px solid green;
+    display: flex;
+    justify-content: space-between;
+    height: 30vh;
+    width: 100%;
+
+}
+
+.titulo_dashRT{
+    display: flex;
+    font-size: 35px;
+    padding: 30px;
+    color: rgb(71, 71, 71);
+    border: 1px solid blue;
+    height: 20px;
+    width: 500px;
+}
+
+.div_select_setor{
+    /* border: 1px solid red; */
+    display: flex;
+    width: 200px;
+    height: 30px;
+    justify-content: center;
+}
+
+.select_setor{
+    /* border: 1px solid blue; */
+    display: flex;
+    width: 120px;
+    height: 30px;
+    /* margin-right: 20px; */
+}
+
+.box_kpi{
+    border: 1px solid blue;
+    display: flex;
+    height: 60px;
+    width: 90%;
+    justify-content: space-around;
+    font-size: 15px;
+    /* margin-top: 20px; */
+    justify-self: center;
+}
+
+.inicio_dashboard_RT{
+    width: 100%;
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+/* .kpi_maqAtiva,
+.kpi_maqInativa,
+.qtd_alertas{
+    margin-top: 10px;
+} */
