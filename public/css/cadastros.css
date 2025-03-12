@@ -18,6 +18,7 @@
     height: 95%;
     width: 35%;
     justify-content: end;
+    border-radius: 25px;
 }
 .div-imagem{
     background-image: "../assets/img/svgLogo.svg";
@@ -30,6 +31,8 @@
     align-self: center;
     justify-self: center;
     background-color: white;
+    border-radius: 25px;
+    
 }
 input{
     width: 80%;
