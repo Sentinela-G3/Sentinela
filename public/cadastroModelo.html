@@ -4,10 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro Sentinela</title>
+    <link rel="stylesheet" href="./css/cadastros.css">
 </head>
 <body>
     
-Insira o nome do modelo: <input type="text" id="input_modelo">
+  <div class="div-geral">
+    <div class="formulario-container">
+      <div class="div-imagem"></div>
+      <div class="div-cadastro-titulo">Cadastrar novo modelo</div>
+        <div class="formulario-inputs">
+          <div class="titulo-input">Insira o nome do modelo:</div><input type="text" id="input_modelo">
+          <button onclick="cadastrar()">Cadastrar</button>
+          <a href="./index.html" class="troca-tela">Voltar para tela inicial</a>
+        </div>
+    </div>
+  </div>
 
 </body>
 </html>

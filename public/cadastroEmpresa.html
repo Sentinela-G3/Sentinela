@@ -7,16 +7,24 @@
     <link rel="stylesheet" href="./css/cadastros.css">
 </head>
 <body>
+  
+  <div class="div-geral">
     <div class="formulario-container">
-    Nome Empresa: <input type="text" id="input_nome">
-    CNPJ: <input type="number" id="input_cnpj" maxlength="11">
-    Categoria: <select name="select_categoria" id="select_categoria">
-        <option value="Distribuidora">Distribuidora</option>
-        <option value="Fabricante">Fabricante</option>
-    </select>
-    
-    <button onclick="cadastrar()">Cadastrar</button>
+      <div class="div-imagem"></div>
+      <div class="div-cadastro-titulo">Cadastrar empresa</div>
+      <div class="formulario-inputs">
+        <div class="titulo-input">Nome Empresa:</div><input type="text" id="input_nome">
+        <div class="titulo-input">CNPJ:</div><input type="text" id="input_cnpj" maxlength="11">
+        <div class="titulo-input">Categoria:</div><select name="select_categoria" id="select_categoria">
+            <option value="Distribuidora">Distribuidora</option>
+            <option value="Fabricante">Fabricante</option>
+        </select>
+
+        <button onclick="cadastrar()">Cadastrar</button>
+        <a href="./index.html" class="troca-tela">Voltar para tela inicial</a>
+    </div>
   </div>
+</div>
 
 </body>
 </html>
