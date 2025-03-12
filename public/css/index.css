@@ -9,18 +9,20 @@
 }
 
 /* Variáveis CSS */
-:root {
+/* :root {
   --autura-header: 115vh;
   --largura-all: 99.06vw;
-}
+   --autura-header: 1000px;
+  --largura-all: 1500px;
+} */
 
 /* Estilos gerais do body */
 body {
   background-color: #000000;
   font-family: 'Poppins', sans-serif;
   line-height: 1.6;
-  height: var(--autura-header);
-  width: var(--largura-all);
+  /* height: var(--autura-header);
+  width: var(--largura-all); */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -105,43 +107,79 @@ body {
 
 /* Section 1 */
 .container_section1 {
-  background-color: aqua;
-  height: 80vh;
+  /* background-color: aquamarine; */
+  height: 250vh;
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .section1_titulo {
-  background-color: #1a1a1a;
   display: flex;
   flex-direction: column;
   text-align: center;
-  height: 50%;
+  height: 70vh;
   width: 100%;
 }
 
-.section1_titulo span{
+.section1_titulo h1{
+  height: 22%;
   display: flex;
-  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.section1_titulo div{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 70%;
   width: 100%;
 }
-.section1_titulo span img{
+.section1_titulo div span{
+  background-color: #FFE792;
+}
+
+#imagemRobo1, #imagemRobo2{
+  /* background-color: brown; */
+  height: 50vh;
+  width: 50%;
   display: flex;
-  height: 100%;
-  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#imagemRobo1{
+  background-image: url(../assets/img/robo1.svg);
+}
+#imagemRobo2{
+  background-image: url(../assets/img/robo2.svg);
 }
 
 .section1_desc {
-  font-size: 18px;
-  margin-bottom: 40px;
+  /* background-color: #1a1a1a; */
+  font-size: 200%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section1_desc p{
+  /* background-color: aliceblue; */
+  display: flex;
   text-align: center;
+  height: 80%;
+  width: 85%;
 }
 
 .quatroMotivos {
+  /* background-color: chartreuse; */
+  height: 25%;
   display: flex;
-  justify-content: center;
-  gap: 30px;
+  align-items: center ;
+  justify-content: space-evenly;
 }
 
 .motivoUm,
@@ -152,10 +190,10 @@ body {
   padding: 20px;
   border-radius: 5px;
   width: 20%;
-  min-height: 300px;
-  text-align: center;
+  height: 78%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -175,59 +213,44 @@ body {
   font-size: 16px;
 }
 
-/* Section 2 */
-.container_section2 {
-  background-color: #FFE792;
-  padding: 60px 0;
+/* Corrigido: Remover a repetição do .imgUm e ajuste das propriedades */
+.imgUm, .imgDois, .imgTres, .imgQuatro {
+  height: 38%;
+  width: 44%;
+  display: flex;
+  background-size: cover; /* Garante que a imagem ocupe toda a área */
+  background-repeat: no-repeat; /* Impede a repetição da imagem */
+  background-position: center; /* Centraliza a imagem na div */
 }
 
-.section2_titulo {
-  text-align: center;
-  font-size: 28px;
-  font-weight: bold;
-  color: #1a1a1a;
-  margin-bottom: 20px;
+.imgUm {
+  background-image: url(../assets/img/relogio.svg);
 }
 
-.section2_desc {
-  font-size: 18px;
-  color: #1a1a1a;
-  margin-bottom: 40px;
-  text-align: center;
+.imgDois {
+  background-image: url(../assets/img/chave.svg);
 }
 
-.quatroFunc {
+.imgTres {
+  background-image: url(../assets/img/alerta.svg);
+  height: 38%;
+  width: 49%;
+}
+
+.imgQuatro {
+  background-image: url(../assets/img/lampada.svg);
+}
+
+.container_monitoramento{
+  background-color: #f39c12;
+  height: 37%;
+  width: 100%;
+}
+
+.container_monitoramento h1{
+  background-color: aqua;
+  height: 22%;
   display: flex;
   justify-content: center;
-  gap: 30px;
+  align-items: center;
 }
-
-.funcUm,
-.funcDois,
-.funcTres,
-.funcQuatro {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 5px;
-  width: 20%;
-  min-height: 300px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.funcUm_texto,
-.funcDois_texto,
-.funcTres_texto,
-.funcQuatro_texto {
-  font-size: 16px;
-}
-
-.funcUm_texto b,
-.funcDois_texto b,
-.funcTres_texto b,
-.funcQuatro_texto b {
-  font-weight: bold;
-}
-
