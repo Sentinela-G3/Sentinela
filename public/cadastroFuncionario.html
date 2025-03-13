@@ -31,21 +31,43 @@
 </html>
 
 <script>
+obterFkEndereco()
 
-// nomeServer: nome,
-//         emailServer: email,
-//         cpfServer: cpf,
-//         contatoServer: contato,
-//         cargoServer: cargo,
-//         senhaServer: senha,
-//         idEmpresaServer: idEmpresa
+function obterFkEndereco(){
+  var email = sessionStorage.email;
+
+  fetch("/usuarios/obterFkEndereco", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emailServer: email
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+
+          setTimeout(() => {
+            window.location = "./index.html";
+          }, "2000");
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+}
+
 function cadastrar(){
     var nome = input_nome.value;
     var email = input_email.value;
     var cpf = input_cpf.value;
     var contato = input_contato.value;
     var senha = input_senha.value;
-    // var idEmpresa = sessionStorage.idEmpresa;
 
     fetch("/usuarios/cadastrar", {
       method: "POST",
@@ -74,7 +96,6 @@ function cadastrar(){
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
       });
       
 }

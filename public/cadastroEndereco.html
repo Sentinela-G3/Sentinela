@@ -28,7 +28,7 @@
 </html>
 
 <script>
-
+verificarIdEmpresa()
 function cadastrar(){
     var logradouro = input_logradouro.value;
     var cep = input_cep.value;
@@ -64,6 +64,13 @@ function cadastrar(){
         console.log(`#ERRO: ${resposta}`);
         finalizarAguardar();
       });
+}
+
+function verificarIdEmpresa(){
+  if(isNaN(parseInt(sessionStorage.idEmpresa))){
+    alert("Erro na verifição do ID da sua empresa, realize o login novamente.")
+    window.location = "./login.html";
+  }
 }
 
 </script>

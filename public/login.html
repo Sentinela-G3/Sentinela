@@ -39,8 +39,9 @@ fetch("/usuarios/autenticar", {
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
-                    sessionStorage.idEmpresa = json.fkEmpresa;
+                    sessionStorage.idEmpresa = json.idEmpresa;
                     sessionStorage.fkDono = json.fkDono;
+                    sessionStorage.email = json.email;
 
 
                     setTimeout(function () {

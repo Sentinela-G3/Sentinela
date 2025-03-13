@@ -19,7 +19,8 @@ function autenticar(req, res) {
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
                         res.json({
-                            fkEmpresa: resultadoAutenticar[0].idEmpresa
+                            idEmpresa: resultadoAutenticar[0].idEmpresa,
+                            email: resultadoAutenticar[0].email
                         })
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
@@ -78,7 +79,28 @@ function cadastrar(req, res) {
     }
 }
 
+function obterFkEndereco(req, res){
+    var email = req.body.emailServer;
+
+    usuarioModel.obterFkEndereco(email)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao tentar obter os endereços! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}   
+
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    obterFkEndereco
 }
