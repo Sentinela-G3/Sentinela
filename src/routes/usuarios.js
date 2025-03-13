@@ -11,4 +11,8 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
+router.post("/obterFkEndereco", function (req, res){
+    usuarioController.obterFkEndereco(req, res);
+});
+
 module.exports = router;
