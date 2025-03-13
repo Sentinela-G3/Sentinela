@@ -9,29 +9,30 @@
 }
 
 /* Variáveis CSS */
-/* :root {
-  --autura-header: 115vh;
-  --largura-all: 99.06vw;
-  --autura-header: 1000px;
-  --largura-all: 1500px;
-} */
+:root {
+  --autura-header: 329vh;
+  --largura-all: 100%;
+  /* --autura-header: 1000px; */
+  /* --largura-all: 1500px; */
+}
 
 /* Estilos gerais do body */
 body {
-  background-color: #000000;
   font-family: 'Poppins', sans-serif;
   line-height: 1.6;
-  /* height: var(--autura-header);
-  width: var(--largura-all); */
+  background-color: #343a40;
+  height: var(--autura-header);
+  width: var(--largura-all);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: flex-start;
 }
 
 /* Nav Bar */
 .container_nav {
   width: 100%;
+  height: 2%;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -107,8 +108,8 @@ body {
 
 /* Section 1 */
 .container_section1 {
-  /* background-color: aquamarine; */
-  height: 250vh;
+  /* background-color: rgb(38, 139, 105); */
+  height: 84%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -122,11 +123,11 @@ body {
   width: 100%;
 }
 
-.section1_titulo h1{
-  height: 22%;
+.container_section1 span, .section1_titulo span{
+  height: 10%;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .section1_titulo div{
@@ -141,8 +142,7 @@ body {
 }
 
 #imagemRobo1, #imagemRobo2{
-  /* background-color: brown; */
-  height: 50vh;
+  height: 60vh;
   width: 50%;
   display: flex;
   background-size: cover;
@@ -155,6 +155,9 @@ body {
 }
 #imagemRobo2{
   background-image: url(../assets/img/robo2.svg);
+}
+#imagemRobo3{
+  background-image: url(../assets/img/robo3.svg);
 }
 
 .section1_desc {
@@ -176,7 +179,7 @@ body {
 
 .quatroMotivos {
   /* background-color: chartreuse; */
-  height: 25%;
+  height: 48%;
   display: flex;
   align-items: center ;
   justify-content: space-evenly;
@@ -187,10 +190,10 @@ body {
 .motivoTres,
 .motivoQuatro {
   background-color: #dadada;
-  padding: 20px;
+  padding: 1%;
   border-radius: 5px;
-  width: 20%;
-  height: 78%;
+  width: 21%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -201,24 +204,24 @@ body {
 .motivoDois_titulo,
 .motivoTres_titulo,
 .motivoQuatro_titulo {
-  font-size: 20px;
+  font-size: 125%;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 3%;
 }
 
 .motivoUm_desc,
 .motivoDois_desc,
 .motivoTres_desc,
 .motivoQuatro_desc {
-  font-size: 16px;
+  font-size: 100%;
 }
 
 /* Corrigido: Remover a repetição do .imgUm e ajuste das propriedades */
 .imgUm, .imgDois, .imgTres, .imgQuatro {
-  height: 38%;
-  width: 44%;
+  height: 40%;
+  width: 50%;
   display: flex;
-  background-size: cover; /* Garante que a imagem ocupe toda a área */
+  background-size: contain; /* Garante que a imagem ocupe toda a área */
   background-repeat: no-repeat; /* Impede a repetição da imagem */
   background-position: center; /* Centraliza a imagem na div */
 }
@@ -233,8 +236,6 @@ body {
 
 .imgTres {
   background-image: url(../assets/img/alerta.svg);
-  height: 38%;
-  width: 49%;
 }
 
 .imgQuatro {
@@ -242,15 +243,135 @@ body {
 }
 
 .container_monitoramento{
-  background-color: #f39c12;
-  height: 37%;
+  background-color: #FFE792;
+  height: 90%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .container_monitoramento h1{
-  background-color: aqua;
-  height: 22%;
+  height: 12%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.monitoramento_filho{
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.monitoramento_img{
+  height: 100%;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.monitoramento_texto{
+  height: 100%;
+  width: 33%;
+  font-size: 130%;
+  display: flex;
+  text-align: left;
+  align-items: center
+}   
+
+.imagemRobo3{
+  background-image: url(../assets/img/robo4.svg);
+  height: 75%;
+  width: 75%;
+  display: flex;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+.monitoramento_img_legenda{
+  display: flex;
+  justify-content: center;
+}
+
+
+
+.monitoramento_imgUm, 
+.monitoramento_imgDois, 
+.monitoramento_imgTres, 
+.monitoramento_imgQuatro{
+  height: 40%;
+  width: 45%;
+  display: flex;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+.monitoramento_imgUm{
+  background-image: url(../assets/img/indicador.svg);
+}
+.monitoramento_imgDois{
+  background-image: url(../assets/img/Alert.svg);
+}
+.monitoramento_imgTres{
+  background-image: url(../assets/img/Chamado.svg);
+}
+.monitoramento_imgQuatro{
+  background-image: url(../assets/img/List.svg);
+}
+
+
+
+
+
+
+.footer-link {
+  color: #6c757d;
+  text-decoration: none;
+}
+.footer-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+/* .footer-logo {
+  width: 150px;
+} */
+footer {
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  background-color: #343a40;
+  color: #fff;
+  padding-top: 40px;
+  padding-bottom: 20px;
+}
+.footer-content {
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+
+/* Ajusta o tamanho do carrossel para ocupar toda a largura da tela */
+.carousel {
+  background-color: #ffffff;
+  width: 100%;  /* O carrossel ocupará 100% da largura da tela */
+  height: 72%; /* Ajuste a altura do carrossel conforme necessário */
+}
+
+/* Ajuste a altura do carrossel */
+.carousel-inner {
+  height: 100%; /* O carrossel vai ocupar 100% da altura */
+}
+
+/* Ajusta as imagens para se ajustarem corretamente dentro do carrossel */
+.carousel-item img {
+  object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+  width: 100%; /* A largura ocupa 100% do container */
+  height: 100%; /* A altura ocupa 100% do container */
 }
