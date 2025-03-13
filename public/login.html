@@ -40,6 +40,7 @@ fetch("/usuarios/autenticar", {
                     console.log(json);
                     console.log(JSON.stringify(json));
                     sessionStorage.idEmpresa = json.fkEmpresa;
+                    sessionStorage.fkDono = json.fkDono;
 
 
                     setTimeout(function () {
