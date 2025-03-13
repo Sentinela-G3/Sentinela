@@ -7,48 +7,47 @@ body{
     display: flex;
 }
 
-.section1{
+.dashboard {
+    width: var(--tamanho-largura-dash);
     display: flex;
-    justify-content: space-between;
-    height: 30vh;
-    width: 100%;
+    justify-content: space-evenly;
+    flex-direction: column;
 }
 
-.titulo_dashRT{
-    display: flex;
+.titulo_dashRT {
     font-size: 35px;
-    padding: 30px;
     color: rgb(71, 71, 71);
     height: 20px;
     width: 500px;
 }
 
-.div_select_setor{
+.div_select_setor {
     display: flex;
-    width: 200px;
     height: 30px;
-    justify-content: center;
 }
 
-.select_setor{
-    display: flex;
+.select_setor {
     width: 120px;
     height: 30px;
 }
 
-.box_kpi{
+.box_kpi {
     display: flex;
     height: 60px;
     width: 90%;
     justify-content: space-around;
     font-size: 15px;
-    justify-self: center;
     border: 0.5px solid rgba(128, 128, 128, 0.452);
 }
 
-.inicio_dashboard_RT{
-    width: 100%;
+.box_kpi2 {
     display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+}
+
+.container_kpi {
+    width: 40%;
+    display: flex;
+    justify-content: space-around;
+    font-size: 15px;
+    border: 0.5px solid rgba(128, 128, 128, 0.452);
 }

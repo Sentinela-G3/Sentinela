@@ -2,6 +2,7 @@
 
 :root {
     --tamanho-largura-nav: 35vh;
+    --tamanho-largura-dash: 200vh;
     --tamanho-altura-nav: 100vh;
     --tamanho-header: 80px;
     --tamanho-pagina: 90vh;

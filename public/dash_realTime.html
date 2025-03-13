@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/navbar.css">
     <link rel="stylesheet" href="./css/dashboardRT.css">
+    <link rel="stylesheet" href="./css/table.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Tempo Real</title>
 </head>
@@ -41,33 +43,88 @@
         </nav>
     </div>
 
-    <div class="section1">
-
-    <div class="inicio_dashboard_RT">
+    <div class="dashboard">
         <div class="titulo_dashRT">
             <span><b>Monitoramento em tempo real</b></span>
         </div>
 
-            <div class="div_select_setor">
-                <select class="select_setor" id="slct_setor"></select>
+        <div class="div_select_setor">
+            <select class="select_setor" id="slct_setor"></select>
+        </div>
+
+        <div class="box_kpi">
+            <div class="kpi_maqAtiva">
+                <span>Máquina(s) ativa(s)</span>
             </div>
 
-            <div class="box_kpi">
+            <div class="kpi_maqInativa">
+                <span>Máquina(s) inativa(s)</span>
+            </div>
+
+            <div class="qtd_alertas">
+                <span>Quantidade de alertas</span>
+            </div>
+        </div>
+
+        <div>
+            <table class="table">
+                <thead class="table_head">
+                    <td class="table_title">Quantidade</td>
+                    <td class="table_title">Categoria</td>
+                    <td class="table_title">Especificação</td>
+                </thead>
+                <tbody class="table_body">
+                    <td class="table_data">QtdAlertas</td>
+                    <td class="table_data">CategoriaComp.</td>
+                    <td class="table_data">EspecificacaoComp.</td>
+                </tbody>
+                <tbody class="table_body">
+                    <td class="table_data">QtdAlertas</td>
+                    <td class="table_data">CategoriaComp.</td>
+                    <td class="table_data">EspecificacaoComp.</td>
+                </tbody>
+                <tbody class="table_body">
+                    <td class="table_data">QtdAlertas</td>
+                    <td class="table_data">CategoriaComp.</td>
+                    <td class="table_data">EspecificacaoComp.</td>
+                </tbody>
+                <tbody class="table_body">
+                    <td class="table_data">QtdAlertas</td>
+                    <td class="table_data">CategoriaComp.</td>
+                    <td class="table_data">EspecificacaoComp.</td>
+                </tbody>
+                <tbody class="table_body">
+                    <td class="table_data">QtdAlertas</td>
+                    <td class="table_data">CategoriaComp.</td>
+                    <td class="table_data">EspecificacaoComp.</td>
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="box_kpi2">
+            <div class="container_kpi">
                 <div class="kpi_maqAtiva">
-                    <span>Máquina(s) ativa(s)</span>
+                    <span>Velocidade de Download</span>
                 </div>
 
                 <div class="kpi_maqInativa">
-                    <span>Máquina(s) inativa(s)</span>
-                </div>
-
-                <div class="qtd_alertas">
-                    <span>Quantidade de alertas</span>
+                    <span>Velocidade de Upload</span>
                 </div>
             </div>
-            
+
+            <div class="container_kpi">
+                <div class="kpi_maqAtiva">
+                    <span>Status de Carregamento</span>
+                </div>
+
+                <div class="kpi_maqInativa">
+                    <span>Tempo total de Atividade</span>
+                </div>
+            </div>
         </div>
     </div>
 
 </body>
+
 </html>
