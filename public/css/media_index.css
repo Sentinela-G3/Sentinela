@@ -1,0 +1,94 @@
+
+@media only screen and (max-width: 1450px) {
+    .btn_sentinelas{
+        width: 22%;
+        /* background-color: aquamarine; */
+        /* justify-content:space-between; */
+    }
+    .itens_nav{
+        /* background-color: rgb(102, 85, 85); */
+        width: 33%;
+        gap: 10%;  
+    }
+}
+
+@media only screen and (max-width: 1160px) {
+    .btn_sentinelas{
+        width: 30%;
+        /* background-color: aquamarine; */
+        /* justify-content:space-between; */
+    }
+    .itens_nav{
+        /* background-color: rgb(102, 85, 85); */
+        width: 40%;
+        gap: 12%;  
+    }
+}
+
+@media only screen and (max-width: 948px){
+    .carousel {
+    /* background-color: #5c2222; */
+    width: 100%;
+    height: 40%;
+  } 
+}
+
+@media only screen and (max-width: 860px) {
+    .btn_sentinelas{
+        width: 35%;
+    }
+    .logo span{
+        display: none;
+    }
+    .carousel {
+        background-color: #5c2222;
+        width: 100%;
+        height: 25%;
+    }
+}
+
+@media only screen and (max-width: 730px){
+    .btn_sentinelas div{
+        display: none;
+    }
+}
+
+/* @media only screen and (max-width: 1000px) {
+    .btn_sentinelas{
+        width: 30%;
+        align-items: center;
+    }
+
+    .itens_nav{
+        background-color: rgb(102, 85, 85);
+        width: 38%;
+        gap: 15%;  
+    }
+} */
+
+/* celular */
+/* @media only screen and (min-width: 600px) {
+    .btn_sentinelas{
+        width: 1%;
+        align-items: center;
+    }
+
+    .itens_nav{
+        width: 40%;
+    }
+} */
+
+/* tablets */
+@media only screen and (min-width: 768px) {
+    
+}
+
+/* Desktop (grandes) */
+@media only screen and (min-width: 992px) {
+    
+}
+
+/* Desktop (extragrandes) */
+@media only screen and (min-width: 1200px) {
+    
+}

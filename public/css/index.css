@@ -35,7 +35,7 @@ body {
   height: 2%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
 .logo{
@@ -88,13 +88,14 @@ body {
 .btn_sentinelas{
   background-color: #FBE969;
   height: 70%;
-  width: 15%;
+  width: 18%;
   padding: 10px 20px;
   border-radius: 35px;
   font-weight: bold;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
+  gap: 15%;
 }
 
 .btn_sentinelas a {
@@ -359,9 +360,9 @@ footer {
 
 /* Ajusta o tamanho do carrossel para ocupar toda a largura da tela */
 .carousel {
-  background-color: #ffffff;
+  background-color: #5c2222;
   width: 100%;  /* O carrossel ocupará 100% da largura da tela */
-  height: 72%; /* Ajuste a altura do carrossel conforme necessário */
+  height: 44%; /* Ajuste a altura do carrossel conforme necessário */
 }
 
 /* Ajuste a altura do carrossel */
