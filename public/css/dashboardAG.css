@@ -3,9 +3,9 @@
   --fontsize-tipo1: 3.5vw;
   --fontsize-tipo2: 3vw;
   --fontsize-tipo3: 2.25vw;
-  --fontsize-tipo4: 1.75vw;
-  --fontsize-tipo5: 1.5vw;
-  --fontsize-tipo6: 1.25vw;
+  --fontsize-tipo4: 1.5vw;
+  --fontsize-tipo5: 1vw;
+  --fontsize-tipo6: 0.9vw;
   --textcolor-cinza1: #697077;
   --color-amarelo: #fbe969;
   --color-cinza1: #dde1e6;
@@ -28,55 +28,6 @@ body {
   display: flex;
 }
 
-.container_navDashRT {
-  border: 0.5px solid grey;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 230px;
-  padding: 20px;
-}
-
-.logo {
-  text-align: center;
-  font-size: 30px;
-  padding: 20px;
-  color: gray;
-}
-
-.div_btn_perfil {
-  padding: 25px;
-  display: flex;
-  justify-content: center;
-}
-
-.btn_perfil {
-  cursor: pointer;
-}
-
-.itens_nav :hover {
-  color: rgb(93, 93, 116);
-}
-
-.itens_nav li {
-  border: 1px solid rgba(71, 104, 119, 0.2);
-  list-style: none;
-  padding: 7px;
-  text-decoration: none;
-  height: 30px;
-  display: flex;
-  align-items: center;
-}
-
-.itens_nav a {
-  font-size: 16px;
-  font-weight: 500;
-  padding: 1px;
-  display: flex;
-  text-decoration: none;
-  color: black;
-}
-
 .section1 {
   border: 1px solid green;
   display: flex;
@@ -91,7 +42,7 @@ body {
 .sub-section1 {
   display: flex;
   flex-direction: column;
-  width: 95%;
+  width: 90%;
   height: max-content;
 
   gap: 4vh;
@@ -150,7 +101,7 @@ body {
 
 #list-cards {
   display: grid;
-  grid-template-columns: 19% 19% 19% 19%;
+  grid-template-columns: 15% 15% 15% 15% 15%;
   gap: 2%;
   margin-bottom: calc(2%);
   /* grid-gap: 2%; */

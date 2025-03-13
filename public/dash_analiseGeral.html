@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./css/dashboardAG.css">
     <link rel="stylesheet" href="./css/table.css">
+    <link rel="stylesheet" href="./css/navbar.css">
+    <link rel="stylesheet" href="./css/dashboardAG.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,20 +21,31 @@
 <body id="dash_RT">
     <div class="container_navDashRT">
         <nav>
-            <div class="logo">
-                <span>Sentinela</span>
+            <div class="perfil">
+                <div class="logo">
+                    <img src="../public/assets/img/svgLogo.svg">
+                    <span>Sentinela</span>
+                </div>
+                <div class="imagem_perfil">
+                    <img src="../public/assets/img/img_perfil_nav.jpg">
+                </div>
+                <div class="texto_perfil">
+                    <span>Olá, Boas-vindas!</span>
+                </div>
             </div>
-            <div class="div_btn_perfil">
-                <a class="btn_perfil" onclick="btn_perfil">Perfil</a>
-            </div>
-            <div class="itens_nav" id="dash_RT">
-                <li><a href="#anls_RT">Análise em tempo real</a></li>
-                <li><a href="#ansl_hist">Análise histórica</a></li>
-                <li><a href="#ansl_geral">Análise de Dados Geral</a></li>
-                <li><a href="#ger_func">Gerenciamento de funcionários</a></li>
-                <li><a href="#ger_disp">Gerenciamento de Dispositivo</a></li>
-                <li><a href="#alertas">Alertas</a></li>
-                <li><a href="#ger_endereco">Gerenciamento de Endereços</a></select></li>
+            <div class="btn_nav">
+                <div class="btn_dash">
+                    <li><button onclick="btn_rt()">Análise em tempo real</button></li>
+                    <li><button onclick="btn_hist()">Análise histórica</button></li>
+                    <li><button onclick="btn_geral()">Ańálise geral</button></li>
+                    <li><button onclick="btn_func()">Gerenciamento de funcionário</button></li>
+                    <li><button onclick="btn_disp()">Gerenciamento de Dispositivo</button></li>
+                    <li><button onclick="btn_alerta()">Alertas</button></li>
+                    <li><button onclick="btn_endereco()">Gerenciamento de Endereços</button></li>
+                </div>
+                <div class="btn_sair">
+                    <button>Sair</button>
+                </div>
             </div>
         </nav>
     </div>
