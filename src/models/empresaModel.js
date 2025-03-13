@@ -6,8 +6,8 @@ function cadastrar(nome, cnpj, categoria) {
   return database.executar(instrucaoSql);
 }
 
-function cadastrarEndereco(logradouro, cep, estado, complemento){
-  var instrucaoSql = `INSERT INTO endereco (logradouro, cep, estado, complemento) VALUES ('${logradouro}', '${cep}', '${estado}', '${complemento}');`;
+function cadastrarEndereco(logradouro, cep, estado, complemento, fkEmpresa){
+  var instrucaoSql = `INSERT INTO endereco (logradouro, cep, estado, complemento, fkEmpresa) VALUES ('${logradouro}', '${cep}', '${estado}', '${complemento}', ${fkEmpresa});`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
