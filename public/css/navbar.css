@@ -65,7 +65,7 @@
 
 .btn_nav li {
     width: 100%;
-    border-bottom: 1px solid rgba(71, 104, 119, 0.2);
+    border: 1px solid rgba(71, 104, 119, 0.2);
     list-style: none;
     text-decoration: none;
     display: flex;
