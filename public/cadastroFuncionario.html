@@ -27,6 +27,7 @@
 
       <button onclick="cadastrar()">Cadastrar</button>
       <a href="./index.html" class="troca-tela">Voltar para tela inicial</a>
+      <a href="./edicaoFuncionario.html" class="troca-tela">Editar funcionário</a>
     </div>
   </div>
 </div>
@@ -54,10 +55,18 @@ function obterFkEndereco(){
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
+          resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    for (i = 0; i < json.length; i ++){
+                      var opcao = document.createElement('option')
+                      opcao.innerHTML = `<option value="${json[i].idEndereco}">${json[i].logradouro}</option>`;
+                      select_endereco.append(opcao)
+                    }
+                    enderecos=json;
 
-          setTimeout(() => {
-            window.location = "./index.html";
-          }, "2000");
+                });
+
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
@@ -66,13 +75,61 @@ function obterFkEndereco(){
         console.log(`#ERRO: ${resposta}`);
       });
 }
-
+var enderecos = []
+var insertId = 0;
 function cadastrar(){
     var nome = input_nome.value;
     var email = input_email.value;
     var cpf = input_cpf.value;
     var contato = input_contato.value;
     var senha = input_senha.value;
+    var contem_numero = false;
+
+    if(nome == ''){
+      alert("Nome vazio, prencha o nome para continuar.")
+      return;
+    }
+    else if(email == '' || !email.includes("@") || !email.includes(".")){
+      alert("Email vazio ou incorreto, emails devem conter @ e .")
+      return;
+    }
+    else if(cpf.length < 11){
+      alert("Tamanho de cpf incorreto.")
+      return;
+    }
+    else if(contato == ""){
+      alert("Contato não pode estar vazio")
+      return;
+    }
+    else if (contato.length < 11){
+      alert("Quantidade de digitos do número contato incorreto")
+      return;
+    }
+    for (i = 0; i < senha.length; i++) {
+      if (!isNaN(senha[i])) {
+        contem_numero = true;
+        i = senha.length;
+      }
+    }
+    if(!contem_numero){
+      alert("A senha deve conter números")
+    }
+    if (
+      !((senha.includes(".") ||
+        senha.includes("#") ||
+        senha.includes("!") ||
+        senha.includes("_") ||
+        senha.includes("-") ||
+        senha.includes("$") ||
+        senha.includes("@")) &&
+      senha.toUpperCase() != senha &&
+      senha.toLowerCase() != senha &&
+      contem_numero &&
+      senha.length >= 8)
+    ) {
+      alert("A senha deve conter no mínimo uma letra minúscula, uma maiúscula, um símbolo e ter um tamanho maior que 8.")
+      return;
+    }
 
     fetch("/usuarios/cadastrar", {
       method: "POST",
@@ -92,9 +149,18 @@ function cadastrar(){
 
         if (resposta.ok) {
 
-          setTimeout(() => {
-            window.location = "./login.html";
-          }, "2000");
+          resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    insertId = json.insertId;
+                    cadastrarUsuarioEndereco()
+
+
+                    setTimeout(function () {
+                        // window.location = "./dash_realTime.html"
+                    }, 1000);
+
+                });
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
@@ -103,6 +169,43 @@ function cadastrar(){
         console.log(`#ERRO: ${resposta}`);
       });
       
+}
+
+function cadastrarUsuarioEndereco(){
+  var endereco = select_endereco.value;
+  for (i = 0; i < enderecos.length; i++) {
+    if(enderecos[i].logradouro == endereco)
+    endereco = enderecos[i].idEndereco
+    
+  }
+  console.log(endereco)
+  fetch("/usuarios/cadastrarUsuarioEndereco", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fkUsuarioServer: insertId,
+        enderecoServer: endereco
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+
+          resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                });
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
 }
 
 </script>

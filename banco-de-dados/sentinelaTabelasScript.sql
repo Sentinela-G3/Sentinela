@@ -137,5 +137,8 @@ insert into tipo values
 
 select * from usuario;
 
-insert into dados values
-(default, 87, now(), 1, 1);
+select * from empresa;
+
+select * from endereco;
+
+select * from usuarioEndereco;
