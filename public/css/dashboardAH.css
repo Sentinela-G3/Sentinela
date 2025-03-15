@@ -1,0 +1,292 @@
+:root {
+  --borda-padrao-box: 0.35vh #dde1e6 solid;
+  --fontsize-tipo1: 3.5vw;
+  --fontsize-tipo2: 3vw;
+  --fontsize-tipo3: 2.25vw;
+  --fontsize-tipo4: 1.5vw;
+  --fontsize-tipo5: 1vw;
+  --fontsize-tipo6: 0.9vw;
+  --textcolor-cinza1: #697077;
+  --color-amarelo: #fbe969;
+  --color-cinza1: #dde1e6;
+}
+
+h1 {
+  font-size: var(--fontsize-tipo1);
+}
+
+h2 {
+  font-size: var(--fontsize-tipo3);
+}
+
+h3 {
+  font-size: var(--fontsize-tipo4);
+}
+
+h4 {
+  font-size: var(--fontsize-tipo5);
+}
+
+* {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  display: flex;
+}
+
+.section1 {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  height: max-content;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.sub-section1 {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: max-content;
+
+  gap: 4vh;
+}
+
+.titulo_dashRT {
+  display: flex;
+  font-size: 35px;
+  padding: 30px;
+  color: rgb(71, 71, 71);
+  height: 20px;
+  width: 500px;
+}
+
+.div_select_setor {
+  /* border: 1px solid red; */
+  display: flex;
+  width: 200px;
+  height: 30px;
+  justify-content: center;
+}
+
+.select_setor {
+  /* border: 1px solid blue; */
+  display: flex;
+  width: 120px;
+  height: 30px;
+  /* margin-right: 20px; */
+}
+
+.box_kpi {
+  display: flex;
+  height: 60px;
+  width: 90%;
+  justify-content: space-around;
+  font-size: 15px;
+  /* margin-top: 20px; */
+  justify-self: center;
+}
+
+.inicio_dashboard_RT {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5%;
+}
+
+#list-cards {
+  display: grid;
+  grid-template-columns: 75%;
+  gap: 2%;
+  margin-bottom: calc(2%);
+  /* grid-gap: 2%; */
+}
+
+#list-2 {
+  width: 27.5%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.card-generic {
+  display: flex;
+  flex-direction: row;
+  border: var(--borda-padrao-box);
+  width: calc(70% - 4vh);
+  height: fit-content;
+
+
+  gap: 2.5vh;
+  padding: 2vh;
+}
+
+.list-data {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+
+  gap: 2.5vh;
+}
+
+.data-box {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  height: fit-content;
+}
+
+.chart-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.chart-js {
+  width: 100%;
+  height: 80%;
+}
+
+.data-title,
+.data {
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.data-title {
+  font-size: var(--fontsize-tipo5);
+  font-weight: bold;
+}
+
+.data {
+  font-size: var(--fontsize-tipo4);
+  font-weight: bold;
+  color: var(--textcolor-cinza1);
+}
+
+#list-table {
+  flex-direction: column;
+  min-width: 50%;
+  width: 60%;
+  gap: 5vh;
+  /* background-color: red; */
+}
+
+#grid-kpi-table {
+  display: grid;
+  grid-template-columns: 47.5% 47.5%;
+  grid-gap: 5%;
+}
+
+#kpi-table {
+  display: flex;
+  flex-direction: column;
+
+  border: var(--borda-padrao-box);
+  /* background-color: #697077; */
+
+  padding: 1vh 2vh;
+}
+
+.kpi-title {
+  font-weight: bold;
+  font-size: var(--fontsize-tipo6);
+}
+
+.kpi-data {
+  font-weight: bold;
+  color: var(--textcolor-cinza1);
+  font-size: var(--fontsize-tipo5);
+}
+
+#list-filter {
+  width: 75%;
+  gap: 3%;
+  align-items: end;
+}
+
+.select_main {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
+.select_main select,
+.select_main input {
+  outline: 0px;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  height: 6vh;
+  padding: 0 2vh;
+  color: var(--textcolor-cinza1);
+  border: var(--borda-padrao-box);
+  border-radius: 0vw;
+  box-sizing: border-box;
+  font-size: var(--fontsize-tipo6);
+}
+
+.title_select {
+  width: 100%;
+
+  font-size: var(--fontsize-tipo6);
+}
+
+#confirm_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: var(--fontsize-tipo6);
+  border-radius: 1vh;
+  background-color: var(--color-amarelo);
+  padding: 0vh 2%;
+  height: 6.5vh;
+}
+
+.chart-js {
+  width: 100%;
+  height: 100%;
+}
+
+.containerComponent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 75vw;
+  height: 80%;
+  gap: 2%;
+}
+
+.containerComponent h3 {
+  width: 100%;
+}
+
+
+.width-100 {
+  width: calc(100% - 5vh);
+}
+
+.heigth-55 {
+  height: 100%;
+}
+
+.heigth-40 {
+  height: 30%;
+}
+
+/* .kpi_maqAtiva,
+.kpi_maqInativa,
+.qtd_alertas{
+    margin-top: 10px;
+} */
