@@ -24,10 +24,9 @@ body{
 }
 
 .container2 {
+    height: 60%;
     border: 2px solid red;
     width: 100%;
-    justify-content: center;
-    align-self: center;
 }
 
 .titulo_dashRT {
@@ -46,6 +45,7 @@ body{
 }
 
 .box_kpi {
+    height: 20%;
     display: flex;
     width: 100%;
     justify-content: space-around;
@@ -54,6 +54,7 @@ body{
 }
 
 .box_kpi2 {
+    height: 20%;
     display: flex;
     justify-content: space-evenly;
 }

@@ -12,20 +12,23 @@
 }
 
 .table {
-  width: 100%;  
+  width: 100%;
   border-spacing: 0px;
-
   border: 1px solid var(--color-cinza1);
 }
 
-  .table_title, .table_data {
-  /* border:1 1px solid var(--color-cinza1); */
-  /* display: flex; */
+.table_title, .table_data {
   align-items: center;
   justify-content: center;
   width: 33%;
   height: 6vh;
-  /* padding: 2vh; */
+}
+
+#table_title_rt, #table_data_rt {
+  align-items: center;
+  justify-content: center;
+  width: 33%;
+  height: 3vh;
 }
 
 .table_head {
