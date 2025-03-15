@@ -1,0 +1,17 @@
+.table_title,
+.table_data {
+    font-size: 15px;
+}
+
+#table_title_rt,
+#table_data_rt {
+    width: 14%;
+}
+
+#table_title1_rt,
+#table_data1_rt {
+    align-items: center;
+    justify-content: center;
+    width: 33%;
+    height: 3vh;
+}

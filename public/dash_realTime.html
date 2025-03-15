@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./css/navbar.css">
     <link rel="stylesheet" href="./css/dashboardRT.css">
     <link rel="stylesheet" href="./css/table.css">
+    <link rel="stylesheet" href="./css/tabela_rt.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Tempo Real</title>
 </head>
@@ -49,80 +50,103 @@
             <div class="titulo_dashRT">
                 <span><b>Monitoramento em tempo real</b></span>
             </div>
+            <div class="subtitulo_dashRT">
+                <span><i>*Dados capturados no dia de hoje</i></span>
+            </div>
 
             <div class="div_select_setor">
                 <select class="select_setor" id="slct_setor"></select>
             </div>
+        </div>
 
-            <div class="container2">
-                <div class="box_kpi">
-                    <div class="kpi_maqAtiva">
-                        <span>Máquina(s) ativa(s)</span>
-                    </div>
-
-                    <div class="kpi_maqInativa">
-                        <span>Máquina(s) inativa(s)</span>
-                    </div>
-
-                    <div class="qtd_alertas">
-                        <span>Quantidade de alertas</span>
+        <div class="container2">
+            <div class="box_kpi">
+                <div class="kpi_maqRT">
+                    <div class="kpi_maqRT2">
+                        <span><b>Máquina(s) ativa(s)</b></span>
+                        <span>2</span>
                     </div>
                 </div>
 
 
+                <div class="kpi_maqRT">
+                    <div class="kpi_maqRT2">
+                        <span><b>Máquina(s) inativa(s)</b></span>
+                        <span>2</span>
+                    </div>
+                </div>
+
+
+                <div class="kpi_maqRT">
+                    <div class="kpi_maqRT2">
+                        <span><b>Total de Alertas</b></span>
+                        <span>23</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box_table">
                 <table class="table">
                     <thead class="table_head">
-                        <td class="table_title" id="table_title_rt">Quantidade</td>
-                        <td class="table_title" id="table_title_rt">Categoria</td>
-                        <td class="table_title" id="table_title_rt">Especificação</td>
+                        <td class="table_title" id="table_title1_rt">Máquinas ↓</td>
+                        <td class="table_title" id="table_title_rt">Status</td>
+                        <td class="table_title" id="table_title_rt">Tempo Ativo (horas)</td>
+                        <td class="table_title" id="table_title_rt">Alertas</td>
+                        <td class="table_title" id="table_title_rt">Ultimo alerta</td>
+                        <td class="table_title" id="table_title_rt">Detalhamento</td>
                     </thead>
                     <tbody class="table_body">
-                        <td class="table_data" id="table_data_rt">QtdAlertas</td>
-                        <td class="table_data" id="table_data_rt">CategoriaComp.</td>
-                        <td class="table_data" id="table_data_rt">EspecificacaoComp.</td>
+                        <td class="table_data" id="table_data1_rt">ID 1 (SERIALNUMBER)</td>
+                        <td class="table_data" id="table_data_rt" style="color: green;">Ativo</td>
+                        <td class="table_data" id="table_data_rt">4:37</td>
+                        <td class="table_data" id="table_data_rt">2</td>
+                        <td class="table_data" id="table_data_rt">13:35</td>
+                        <td class="table_data" id="table_data_rt"><button>Detalhamento</button></td>
                     </tbody>
                     <tbody class="table_body">
-                        <td class="table_data" id="table_data_rt">QtdAlertas</td>
-                        <td class="table_data" id="table_data_rt">CategoriaComp.</td>
-                        <td class="table_data" id="table_data_rt">EspecificacaoComp.</td>
+                        <td class="table_data" id="table_data1_rt">ID 2 (SERIALNUMBER)</td>
+                        <td class="table_data" id="table_data_rt" style="color: green;">Ativo</td>
+                        <td class="table_data" id="table_data_rt">7:10</td>
+                        <td class="table_data" id="table_data_rt">4</td>
+                        <td class="table_data" id="table_data_rt">10:30</td>
+                        <td class="table_data" id="table_data_rt"><button>Detalhamento</button></td>
                     </tbody>
                     <tbody class="table_body">
-                        <td class="table_data" id="table_data_rt">QtdAlertas</td>
-                        <td class="table_data" id="table_data_rt">CategoriaComp.</td>
-                        <td class="table_data" id="table_data_rt">EspecificacaoComp.</td>
-                    </tbody>
-                    <tbody class="table_body">
-                        <td class="table_data" id="table_data_rt">QtdAlertas</td>
-                        <td class="table_data" id="table_data_rt">CategoriaComp.</td>
-                        <td class="table_data" id="table_data_rt">EspecificacaoComp.</td>
-                    </tbody>
-                    <tbody class="table_body">
-                        <td class="table_data" id="table_data_rt">QtdAlertas</td>
-                        <td class="table_data" id="table_data_rt">CategoriaComp.</td>
-                        <td class="table_data" id="table_data_rt">EspecificacaoComp.</td>
+                        <td class="table_data" id="table_data1_rt">ID 3 (SERIALNUMBER)</td>
+                        <td class="table_data" id="table_data_rt" style="color: red;">Inativo</td>
+                        <td class="table_data" id="table_data_rt">2:51</td>
+                        <td class="table_data" id="table_data_rt">0</td>
+                        <td class="table_data" id="table_data_rt">11:55</td>
+                        <td class="table_data" id="table_data_rt"><button>Detalhamento</button></td>
                     </tbody>
                 </table>
+            </div>
 
+            <div class="box_kpi2">
+                <div class="container_kpi">
+                    <div class="kpi_maqRT">
+                        <span><b>Velocidade de Download</b></span>
+                        <span>320 mbps</span>
+                    </div>
 
+                    <div class="kpi_maqRT">
+                        <span><b>Velocidade de Upload</b></span>
+                        <span>150 mbps</span>
+                    </div>
+                </div>
 
-                <div class="box_kpi2">
-                    <div class="container_kpi">
-                        <div class="kpi_maqAtiva">
-                            <span>Velocidade de Download</span>
-                        </div>
-
-                        <div class="kpi_maqInativa">
-                            <span>Velocidade de Upload</span>
+                <div class="container_kpi">
+                    <div class="kpi_maqRT">
+                        <span><b>Bateria Conectada</b></span>
+                        <div class="kpi_text">
+                            <span>Inativo</span>
                         </div>
                     </div>
 
-                    <div class="container_kpi">
-                        <div class="kpi_maqAtiva">
-                            <span>Status de Carregamento</span>
-                        </div>
-
-                        <div class="kpi_maqInativa">
-                            <span>Tempo total de Atividade</span>
+                    <div class="kpi_maqRT">
+                        <span><b>Tempo de bateria restante</b></span>
+                        <div class="kpi_text">
+                            <span>Estimados 15 minutos</span>
                         </div>
                     </div>
                 </div>
@@ -136,17 +160,17 @@
 
 <script>
 
-function btn_func(){
-    window.location = './cadastroFuncionario.html';
-}
+    function btn_func() {
+        window.location = './cadastroFuncionario.html';
+    }
 
-function btn_disp(){
-    window.location = './cadastroModelo.html';
-}
+    function btn_disp() {
+        window.location = './cadastroModelo.html';
+    }
 
-function btn_maquina(){
-    window.location = './cadastroMaquina.html';
-}
+    function btn_maquina() {
+        window.location = './cadastroMaquina.html';
+    }
 
 
 </script>
