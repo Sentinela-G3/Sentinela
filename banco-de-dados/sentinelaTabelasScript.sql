@@ -12,13 +12,13 @@ CREATE TABLE empresa (
     nomeFantasia VARCHAR(45),
     cnpj CHAR(14),
     categoria VARCHAR(45),
-    dataInicio DATE
+    dataInicio DATE,
+    status VARCHAR(13)
 );
 
 CREATE TABLE usuario (
     idUsuario INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(45),
-    sobrenome VARCHAR(45),
     email VARCHAR(45),
     cpf CHAR(11),
     contato CHAR(11),
@@ -36,6 +36,7 @@ CREATE TABLE endereco (
     estado CHAR(2),
     complemento VARCHAR(45),
     fkEmpresa INT,
+    status VARCHAR(13),
     FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 );
 
@@ -52,18 +53,19 @@ CREATE TABLE modelo (
     idModelo INT AUTO_INCREMENT PRIMARY KEY,
     nomeModelo VARCHAR(45),
     fkEmpresa INT,
+    status VARCHAR(13),
     constraint fkModeloEmpresa foreign key (fkEmpresa) references empresa (idEmpresa)
 );
 
 CREATE TABLE maquina (
     idMaquina INT AUTO_INCREMENT PRIMARY KEY,
     status VARCHAR(13),
+    setor VARCHAR(45),
     nomeModelo VARCHAR(45),
-    fabricanteModelo VARCHAR(45),
     fkEndereco INT,
-    fkEmpresa INT,
+    fkModelo INT,
     FOREIGN KEY (fkEndereco) REFERENCES endereco(idEndereco),
-    FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
+    FOREIGN KEY (fkModelo) REFERENCES modelo(idModelo)
 );
 
 CREATE TABLE componente (
@@ -71,7 +73,8 @@ CREATE TABLE componente (
     nome VARCHAR(45),
     modelo VARCHAR(45),
     fkMaquina INT,
-    FOREIGN KEY (fkMaquina) REFERENCES maquina(idMaquina)
+    FOREIGN KEY (fkMaquina) REFERENCES maquina(idMaquina),
+    status VARCHAR(13)
 );
 
 CREATE TABLE tipo (
@@ -91,17 +94,17 @@ CREATE TABLE dados (
 );
 
 insert into empresa values
-(1, 'Quicktron', '11111111111111', 'fabricante', '2025-02-25');
+(2, 'Quicktron', '11111111111111', 'fabricante', '2025-02-25');
 
 insert into cargo values
 (1, 'Gerente', 1),
 (2, 'Analista', 3);
 
 insert into usuario values
-(1, 'Ronaldo Alves', null, 'ronaldoalves@quicktron.com', 12345678901, 12345678901, 'Quicktron#123', 1, null);
+(1, 'Ronaldo Alves', null, 'ronaldoalves@quicktron.com', 12345678901, 12345678901, 'Quicktron#123', 2, null);
 
 insert into endereco values
-(1, 'Rua João Silva', '04911111', 'sp', '', 1);
+(1, 'Rua João Silva', '04911111', 'sp', '', 2);
 
 insert into usuarioEndereco  values
 (1, 1, 2);
@@ -109,10 +112,10 @@ insert into usuarioEndereco  values
         SELECT idUsuario, nome, email, fkCargo, idEmpresa FROM usuario join usuarioEndereco on idUsuario = fkUsuario join endereco on 
 idEndereco = fkEndereco join empresa on idEmpresa = fkEmpresa WHERE email = 'ronaldoalves@quicktron.com' AND senha = 'Quicktron#123'; 
 insert into modelo values
-(default, 'M60', 1);
+(default, 'M60', 2);
 
 insert into maquina values
-(default, "ativo", "EG209", "Quicktrom", 1, 1);
+(default, "ativo", "EG209", "Quicktron", 1, 1);
 
 insert into componente values
 (1, 'Processador', 'Ryzen 3', 1),
@@ -141,4 +144,8 @@ select * from empresa;
 
 select * from endereco;
 
+select * from modelo;
+
 select * from usuarioEndereco;
+
+SELECT idModelo, nomeModelo from modelo where fkEmpresa = 1;
