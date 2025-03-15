@@ -1,10 +1,13 @@
-var maquinaModel = require("../models/usuarioModel");
+var maquinaModel = require("../models/maquinaModel");
 
 
 function cadastrar(req, res) {
-    
+    var serial = req.body.serialServer;
+    var setor = req.body.setorServer;
+    var fkEndereco = req.body.fkEnderecoServer;
+    var fkModelo = req.body.fkModeloServer;
 
-        maquinaModel.cadastrar(nome, email, cpf, contato, senha)
+        maquinaModel.cadastrar(serial, setor, fkEndereco, fkModelo)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -33,7 +36,7 @@ function obterFkModelo(req, res){
                 function (erro) {
                     console.log(erro);
                     console.log(
-                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        "\nHouve um erro ao obter os modelo! Erro: ",
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);

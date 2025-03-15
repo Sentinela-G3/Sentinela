@@ -1,13 +1,13 @@
 var database = require("../database/config");
 
-function cadastrar(nome, cnpj, categoria) {
-  var instrucaoSql = `INSERT INTO empresa (nomeFantasia, cnpj, categoria, dataInicio) VALUES ('${nome}', '${cnpj}', '${categoria}', now());`;
+function cadastrar(serial, setor, fkEndereco, fkModelo) {
+  var instrucaoSql = `INSERT INTO maquina (serial, setor, fkEndereco, fkModelo, status) VALUES ('${serial}', '${setor}', '${fkEndereco}', '${fkModelo}', 'ativo');`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
 
 function obterFkModelo(fkEmpresa){
-  var instrucaoSql = `SELECT idModelo, nomeModelo from modelo where fkEmpresa = ${fkEmpresa} and where status = 'ativo';`;
+  var instrucaoSql = `SELECT idModelo, nomeModelo from modelo where fkEmpresa = ${fkEmpresa} and status = 'ativo';`;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }

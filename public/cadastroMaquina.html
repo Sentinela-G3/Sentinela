@@ -22,6 +22,7 @@
       <div class="div-cadastro-titulo">Cadastrar novo modelo</div>
         <div class="formulario-inputs">
           <div class="titulo-input">Número serial da maquina </div><input type="text" id="input_serial">
+          <div class="titulo-input">Setor da máquina </div><input type="text" id="input_setor">
           <div class="titulo-input">Modelo </div><select name="" id="select_modelo">
             <option value="">Escolha o modelo</option>
           </select>
@@ -95,7 +96,6 @@ function obterFkModelo(){
     })
       .then(function (resposta) {
         console.log("resposta: ", resposta);
-        console.log("eror")
 
         if (resposta.ok) {
           resposta.json().then(json => {
@@ -103,8 +103,8 @@ function obterFkModelo(){
                     console.log(JSON.stringify(json));
                     for (i = 0; i < json.length; i ++){
                       var opcao = document.createElement('option')
-                    //   opcao.innerHTML = `<option value="${json[i].idEndereco}">${json[i].logradouro}</option>`;
-                    //   select_modelo.append(opcao)
+                      opcao.innerHTML = `<option value="${json[i].idModelo}">${json[i].nomeModelo}</option>`;
+                      select_modelo.append(opcao)
                     }
                     modelos=json;
 
@@ -121,8 +121,21 @@ function obterFkModelo(){
 
 function cadastrar(){
     var serial = input_serial.value;
-    var modelo = select_modelo.value;
-    var idEmpresa = sessionStorage.idEmpresa;
+    var setor = input_setor.value;
+
+    for (i = 0; i < enderecos.length; i++) {
+      if(select_endereco.value == enderecos[i].logradouro){
+        var endereco = enderecos[i].idEndereco
+      }
+      
+    }
+
+    for (i = 0; i < modelos.length; i++) {
+      if(select_modelo.value == modelos[i].nomeModelo){
+        var modelo = modelos[i].idModelo
+      }
+      
+    }
 
     fetch("/maquinas/cadastrar", {
       method: "POST",
@@ -130,8 +143,10 @@ function cadastrar(){
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        modeloServer: modelo,
-        idEmpresaServer: idEmpresa
+        serialServer: serial,
+        setorServer: setor,
+        fkEnderecoServer: endereco,
+        fkModeloServer: modelo
       }),
     })
       .then(function (resposta) {
