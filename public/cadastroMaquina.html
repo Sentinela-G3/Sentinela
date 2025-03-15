@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Sentinela</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro Sentinela</title>
+    <link rel="stylesheet" href="./css/cadastros.css">
+</head>
+<body>
+    
+  <div class="div-geral">
+    <div class="formulario-container">
+      <img src="./assets/img/svgLogo.svg" alt="">
+      <div class="div-cadastro-titulo">Cadastrar novo modelo</div>
+        <div class="formulario-inputs">
+          <div class="titulo-input">Número serial da maquina </div><input type="text" id="input_serial">
+          <div class="titulo-input">Modelo </div><select name="" id="select_modelo">
+            <option value="">Escolha o modelo</option>
+          </select>
+          <div class="titulo-input">Endereço </div><select name="" id="select_endereco">
+            <option value="">Escolha o endereco</option>
+          </select>
+          <button onclick="cadastrar()">Cadastrar</button>
+          <a href="./index.html" class="troca-tela">Voltar para tela inicial</a>
+          <a href="./edicaoMaquina.html" class="troca-tela">Editar maquina</a>
+        </div>
+    </div>
+  </div>
+
+</body>
+</html>
+
+<script>
+enderecos = []
+modelos = []
+obterFkEndereco()
+obterFkModelo()
+
+function obterFkEndereco(){
+  var email = sessionStorage.email;
+
+  fetch("/usuarios/obterFkEndereco", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emailServer: email
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    for (i = 0; i < json.length; i ++){
+                      var opcao = document.createElement('option')
+                      opcao.innerHTML = `<option value="${json[i].idEndereco}">${json[i].logradouro}</option>`;
+                      select_endereco.append(opcao)
+                    }
+                    enderecos=json;
+
+                });
+
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+}
+
+function obterFkModelo(){
+  var fkEmpresa = sessionStorage.idEmpresa;
+
+  fetch("/maquinas/obterFkModelo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fkEmpresaServer: fkEmpresa
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+        console.log("eror")
+
+        if (resposta.ok) {
+          resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    for (i = 0; i < json.length; i ++){
+                      var opcao = document.createElement('option')
+                    //   opcao.innerHTML = `<option value="${json[i].idEndereco}">${json[i].logradouro}</option>`;
+                    //   select_modelo.append(opcao)
+                    }
+                    modelos=json;
+
+                });
+
+        } else {
+          throw "Houve um erro ao tentar obter o fkModelo!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+}
+
+function cadastrar(){
+    var serial = input_serial.value;
+    var modelo = select_modelo.value;
+    var idEmpresa = sessionStorage.idEmpresa;
+
+    fetch("/maquinas/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        modeloServer: modelo,
+        idEmpresaServer: idEmpresa
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+
+          setTimeout(() => {
+            window.localtion = './edicaoMaquina.html';
+          }, "2000");
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+}
+
+</script>
+</body>
+</html>

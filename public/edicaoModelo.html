@@ -13,7 +13,7 @@
     <img src="./assets/img/svgLogo.svg" alt="">
       <div class="div-cadastro-titulo">Cadastrar novo modelo</div>
         <div class="formulario-inputs">
-          <div class="titulo-input">Insira o nome do modelo:</div><input type="text" id="input_modelo">
+          
           <button onclick="cadastrar()">Cadastrar</button>
           <a href="./index.html" class="troca-tela">Voltar para tela inicial</a>
           <a href="./edicaoModelo.html" class="troca-tela">Editar modelo</a>
@@ -23,38 +23,3 @@
 
 </body>
 </html>
-
-<script>
-
-function cadastrar(){
-    var modelo = input_modelo.value;
-    var idEmpresa = sessionStorage.idEmpresa;
-
-    fetch("/modelos/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        modeloServer: modelo,
-        idEmpresaServer: idEmpresa
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
-
-        if (resposta.ok) {
-
-          setTimeout(() => {
-            window.localtion = './edicaoModelo.html';
-          }, "2000");
-        } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
-        }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-}
-
-</script>

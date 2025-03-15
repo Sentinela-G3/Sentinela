@@ -84,6 +84,10 @@ function cadastrar(){
     var contato = input_contato.value;
     var senha = input_senha.value;
     var contem_numero = false;
+    if(select_endereco.value == ""){
+      alert("Selecione um endereço válido.")
+      return;
+    }
 
     if(nome == ''){
       alert("Nome vazio, prencha o nome para continuar.")
@@ -157,7 +161,7 @@ function cadastrar(){
 
 
                     setTimeout(function () {
-                        // window.location = "./dash_realTime.html"
+                        window.location = "./dash_realTime.html"
                     }, 1000);
 
                 });
