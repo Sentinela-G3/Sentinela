@@ -27,6 +27,7 @@
 
       <button onclick="cadastrar()">Cadastrar</button>
       <a href="./index.html" class="troca-tela">Voltar para tela inicial</a>
+      <a href="./edicaoFuncionario.html" class="troca-tela">Editar funcionário</a>
     </div>
   </div>
 </div>
@@ -80,6 +81,54 @@ function cadastrar(){
     var cpf = input_cpf.value;
     var contato = input_contato.value;
     var senha = input_senha.value;
+    var endereco = select_endereco.value;
+    var contem_numero = false;
+
+    if(nome == ''){
+      alert("Nome vazio, prencha o nome para continuar.")
+      return;
+    }
+    else if(email == '' || !email.includes("@") || !email.includes(".")){
+      alert("Email vazio ou incorreto, emails devem conter @ e .")
+      return;
+    }
+    else if(cpf.length < 11){
+      alert("Tamanho de cpf incorreto.")
+      return;
+    }
+    else if(contato == ""){
+      alert("Contato não pode estar vazio")
+      return;
+    }
+    else if (contato.length < 11){
+      alert("Quantidade de digitos do número contato incorreto")
+      return;
+    }
+    for (i = 0; i < senha.length; i++) {
+      if (!isNaN(senha[i])) {
+        contem_numero = true;
+        i = senha.length;
+      }
+    }
+    if(!contem_numero){
+      alert("A senha deve conter números")
+    }
+    if (
+      !((senhaVar.includes(".") ||
+        senhaVar.includes("#") ||
+        senhaVar.includes("!") ||
+        senhaVar.includes("_") ||
+        senhaVar.includes("-") ||
+        senhaVar.includes("$") ||
+        senhaVar.includes("@")) &&
+      senhaVar.toUpperCase() != senhaVar &&
+      senhaVar.toLowerCase() != senhaVar &&
+      contem_numero &&
+      senhaVar.length >= 8)
+    ) {
+      alert("A senha deve conter no mínimo uma letra minúscula, uma maiúscula, um símbolo e ter um tamanho maior que 8.")
+      return;
+    }
 
     fetch("/usuarios/cadastrar", {
       method: "POST",
@@ -100,7 +149,7 @@ function cadastrar(){
         if (resposta.ok) {
 
           setTimeout(() => {
-            window.location = "./login.html";
+            window.location = "./dash_realTime.html";
           }, "2000");
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
