@@ -60,7 +60,7 @@ function obterFkEndereco(){
                     console.log(JSON.stringify(json));
                     for (i = 0; i < json.length; i ++){
                       var opcao = document.createElement('option')
-                      opcao.innerHTML = `<option value="${json[i].logradouro}">${json[i].logradouro}</option>`;
+                      opcao.innerHTML = `<option value="${json[i].idEndereco}">${json[i].logradouro}</option>`;
                       select_endereco.append(opcao)
                     }
 
@@ -74,14 +74,15 @@ function obterFkEndereco(){
         console.log(`#ERRO: ${resposta}`);
       });
 }
-
+var endereco = 0;
+var insertId = 0;
 function cadastrar(){
     var nome = input_nome.value;
     var email = input_email.value;
     var cpf = input_cpf.value;
     var contato = input_contato.value;
     var senha = input_senha.value;
-    var endereco = select_endereco.value;
+    endereco = select_endereco.value;
     var contem_numero = false;
 
     if(nome == ''){
@@ -140,7 +141,8 @@ function cadastrar(){
         emailServer: email,
         cpfServer: cpf,
         contatoServer: contato,
-        senhaServer: senha
+        senhaServer: senha,
+        enderecoServer: endereco
       }),
     })
       .then(function (resposta) {
@@ -148,9 +150,18 @@ function cadastrar(){
 
         if (resposta.ok) {
 
-          setTimeout(() => {
-            window.location = "./dash_realTime.html";
-          }, "2000");
+          resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    insertId = json.insertId;
+                    cadastrarUsuarioEndereco()
+
+
+                    setTimeout(function () {
+                        // window.location = "./dash_realTime.html"
+                    }, 1000);
+
+                });
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
@@ -159,6 +170,37 @@ function cadastrar(){
         console.log(`#ERRO: ${resposta}`);
       });
       
+}
+
+function cadastrarUsuarioEndereco(){
+  console.log(endereco)
+  fetch("/usuarios/cadastrarUsuarioEndereco", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fkUsuarioServer: insertId,
+        enderecoServer: endereco
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+
+          resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                });
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
 }
 
 </script>

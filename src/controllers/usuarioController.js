@@ -1,3 +1,4 @@
+const { json } = require("express");
 var usuarioModel = require("../models/usuarioModel");
 
 function autenticar(req, res) {
@@ -99,8 +100,31 @@ function obterFkEndereco(req, res){
     );
 }   
 
+function cadastrarUsuarioEndereco(req, res){
+    var fkUsuario = req.body.fkUsuarioServer;
+    var fkEndereco = req.body.enderecoServer;
+
+    usuarioModel.cadastrarUsuarioEndereco(fkUsuario, fkEndereco)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao tentar cadastrar o endereço do usuário! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+
+}
+
 module.exports = {
     autenticar,
     cadastrar,
-    obterFkEndereco
+    obterFkEndereco,
+    cadastrarUsuarioEndereco
 }
