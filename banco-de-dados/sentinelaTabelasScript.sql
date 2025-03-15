@@ -18,6 +18,7 @@ CREATE TABLE empresa (
 CREATE TABLE usuario (
     idUsuario INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(45),
+    sobrenome VARCHAR(45),
     email VARCHAR(45),
     cpf CHAR(11),
     contato CHAR(11),
@@ -90,35 +91,23 @@ CREATE TABLE dados (
 );
 
 insert into empresa values
-(1, 'Sentinela', '22222222222222', null, '2025-02-23');
-
-insert into usuario values
-(1, 'Diogo Yudi', 'diogoyudi@sentinela.com', 13245678901, 13245678901, 'Sentinela@123', null, 1),
-(2, 'Gabriel Feitosa', 'gabrielfeitosa@sentinela.com', 14325678901, 14325678901, 'Sentinela@123', null, 1),
-(3, 'Guilherme Eduardo', 'guilhermeeduardo@sentinela.com', 15342678901, 15342678901, 'Sentinela@123', null, 1),
-(4, 'Leticia Reis', 'leticiareis@sentinela.com', 16345278901, 16345278901, 'Sentinela@123', null, 1),
-(5, 'Lucas Aquino', 'lucasaquino@sentinela.com', 17345628901, 17345628901, 'Sentinela@123', null, 1),
-(6, 'Lucas Marcolino', 'lucasmarcolino@sentinela.com', 18345672901, 18345672901, 'Sentinela@123', null, 1);
-
-insert into empresa values
-(2, 'Quicktron', '11111111111111', 'fabricante', '2025-02-25');
+(1, 'Quicktron', '11111111111111', 'fabricante', '2025-02-25');
 
 insert into cargo values
 (1, 'Gerente', 1),
 (2, 'Analista', 3);
 
 insert into usuario values
-(7, 'Ronaldo Alves','ronaldoalves@quicktron.com', 12345678901, 12345678901, 'Quicktron#123', 1, null);
+(1, 'Ronaldo Alves', null, 'ronaldoalves@quicktron.com', 12345678901, 12345678901, 'Quicktron#123', 1, null);
 
 insert into endereco values
-(1, 'Rua João Silva', '04911111', 'sp', '', 2),
-(2, 'Rua Pedro Amorim', '04922222', 'sp', '', 2);
+(1, 'Rua João Silva', '04911111', 'sp', '', 1);
 
 insert into usuarioEndereco  values
-(7, 1, 2),
-(7, 2, 2);
+(1, 1, 2);
 
-SELECT idUsuario, nome, email, fkCargo, idEmpresa FROM usuario join usuarioEndereco on idUsuario = fkUsuario join endereco on idEndereco = fkEndereco join empresa on idEmpresa = fkEmpresa WHERE email = 'gui@email.com' AND senha = 'senha123';
+        SELECT idUsuario, nome, email, fkCargo, idEmpresa FROM usuario join usuarioEndereco on idUsuario = fkUsuario join endereco on 
+idEndereco = fkEndereco join empresa on idEmpresa = fkEmpresa WHERE email = 'ronaldoalves@quicktron.com' AND senha = 'Quicktron#123'; 
 insert into modelo values
 (default, 'M60', 1);
 
@@ -148,8 +137,6 @@ insert into tipo values
 
 select * from usuario;
 
-insert into dados values
-(default, 87, now(), 1, 1);
+select * from empresa;
 
-select * from dados;
-SELECT logradouro FROM endereco join usuarioEndereco on fkEndereco = idEndereco join usuario on fkUsuario = idUsuario where email = 'ronaldoalves@quicktron.com';
+select * from endereco;

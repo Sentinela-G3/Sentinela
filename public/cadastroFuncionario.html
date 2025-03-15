@@ -63,6 +63,7 @@ function obterFkEndereco(){
                       opcao.innerHTML = `<option value="${json[i].idEndereco}">${json[i].logradouro}</option>`;
                       select_endereco.append(opcao)
                     }
+                    enderecos=json;
 
                 });
 
@@ -74,7 +75,7 @@ function obterFkEndereco(){
         console.log(`#ERRO: ${resposta}`);
       });
 }
-var endereco = 0;
+var enderecos = []
 var insertId = 0;
 function cadastrar(){
     var nome = input_nome.value;
@@ -82,7 +83,6 @@ function cadastrar(){
     var cpf = input_cpf.value;
     var contato = input_contato.value;
     var senha = input_senha.value;
-    endereco = select_endereco.value;
     var contem_numero = false;
 
     if(nome == ''){
@@ -141,8 +141,7 @@ function cadastrar(){
         emailServer: email,
         cpfServer: cpf,
         contatoServer: contato,
-        senhaServer: senha,
-        enderecoServer: endereco
+        senhaServer: senha
       }),
     })
       .then(function (resposta) {
@@ -173,6 +172,12 @@ function cadastrar(){
 }
 
 function cadastrarUsuarioEndereco(){
+  var endereco = select_endereco.value;
+  for (i = 0; i < enderecos.length; i++) {
+    if(enderecos[i].logradouro == endereco)
+    endereco = enderecos[i].idEndereco
+    
+  }
   console.log(endereco)
   fetch("/usuarios/cadastrarUsuarioEndereco", {
       method: "POST",
