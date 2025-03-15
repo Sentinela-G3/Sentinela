@@ -114,17 +114,17 @@ function cadastrar(){
       alert("A senha deve conter números")
     }
     if (
-      !((senhaVar.includes(".") ||
-        senhaVar.includes("#") ||
-        senhaVar.includes("!") ||
-        senhaVar.includes("_") ||
-        senhaVar.includes("-") ||
-        senhaVar.includes("$") ||
-        senhaVar.includes("@")) &&
-      senhaVar.toUpperCase() != senhaVar &&
-      senhaVar.toLowerCase() != senhaVar &&
+      !((senha.includes(".") ||
+        senha.includes("#") ||
+        senha.includes("!") ||
+        senha.includes("_") ||
+        senha.includes("-") ||
+        senha.includes("$") ||
+        senha.includes("@")) &&
+      senha.toUpperCase() != senha &&
+      senha.toLowerCase() != senha &&
       contem_numero &&
-      senhaVar.length >= 8)
+      senha.length >= 8)
     ) {
       alert("A senha deve conter no mínimo uma letra minúscula, uma maiúscula, um símbolo e ter um tamanho maior que 8.")
       return;
