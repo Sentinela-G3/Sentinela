@@ -1,7 +1,7 @@
 var modeloModel = require("../models/modeloModel");
 
 function cadastrar(req ,res){
-    var nomeModelo = req.body.nomeServer;
+    var nomeModelo = req.body.modeloServer;
     var idEmpresa = req.body.idEmpresaServer;
 
     if (nomeModelo == undefined) {

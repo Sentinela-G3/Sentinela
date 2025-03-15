@@ -140,3 +140,5 @@ select * from usuario;
 select * from empresa;
 
 select * from endereco;
+
+select * from usuarioEndereco;
