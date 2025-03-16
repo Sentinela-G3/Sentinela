@@ -15,3 +15,14 @@
     width: 33%;
     height: 4vh;
 }
+
+button {
+    background-color: #fff9cf;
+    border-radius: 4px;
+}
+
+.table_data :hover {
+    background-color: #fff9cf;
+    border: 1px;
+    border-radius: 4px;
+}
