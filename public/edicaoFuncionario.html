@@ -29,7 +29,45 @@
 </html>
 
 <script>
+var enderecos = []
+obterFkEndereco()
 
+function obterFkEndereco(){
+  var email = sessionStorage.email;
+
+  fetch("/usuarios/obterFkEndereco", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emailServer: email
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    for (i = 0; i < json.length; i ++){
+                      var opcao = document.createElement('option')
+                      opcao.innerHTML = `<option value="${json[i].idEndereco}">${json[i].logradouro}</option>`;
+                      select_endereco.append(opcao)
+                    }
+                    enderecos=json;
+
+                });
+
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+    }
 
 
 </script>

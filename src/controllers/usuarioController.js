@@ -46,6 +46,7 @@ function cadastrar(req, res) {
     var email = req.body.emailServer;
     var cpf = req.body.cpfServer;
     var contato = req.body.contatoServer;
+    var cargo = req.body.cargoServer;
     var senha = req.body.senhaServer;
 
     // Faça as validações dos valores
@@ -57,12 +58,14 @@ function cadastrar(req, res) {
         res.status(400).send("Seu cpf está undefined!");
     } else if (contato == undefined) {
         res.status(400).send("Seu contato está undefined!");
+    } else if (cargo == undefined) {
+        res.status(400).send("Seu cargo está undefined!");
     } else if (senha == undefined) {
         res.status(400).send("Sua senha está undefined!");
     } else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, email, cpf, contato, senha)
+        usuarioModel.cadastrar(nome, email, cpf, contato, cargo, senha)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -122,9 +125,30 @@ function cadastrarUsuarioEndereco(req, res){
 
 }
 
+function obterFkCargo(req, res){
+    var idEmpresa = req.body.idEmpresaServer;
+
+    usuarioModel.obterFkCargo(idEmpresa)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao tentar obter os cargos! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     obterFkEndereco,
-    cadastrarUsuarioEndereco
+    cadastrarUsuarioEndereco,
+    obterFkCargo
 }

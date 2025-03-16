@@ -19,7 +19,9 @@
       <div class="titulo-input">Email:</div><input type="text" id="input_email">
       <div class="titulo-input">CPF:</div><input type="text" id="input_cpf">
       <div class="titulo-input">Contato:</div><input type="text" id="input_contato">
-      <div class="titulo-input">Cargo:</div><input type="text" id="input_cargo">
+      <div class="titulo-input">Cargo:</div><select name="select_cargo" id="select_cargo">
+        <option value="">Selecione um cargo</option>
+      </select><br>
       <div class="titulo-input">Senha:</div><input type="text" id="input_senha">
       <div class="titulo-input">Endereço:</div><select name="select_endereco" id="select_endereco">
         <option value="">Selecione um endereço</option>
@@ -39,6 +41,7 @@
 
 <script>
 obterFkEndereco()
+obterFkCargo()
 
 function obterFkEndereco(){
   var email = sessionStorage.email;
@@ -69,7 +72,7 @@ function obterFkEndereco(){
                 });
 
         } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
+          throw "Houve um erro ao tentar obter o endereço!";
         }
       })
       .catch(function (resposta) {
@@ -77,12 +80,57 @@ function obterFkEndereco(){
       });
 }
 var enderecos = []
+var cargos = []
 var insertId = 0;
+
+function obterFkCargo(){
+  var idEmpresa = sessionStorage.idEmpresa;
+
+  fetch("/usuarios/obterFkCargo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        idEmpresaServer: idEmpresa
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    for (i = 0; i < json.length; i ++){
+                      var opcao = document.createElement('option')
+                      opcao.innerHTML = `<option value="${json[i].idCargo}">${json[i].nomeCargo}</option>`;
+                      select_cargo.append(opcao)
+                    }
+                    cargos=json;
+
+                });
+
+        } else {
+          throw "Houve um erro ao tentar obter o cargo!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  
+}
+
 function cadastrar(){
     var nome = input_nome.value;
     var email = input_email.value;
     var cpf = input_cpf.value;
     var contato = input_contato.value;
+    for (i = 0; i < enderecos.length; i++) {
+    if(cargos[i].nomeCargo == select_cargo.value)
+    var cargo = cargos[i].idCargo
+    
+  }
     var senha = input_senha.value;
     var contem_numero = false;
     if(select_endereco.value == ""){
@@ -146,6 +194,7 @@ function cadastrar(){
         emailServer: email,
         cpfServer: cpf,
         contatoServer: contato,
+        cargoServer: cargo,
         senhaServer: senha
       }),
     })

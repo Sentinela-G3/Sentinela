@@ -125,13 +125,13 @@ insert into endereco values
 (3, 'Rua Eduardo Monteiro', '04933333', 'sp', '', 2, 'ativo');
 
 insert into usuarioEndereco  values
-(7, 1, 1),
-(7, 2, 1),
-(7, 3, 1),
-(8, 2, 3),
-(9, 1, 2),
-(9, 2, 2),
-(9, 3, 2);
+(8, 1, 1),
+(8, 2, 1),
+(8, 3, 1),
+(9, 2, 3),
+(10, 1, 2),
+(10, 2, 2),
+(10, 3, 2);
 
         SELECT idUsuario, nome, email, fkCargo, idEmpresa FROM usuario join usuarioEndereco on idUsuario = fkUsuario join endereco on 
 idEndereco = fkEndereco join empresa on idEmpresa = fkEmpresa WHERE email = 'ronaldoalves@quicktron.com' AND senha = 'Quicktron#123'; 
