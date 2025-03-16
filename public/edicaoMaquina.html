@@ -3,31 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro Sentinela</title>
-</head>
-<body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro Sentinela</title>
+    <title>Edição Sentinela</title>
     <link rel="stylesheet" href="./css/cadastros.css">
 </head>
-<body>
     
+<body>
   <div class="div-geral">
     <div class="formulario-container">
       <img src="./assets/img/svgLogo.svg" alt="">
       <div class="div-cadastro-titulo">Editar maquina</div>
         <div class="formulario-inputs">
-            <a href="./edicaoMaquinaEndereco.html"><button onclick="cadastrar()">Editar endereço</button></a>
-            <a href="./edicaoMaquinaSetor.html"><button onclick="cadastrar()">Editar setor</button></a>
-            <a href="./edicaoMaquinaExcluir.html"><button onclick="cadastrar()">Excluir máquina</button></a>
-
-          <button onclick="cadastrar()">Cadastrar</button>
-          <a href="./index.html" class="troca-tela">Voltar para tela inicial</a>
-          <a href="./dash_realTime.html" class="troca-tela">Voltar para dashboard</a>
+          <div class="titulo-input">Maquina:</div> <select name="" id="select_maquina">
+              <option value="">Selecione a maquina que deseja editar</option>
+            </select>
+            <div class="titulo-input">Setor:</div><input type="text" id="input_setor">
+            <div class="titulo-input">Endereco:</div><select name="" id="select_endereco">
+              <option value="">Selecione o novo endereco</option>
+            </select>
+            <button onclick="excluir(1)">Excluir Maquina</button>
+            <button onclick="excluir(2)" id="botao_confirmar">Clique aqui para confirmar</button>
+            <button onclick="editar()">Editar Maquina</button>
+            <a href="./index.html" class="troca-tela">Voltar para tela inicial</a>
+            <a href="./dash_realTime.html" class="troca-tela">Voltar para dashboard</a>
+            *Caso você não deseje editar algum campo só deixe ele vazio
         </div>
     </div>
   </div>
@@ -36,10 +34,46 @@
 </html>
 
 <script>
-enderecos = []
-modelos = []
-obterFkEndereco()
-obterFkModelo()
+botao_confirmar.style.display = "none";
+var maquinas = []
+obterMaquinas()
+
+function obterMaquinas(){
+  fkEmpresa = sessionStorage.idEmpresa;
+
+  fetch("/maquinas/obterMaquinas", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        fkEmpresaServer: fkEmpresa
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    for (i = 0; i < json.length; i ++){
+                      var opcao = document.createElement('option')
+                      opcao.innerHTML = `<option value="${json[i].idMaquina}">${json[i].serial}</option>`;
+                      select_maquina.append(opcao)
+                    }
+                    maquinas=json;
+
+                });
+
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+}
 
 function obterFkEndereco(){
   var email = sessionStorage.email;
@@ -76,18 +110,26 @@ function obterFkEndereco(){
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
       });
+    }
+
+function excluir(etapa){
+if(etapa == 1){
+  botao_confirmar.style.display="block";
+}
+if(etapa == 2){
+for(i = 0; i < maquinas.length; i++){
+  if(select_maquina.value == maquinas[i].serial){
+    var idMaquina = maquinas[i].idMaquina;
+  }
 }
 
-function obterFkModelo(){
-  var fkEmpresa = sessionStorage.idEmpresa;
-
-  fetch("/maquinas/obterFkModelo", {
+  fetch("/maquinas/excluir", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        fkEmpresaServer: fkEmpresa
+        idMaquinaServer: idMaquina
       }),
     })
       .then(function (resposta) {
@@ -95,64 +137,9 @@ function obterFkModelo(){
 
         if (resposta.ok) {
           resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    for (i = 0; i < json.length; i ++){
-                      var opcao = document.createElement('option')
-                      opcao.innerHTML = `<option value="${json[i].idModelo}">${json[i].nomeModelo}</option>`;
-                      select_modelo.append(opcao)
-                    }
-                    modelos=json;
-
+                    console.log("Máquina excluida.")
                 });
 
-        } else {
-          throw "Houve um erro ao tentar obter o fkModelo!";
-        }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-}
-
-function cadastrar(){
-    var serial = input_serial.value;
-    var setor = input_setor.value;
-
-    for (i = 0; i < enderecos.length; i++) {
-      if(select_endereco.value == enderecos[i].logradouro){
-        var endereco = enderecos[i].idEndereco
-      }
-      
-    }
-
-    for (i = 0; i < modelos.length; i++) {
-      if(select_modelo.value == modelos[i].nomeModelo){
-        var modelo = modelos[i].idModelo
-      }
-      
-    }
-
-    fetch("/maquinas/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        serialServer: serial,
-        setorServer: setor,
-        fkEnderecoServer: endereco,
-        fkModeloServer: modelo
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
-
-        if (resposta.ok) {
-
-          setTimeout(() => {
-            window.location = './edicaoMaquina.html';
-          }, "2000");
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
@@ -160,8 +147,10 @@ function cadastrar(){
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
       });
+  
+}
+}
+function editar(){
 }
 
 </script>
-</body>
-</html>

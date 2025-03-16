@@ -8,9 +8,19 @@ router.post("/cadastrar", function (req, res) {
 })
 
 router.post("/obterFkModelo", function (req, res) {
-    console.log("to na rota")
     maquinaController.obterFkModelo(req, res);
 })
 
+router.post("/obterMaquinas", function (req, res){
+    maquinaController.obterMaquinas(req, res)
+})
+
+router.post("/editarEndereco", function(req, res){
+    maquinaController.editarEndereco(req, res)
+})
+
+router.post("/excluir", function(req, res){
+    maquinaController.excluir(req, res)
+})
 
 module.exports = router;

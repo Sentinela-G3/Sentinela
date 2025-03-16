@@ -12,4 +12,21 @@ function obterFkModelo(fkEmpresa){
   return database.executar(instrucaoSql);
 }
 
-module.exports = { cadastrar, obterFkModelo};
+function obterMaquinas(fkEmpresa){
+  var instrucaoSql = `SELECT maquina.* from maquina join modelo on fkModelo = idModelo join empresa on fkEmpresa = idEmpresa where fkEmpresa = ${fkEmpresa} and maquina.status = 'ativo';`;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+function excluir(idMaquina){
+  var instrucaoSql = `UPDATE maquina set status = 'desativo' where idMaquina = ${idMaquina}`;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+module.exports = 
+{ cadastrar,
+  obterFkModelo,
+  obterMaquinas,
+  excluir
+}
