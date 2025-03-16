@@ -140,6 +140,7 @@ for(i = 0; i < maquinas.length; i++){
         if (resposta.ok) {
           resposta.json().then(json => {
                     console.log("Máquina excluida.")
+                    window.location = './edicaoMaquina.html';
                 });
 
         } else {
@@ -191,6 +192,7 @@ function editar(){
         if (resposta.ok) {
           resposta.json().then(json => {
                     console.log("Máquina editada.")
+                    window.location = './edicaoMaquina.html';
                 });
 
         } else {

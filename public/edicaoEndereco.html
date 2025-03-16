@@ -89,7 +89,8 @@ function excluir(){
 
         if (resposta.ok) {
           resposta.json().then(json => {
-
+            alert("Endereço excluido.")
+            window.location = './edicaoEndereço.html';
                 });
 
         } else {
