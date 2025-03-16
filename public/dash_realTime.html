@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./css/dashboardRT.css">
     <link rel="stylesheet" href="./css/table.css">
     <link rel="stylesheet" href="./css/tabela_rt.css">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Tempo Real</title>
 </head>
@@ -101,7 +102,7 @@
                         <td class="table_data" id="table_data_rt">4:37</td>
                         <td class="table_data" id="table_data_rt">2</td>
                         <td class="table_data" id="table_data_rt">13:35</td>
-                        <td class="table_data" id="table_data_rt"><button>Detalhamento</button></td>
+                        <td class="table_data" id="table_data_rt"><button>Expandir Análise</button></td>
                     </tbody>
                     <tbody class="table_body">
                         <td class="table_data" id="table_data1_rt">ID 2 (SERIALNUMBER)</td>
@@ -109,7 +110,7 @@
                         <td class="table_data" id="table_data_rt">7:10</td>
                         <td class="table_data" id="table_data_rt">4</td>
                         <td class="table_data" id="table_data_rt">10:30</td>
-                        <td class="table_data" id="table_data_rt"><button>Detalhamento</button></td>
+                        <td class="table_data" id="table_data_rt"><button>Expandir Análise</button></td>
                     </tbody>
                     <tbody class="table_body">
                         <td class="table_data" id="table_data1_rt">ID 3 (SERIALNUMBER)</td>
@@ -117,7 +118,7 @@
                         <td class="table_data" id="table_data_rt">2:51</td>
                         <td class="table_data" id="table_data_rt">0</td>
                         <td class="table_data" id="table_data_rt">11:55</td>
-                        <td class="table_data" id="table_data_rt"><button>Detalhamento</button></td>
+                        <td class="table_data" id="table_data_rt"><button>Expandir Análise</button></td>
                     </tbody>
                 </table>
             </div>
@@ -151,6 +152,33 @@
                     </div>
                 </div>
             </div>
+
+            <div class="container_grafico">
+                <div class="box_graficoRT">
+                    <div class="titulo_grafico">
+                        <span><b>Bateria</b></span>
+                    </div>
+                    <div id="chart1" class="chart-js"></div>
+                </div>
+                <div class="box_graficoRT">
+                    <div class="titulo_grafico">
+                        <span><b>Processador</b></span>
+                    </div>
+                    <div id="chart2" class="chart-js"></div>
+                </div>
+                <div class="box_graficoRT">
+                    <div class="titulo_grafico">
+                        <span><b>Memória (RAM)</b></span>
+                    </div>
+                    <div id="chart3" class="chart-js"></div>
+                </div>
+                <div class="box_graficoRT">
+                    <div class="titulo_grafico">
+                        <span><b>Disco Rígido</b></span>
+                    </div>
+                    <div id="chart4" class="chart-js"></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -172,5 +200,138 @@
         window.location = './cadastroMaquina.html';
     }
 
+    // Gráficos
+    // Bateria
+    var options = {
+        series: [70, 30],
+        colors: ['#66ff00', '#b1b1b141'],
+        chart: {
+            type: 'donut',
+        },
+        labels: ['Bateria restante', 'Total'],
+        legend: {
+            position: 'top',
+            horizontalAlign: 'start',
+            fontSize: '14px',
+            markers: {
+                width: 12,
+                height: 12
+            }
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'top'
+                }
+            }
+        }]
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart1"), options);
+    chart.render();
+
+    // Processador
+    var options = {
+        series: [55, 45],
+        colors: ['#ffe100', '#b1b1b141'],
+        chart: {
+            type: 'donut',
+        },
+        labels: ['Uso do processador', 'Total'],
+        legend: {
+            position: 'top',
+            horizontalAlign: 'start',
+            fontSize: '14px',
+            markers: {
+                width: 12,
+                height: 12
+            }
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'top'
+                }
+            }
+        }]
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart2"), options);
+    chart.render();
+
+
+    // Memoria RAM
+    var options = {
+        series: [23, 77],
+        colors: ['#ffe100', '#b1b1b141'],
+        chart: {
+            type: 'donut',
+        },
+        labels: ['Uso de RAM', 'Total'],
+        legend: {
+            position: 'top',
+            horizontalAlign: 'start',
+            fontSize: '14px',
+            markers: {
+                width: 12,
+                height: 12
+            }
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'top'
+                }
+            }
+        }]
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart3"), options);
+    chart.render();
+
+    // Disco Rígido
+    var options = {
+        series: [68, 32],
+        colors: ['#ffe100', '#b1b1b141'],
+        chart: {
+            type: 'donut',
+        },
+        labels: ['Disco usado', 'Disco livre'],
+        legend: {
+            position: 'top',
+            horizontalAlign: 'start',
+            fontSize: '14px',
+            markers: {
+                width: 12,
+                height: 12
+            }
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'top'
+                }
+            }
+        }]
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart4"), options);
+    chart.render();
 
 </script>
