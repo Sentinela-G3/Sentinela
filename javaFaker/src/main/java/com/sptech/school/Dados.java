@@ -1,3 +1,5 @@
+package com.sptech.school;
+
 import com.github.javafaker.Faker;
 
 public class Dados {
@@ -27,7 +29,7 @@ public class Dados {
     }
 
     private void gerarDados() {
-        this.ID = String.valueOf(faker.number().randomNumber());
+        this.ID = String.valueOf(faker.number().randomNumber(4, false));
         this.CPU_frequencia = String.valueOf(faker.number().randomDouble(2, 0, 5));
         this.RAM_utilizada = String.valueOf(faker.number().randomDouble(2, 0, 32));
         this.RAM_naoutilizada = String.valueOf(faker.number().randomDouble(2, 0, 32));
