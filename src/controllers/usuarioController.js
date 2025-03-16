@@ -21,7 +21,9 @@ function autenticar(req, res) {
                         console.log(resultadoAutenticar);
                         res.json({
                             idEmpresa: resultadoAutenticar[0].idEmpresa,
-                            email: resultadoAutenticar[0].email
+                            email: resultadoAutenticar[0].email,
+                            fkCargo: resultadoAutenticar[0].fkCargo,
+                            nivelAcesso: resultadoAutenticar[0].nivelAcesso
                         })
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
@@ -126,9 +128,8 @@ function cadastrarUsuarioEndereco(req, res){
 }
 
 function obterFkCargo(req, res){
-    var idEmpresa = req.body.idEmpresaServer;
 
-    usuarioModel.obterFkCargo(idEmpresa)
+    usuarioModel.obterFkCargo()
     .then(
         function (resultado) {
             res.json(resultado);
@@ -145,10 +146,55 @@ function obterFkCargo(req, res){
     );
 }
 
+function obterIdFuncionario(req, res){
+    var nivelAcesso = req.body.nivelAcessoServer;
+
+    usuarioModel.obterIdFuncionario(nivelAcesso)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao tentar obter os funcionarios! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );
+}
+
+function editarFuncionario(req, res){
+    var idUsuario = req.body.idUsuarioServer;
+    var contato = req.body.contatoServer;
+    var fkCargo = req.body.fkCargoServer;
+    var fkEndereco = req.body.fkEnderecoServer;
+    
+    usuarioModel.editarFuncionario(idUsuario, contato, fkCargo, fkEndereco)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao tentar editar os funcionarios! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );    
+}
+
 module.exports = {
     autenticar,
     cadastrar,
     obterFkEndereco,
     cadastrarUsuarioEndereco,
-    obterFkCargo
+    obterFkCargo,
+    obterIdFuncionario,
+    editarFuncionario
 }

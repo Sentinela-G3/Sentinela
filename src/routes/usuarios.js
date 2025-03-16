@@ -15,12 +15,20 @@ router.post("/obterFkEndereco", function (req, res){
     usuarioController.obterFkEndereco(req, res);
 });
 
-router.post("/obterFkCargo", function (req, res){
+router.get("/obterFkCargo", function (req, res){
     usuarioController.obterFkCargo(req, res);
 });
 
 router.post("/cadastrarUsuarioEndereco", function (req, res){
     usuarioController.cadastrarUsuarioEndereco(req, res);
+})
+
+router.post("/obterIdFuncionario", function(req, res){
+    usuarioController.obterIdFuncionario(req, res);
+})
+
+router.post("/editarFuncionario", function(req, res){
+    usuarioController.editarFuncionario(req, res);
 })
 
 module.exports = router;

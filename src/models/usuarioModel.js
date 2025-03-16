@@ -3,7 +3,7 @@ var database = require("../database/config")
 function autenticar(email, senha) {
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function autenticar(): ", email, senha)
     var instrucaoSql = `
-        SELECT idUsuario, nome, email, fkCargo, idEmpresa, fkDono FROM usuario join usuarioEndereco on idUsuario = fkUsuario join endereco on idEndereco = fkEndereco join empresa on idEmpresa = fkEmpresa WHERE email = '${email}' AND senha = SHA2('${senha}', 256) limit 1;
+        SELECT idUsuario, nome, email, fkCargo, idEmpresa, fkDono, nivelAcesso FROM usuario join usuarioEndereco on idUsuario = fkUsuario join endereco on idEndereco = fkEndereco join empresa on idEmpresa = fkEmpresa join cargo on fkCargo = idCargo WHERE email = '${email}' AND senha = SHA2('${senha}', 256) group by idUsuario, idEmpresa;
     `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -37,9 +37,25 @@ console.log("Executando a instrução SQL: \n" + instrucaoSql);
 return database.executar(instrucaoSql);
 }
 
-function obterFkCargo(idEmpresa){
+function obterFkCargo(){
     var instrucaoSql = `
-    SELECT cargo.* FROM cargo join usuario on fkCargo = idCargo join usuarioEndereco on fkUsuario = idUsuario join endereco on fkEndereco = idEndereco join empresa on fkEmpresa = idEmpresa where idEmpresa = ${idEmpresa} group by idCargo; 
+    SELECT * FROM cargo where idCargo != 1; 
+     `;
+ console.log("Executando a instrução SQL: \n" + instrucaoSql);
+ return database.executar(instrucaoSql);
+}
+
+function obterIdFuncionario(nivelAcesso){
+    var instrucaoSql = `
+    select usuario.*, fkEndereco from usuario join cargo on fkCargo = idCargo join usuarioEndereco on fkUsuario = idUsuario where cargo.nivelAcesso > ${nivelAcesso} group by idUsuario, fkEndereco;
+     `;
+ console.log("Executando a instrução SQL: \n" + instrucaoSql);
+ return database.executar(instrucaoSql);
+}
+
+function editarFuncionario(idUsuario, contato, fkCargo, fkEndereco){
+    var instrucaoSql = `
+    UPDATE usuario join usuarioEndereco on fkUsuario = idUsuario set usuario.contato = '${contato}', usuario.fkCargo = ${fkCargo}, usuarioEndereco.fkEndereco = ${fkEndereco} where idUsuario = ${idUsuario};
      `;
  console.log("Executando a instrução SQL: \n" + instrucaoSql);
  return database.executar(instrucaoSql);
@@ -50,5 +66,7 @@ module.exports = {
     cadastrar,
     obterFkEndereco,
     cadastrarUsuarioEndereco,
-    obterFkCargo
+    obterFkCargo,
+    obterIdFuncionario,
+    editarFuncionario
 };
