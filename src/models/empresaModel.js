@@ -12,4 +12,10 @@ function cadastrarEndereco(logradouro, cep, estado, complemento, fkEmpresa){
   return database.executar(instrucaoSql);
 }
 
-module.exports = { cadastrar, cadastrarEndereco };
+function excluirEndereco(idEndereco){
+  var instrucaoSql = `UPDATE endereco set status = 'inativo' where idEndereco = ${idEndereco};`;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
+module.exports = { cadastrar, cadastrarEndereco, excluirEndereco };

@@ -12,4 +12,8 @@ router.post("/cadastrarEndereco", function (req, res){
     empresaController.cadastrarEndereco(req, res);
 })
 
+router.post("/excluirEndereco", function(req, res){
+    maquinaController.excluirEndereco(req, res)
+})
+
 module.exports = router;

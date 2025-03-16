@@ -22,7 +22,7 @@ function cadastrar(nome, email, cpf, contato, senha) {
 function obterFkEndereco(email){
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function obterFkEndereco():", email);
     var instrucaoSql = `
-    SELECT idEndereco, logradouro FROM endereco join usuarioEndereco on fkEndereco = idEndereco join usuario on fkUsuario = idUsuario where email = '${email}';
+    SELECT idEndereco, logradouro FROM endereco join usuarioEndereco on fkEndereco = idEndereco join usuario on fkUsuario = idUsuario where email = '${email}' and status = 'ativo';
     `;
 console.log("Executando a instrução SQL: \n" + instrucaoSql);
 return database.executar(instrucaoSql);
