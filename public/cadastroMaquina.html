@@ -124,18 +124,34 @@ function cadastrar(){
     var serial = input_serial.value;
     var setor = input_setor.value;
 
+    if(serial == ""){
+      alert("O serial não pode ser vázio.")
+      return;
+    }
+    if(setor == ""){
+      alert("O setor não pode ser vázio.")
+      return;
+    }
+
     for (i = 0; i < enderecos.length; i++) {
       if(select_endereco.value == enderecos[i].logradouro){
         var endereco = enderecos[i].idEndereco
       }
       
     }
+    if(endereco == ""){
+      alert("O endereco não pode ser vázio.")
+      return;
+    }
 
     for (i = 0; i < modelos.length; i++) {
       if(select_modelo.value == modelos[i].nomeModelo){
         var modelo = modelos[i].idModelo
       }
-      
+    }
+    if(modelo == ""){
+      alert("O modelo não pode ser vázio.")
+      return;
     }
 
     fetch("/maquinas/cadastrar", {

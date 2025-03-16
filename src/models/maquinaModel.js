@@ -24,9 +24,16 @@ function excluir(idMaquina){
   return database.executar(instrucaoSql);
 }
 
+function editar(setor, fkEndereco, idMaquina){
+  var instrucaoSql = `UPDATE maquina set setor = '${setor}', fkEndereco = ${fkEndereco} where idMaquina = ${idMaquina}`;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
 module.exports = 
 { cadastrar,
   obterFkModelo,
   obterMaquinas,
-  excluir
+  excluir,
+  editar
 }

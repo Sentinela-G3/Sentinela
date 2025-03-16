@@ -64,11 +64,12 @@ function obterMaquinas(req, res){
     );
 }
 
-function editarEndereco(req, res){
-    var idMaquina = req.body.fkMaquinaServer;
-    var idEndereco = req.body.enderecoServer;
+function editar(req, res){
+    var setor = req.body.setorServer;
+    var fkEndereco = req.body.enderecoServer;
+    var idMaquina = req.body.idMaquinaServer;
 
-    maquinaModel.editarEndereco(idMaquina, idEndereco)
+    maquinaModel.editar(setor, fkEndereco, idMaquina)
     .then(
         function (resultado) {
             res.json(resultado);
@@ -109,6 +110,6 @@ module.exports = {
     cadastrar,
     obterFkModelo,
     obterMaquinas,
-    editarEndereco,
+    editar,
     excluir
 }

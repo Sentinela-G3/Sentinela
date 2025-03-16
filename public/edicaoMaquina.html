@@ -36,7 +36,9 @@
 <script>
 botao_confirmar.style.display = "none";
 var maquinas = []
+var enderecos = []
 obterMaquinas()
+obterFkEndereco()
 
 function obterMaquinas(){
   fkEmpresa = sessionStorage.idEmpresa;
@@ -150,7 +152,55 @@ for(i = 0; i < maquinas.length; i++){
   
 }
 }
+
 function editar(){
+  var endereco = ""
+  var setor = input_setor.value;
+  for (i = 0; i < enderecos.length; i++) {
+    if(enderecos[i].logradouro == select_endereco.value){
+      endereco = enderecos[i].idEndereco
+    }
+    
+  }
+
+  for (i = 0; i < maquinas.length; i++) {
+    if(maquinas[i].serial == select_maquina.value){
+      var maquina = maquinas[i]
+    } 
+  }
+  if(endereco == ""){
+    endereco = maquina.fkEndereco;
+  }
+
+  var idMaquina = maquina.idMaquina;
+
+  fetch("/maquinas/editar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        setorServer: setor,
+        enderecoServer: endereco,
+        idMaquinaServer: idMaquina
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          resposta.json().then(json => {
+                    console.log("Máquina editada.")
+                });
+
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
 }
 
 </script>

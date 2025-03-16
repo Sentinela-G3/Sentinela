@@ -15,8 +15,8 @@ router.post("/obterMaquinas", function (req, res){
     maquinaController.obterMaquinas(req, res)
 })
 
-router.post("/editarEndereco", function(req, res){
-    maquinaController.editarEndereco(req, res)
+router.post("/editar", function(req, res){
+    maquinaController.editar(req, res)
 })
 
 router.post("/excluir", function(req, res){
