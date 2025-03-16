@@ -32,8 +32,9 @@ public class Main {
         List<String> RAM_naoutilizadaPorcento = new ArrayList<>();
         List<String> ArmazenamentoIndisponivelPorcento = new ArrayList<>();
 
+        // lista de listas
         List<List<String>> Componentes = new ArrayList<>();
-
+            // listas individuais
         Componentes.add(ID);
         Componentes.add(CPU_frequencia);
         Componentes.add(RAM_utilizada);
@@ -52,6 +53,7 @@ public class Main {
         Componentes.add(RAM_naoutilizadaPorcento);
         Componentes.add(ArmazenamentoIndisponivelPorcento);
 
+        // adicionando dados em cada lista
         for (int i = 0; i < repeticoes; i++) {
             dadosMaquina1.repetir(repeticoes);
             ID.add(dadosMaquina1.getID());
@@ -94,9 +96,9 @@ public class Main {
         System.out.println("ArmazenamentoIndisponivelPorcento: " + ArmazenamentoIndisponivelPorcento);
 
         System.out.println("\nOh Não!! os dados estão bagunçados!! quer que eu arrume?");
-        System.out.println("1-Organizar por ID \n2-Organizar por maior número \n3- Organizar por menor número\n4-Não quero");
+        System.out.println("1-Organizar por ID");
         Integer escolha = input.nextInt();
-
+    // SelectionSort para os dados
         for (int i = 0; i < ID.size() - 1; i++) {
             int indMenor = i;
             for (int j = i + 1; j < ID.size(); j++) {
