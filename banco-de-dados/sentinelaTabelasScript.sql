@@ -94,20 +94,44 @@ CREATE TABLE dados (
 );
 
 insert into empresa values
-(2, 'Quicktron', '11111111111111', 'fabricante', '2025-02-25', 'ativo');
+(1, 'Sentinela', '11111111111111', 'monitoramento', '2025-02-17', 'ativo');
 
 insert into cargo values
-(1, 'Gerente', 1),
-(2, 'Analista', 3);
+(1, 'Dono', 1),
+(2, 'Gerente', 2),
+(3, 'Analista', 4),
+(4, 'Suporte', 3);
 
 insert into usuario values
-(1, 'Ronaldo Alves', 'ronaldoalves@quicktron.com', 12345678901, 12345678901, 'Quicktron#123', 2, null);
+(1, 'Diogo Yudi', 'diogoyudi@sentinela.com', 10987654321, 10987654321, SHA2('Sentinela@123', 256), 1, 1),
+(2, 'Gabriel Feitosa', 'gabrielfeitosa@sentinela.com', 10897654321, 10897654321, SHA2('Sentinela@123', 256), 1, 1),
+(3, 'Guilherme Eduardo', 'guilhermeeduardo@sentinela.ocom', 10798654321, 10798654321, SHA2('Sentinela@123', 256), 1, 1),
+(4, 'Leticia Reis', 'leticiareis@sentinela.com', 10698754321, 10698754321, SHA2('Sentinela@123', 256), 1, 1),
+(5, 'Lucas Aquino', 'lucasaquino@sentinela.com', 10598764321, 10598764321, SHA2('Sentinela@123', 256), 1, 1),
+(6, 'Lucas Marcolino', 'lucasmarcolino@sentinela.com', 10498765321, 10498765321, SHA2('Sentinela@123', 256), 1, 1);
+
+insert into empresa values
+(2, 'Quicktron', '22222222222222', 'fabricante', '2025-02-25', 'ativo');
+
+insert into usuario values
+(7, 'Erick Yang', 'erickyang@quicktron.com', 15234678901, 15234678901, SHA2('Quicktron#123', 256), 1, 2),
+(8, 'Ronaldo Alves', 'ronaldoalves@quicktron.com', 12345678901, 12345678901, SHA2('Quicktron#123', 256), 2, null),
+(9, 'Mariana Campos', 'marianacampos@quicktron.com', 13245678901, 13245678901, SHA2('Quicktron#123', 256), 3, null),
+(10, 'Gilberto Silva', 'gilbertosilva@quicktron.com', 14235678901, 14235678901, SHA2('Quicktron#123', 256), 4, null);
 
 insert into endereco values
-(1, 'Rua João Silva', '04911111', 'sp', '', 2, 'ativo');
+(1, 'Rua João Silva', '04911111', 'sp', '', 2, 'ativo'),
+(2, 'Rua Gabriel Alves', '04922222', 'sp', '', 2, 'ativo'),
+(3, 'Rua Eduardo Monteiro', '04933333', 'sp', '', 2, 'ativo');
 
 insert into usuarioEndereco  values
-(1, 1, 2);
+(7, 1, 1),
+(7, 2, 1),
+(7, 3, 1),
+(8, 2, 3),
+(9, 1, 2),
+(9, 2, 2),
+(9, 3, 2);
 
         SELECT idUsuario, nome, email, fkCargo, idEmpresa FROM usuario join usuarioEndereco on idUsuario = fkUsuario join endereco on 
 idEndereco = fkEndereco join empresa on idEmpresa = fkEmpresa WHERE email = 'ronaldoalves@quicktron.com' AND senha = 'Quicktron#123'; 
