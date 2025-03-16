@@ -10,7 +10,7 @@
 
 /* Variáveis CSS */
 :root {
-  --autura-header: 329vh;
+  --autura-header: 2024px;
   --largura-all: 100%;
   /* --autura-header: 1000px; */
   /* --largura-all: 1500px; */
@@ -20,7 +20,7 @@
 body {
   font-family: 'Poppins', sans-serif;
   line-height: 1.6;
-  background-color: #343a40;
+  background: linear-gradient(to bottom, #ffffff 50%, #212529 50%);
   height: var(--autura-header);
   width: var(--largura-all);
   display: flex;
@@ -109,7 +109,6 @@ body {
 
 /* Section 1 */
 .container_section1 {
-  /* background-color: rgb(38, 139, 105); */
   height: 84%;
   width: 100%;
   display: flex;
@@ -162,7 +161,6 @@ body {
 }
 
 .section1_desc {
-  /* background-color: #1a1a1a; */
   font-size: 200%;
   height: 10%;
   display: flex;
@@ -171,7 +169,6 @@ body {
 }
 
 .section1_desc p{
-  /* background-color: aliceblue; */
   display: flex;
   text-align: center;
   height: 80%;
@@ -179,7 +176,6 @@ body {
 }
 
 .quatroMotivos {
-  /* background-color: chartreuse; */
   height: 48%;
   display: flex;
   align-items: center ;
@@ -217,14 +213,13 @@ body {
   font-size: 100%;
 }
 
-/* Corrigido: Remover a repetição do .imgUm e ajuste das propriedades */
 .imgUm, .imgDois, .imgTres, .imgQuatro {
   height: 40%;
   width: 50%;
   display: flex;
-  background-size: contain; /* Garante que a imagem ocupe toda a área */
-  background-repeat: no-repeat; /* Impede a repetição da imagem */
-  background-position: center; /* Centraliza a imagem na div */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .imgUm {
@@ -327,10 +322,6 @@ body {
 }
 
 
-
-
-
-
 .footer-link {
   color: #6c757d;
   text-decoration: none;
@@ -339,9 +330,6 @@ body {
   color: #0056b3;
   text-decoration: underline;
 }
-/* .footer-logo {
-  width: 150px;
-} */
 footer {
   width: 100%;
   position: relative;
@@ -351,28 +339,24 @@ footer {
   padding-top: 40px;
   padding-bottom: 20px;
 }
-.footer-content {
-  width: 100%;
-  padding-left: 15px;
-  padding-right: 15px;
-}
 
 
-/* Ajusta o tamanho do carrossel para ocupar toda a largura da tela */
+
+/* Tamanho do carrossel */
 .carousel {
   background-color: #5c2222;
-  width: 100%;  /* O carrossel ocupará 100% da largura da tela */
-  height: 44%; /* Ajuste a altura do carrossel conforme necessário */
+  width: 100%;
+  height: 44%;
 }
 
 /* Ajuste a altura do carrossel */
 .carousel-inner {
-  height: 100%; /* O carrossel vai ocupar 100% da altura */
+  height: 100%;
 }
 
-/* Ajusta as imagens para se ajustarem corretamente dentro do carrossel */
+/* Imagens do carrossel */
 .carousel-item img {
-  object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
-  width: 100%; /* A largura ocupa 100% do container */
-  height: 100%; /* A altura ocupa 100% do container */
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
