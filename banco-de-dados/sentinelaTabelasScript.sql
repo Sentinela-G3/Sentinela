@@ -23,6 +23,7 @@ CREATE TABLE usuario (
     cpf CHAR(11),
     contato CHAR(11),
     senha CHAR(64),
+    status VARCHAR(13),
     fkCargo INT,
     fkDono INT,
     constraint fkUsuarioCargo foreign key (fkCargo) references cargo (idCargo),
@@ -103,21 +104,21 @@ insert into cargo values
 (4, 'Suporte', 3);
 
 insert into usuario values
-(1, 'Diogo Yudi', 'diogoyudi@sentinela.com', 10987654321, 10987654321, SHA2('Sentinela@123', 256), 1, 1),
-(2, 'Gabriel Feitosa', 'gabrielfeitosa@sentinela.com', 10897654321, 10897654321, SHA2('Sentinela@123', 256), 1, 1),
-(3, 'Guilherme Eduardo', 'guilhermeeduardo@sentinela.ocom', 10798654321, 10798654321, SHA2('Sentinela@123', 256), 1, 1),
-(4, 'Leticia Reis', 'leticiareis@sentinela.com', 10698754321, 10698754321, SHA2('Sentinela@123', 256), 1, 1),
-(5, 'Lucas Aquino', 'lucasaquino@sentinela.com', 10598764321, 10598764321, SHA2('Sentinela@123', 256), 1, 1),
-(6, 'Lucas Marcolino', 'lucasmarcolino@sentinela.com', 10498765321, 10498765321, SHA2('Sentinela@123', 256), 1, 1);
+(1, 'Diogo Yudi', 'diogoyudi@sentinela.com', 10987654321, 10987654321, SHA2('Sentinela@123', 256), 'ativo', 1, 1),
+(2, 'Gabriel Feitosa', 'gabrielfeitosa@sentinela.com', 10897654321, 10897654321, SHA2('Sentinela@123', 256), 'ativo', 1, 1),
+(3, 'Guilherme Eduardo', 'guilhermeeduardo@sentinela.ocom', 10798654321, 10798654321, SHA2('Sentinela@123', 256), 'ativo', 1, 1),
+(4, 'Leticia Reis', 'leticiareis@sentinela.com', 10698754321, 10698754321, SHA2('Sentinela@123', 256), 'ativo', 1, 1),
+(5, 'Lucas Aquino', 'lucasaquino@sentinela.com', 10598764321, 10598764321, SHA2('Sentinela@123', 256), 'ativo', 1, 1),
+(6, 'Lucas Marcolino', 'lucasmarcolino@sentinela.com', 10498765321, 10498765321, SHA2('Sentinela@123', 256), 'ativo', 1, 1);
 
 insert into empresa values
 (2, 'Quicktron', '22222222222222', 'fabricante', '2025-02-25', 'ativo');
 
 insert into usuario values
-(7, 'Erick Yang', 'erickyang@quicktron.com', 15234678901, 15234678901, SHA2('Quicktron#123', 256), 1, 2),
-(8, 'Ronaldo Alves', 'ronaldoalves@quicktron.com', 12345678901, 12345678901, SHA2('Quicktron#123', 256), 2, null),
-(9, 'Mariana Campos', 'marianacampos@quicktron.com', 13245678901, 13245678901, SHA2('Quicktron#123', 256), 3, null),
-(10, 'Gilberto Silva', 'gilbertosilva@quicktron.com', 14235678901, 14235678901, SHA2('Quicktron#123', 256), 4, null);
+(7, 'Erick Yang', 'erickyang@quicktron.com', 15234678901, 15234678901, SHA2('Quicktron#123', 256), 'ativo', 1, 2),
+(8, 'Ronaldo Alves', 'ronaldoalves@quicktron.com', 12345678901, 12345678901, SHA2('Quicktron#123', 256), 'ativo', 2, null),
+(9, 'Mariana Campos', 'marianacampos@quicktron.com', 13245678901, 13245678901, SHA2('Quicktron#123', 256), 'ativo', 3, null),
+(10, 'Gilberto Silva', 'gilbertosilva@quicktron.com', 14235678901, 14235678901, SHA2('Quicktron#123', 256), 'ativo', 4, null);
 
 insert into endereco values
 (1, 'Rua João Silva', '04911111', 'sp', '', 2, 'ativo'),
