@@ -146,8 +146,6 @@ select * from endereco;
 
 select * from modelo;
 
+select * from maquina;
+
 select * from usuarioEndereco;
-
-SELECT idModelo, nomeModelo from modelo where fkEmpresa = 2;
-
-INSERT INTO maquina (serial, fkEndereco, fkModelo, status) VALUES ('ababa', '1', '1', 'ativo');

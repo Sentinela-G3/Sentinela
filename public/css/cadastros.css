@@ -82,3 +82,6 @@ select{
     max-height: 25px;
     font-size: 1.5rem;
 }
+a{
+    align-self: center;
+}

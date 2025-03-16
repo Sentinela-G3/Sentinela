@@ -19,19 +19,14 @@
   <div class="div-geral">
     <div class="formulario-container">
       <img src="./assets/img/svgLogo.svg" alt="">
-      <div class="div-cadastro-titulo">Cadastrar novo modelo</div>
+      <div class="div-cadastro-titulo">Editar maquina</div>
         <div class="formulario-inputs">
-          <div class="titulo-input">Número serial da maquina </div><input type="text" id="input_serial">
-          <div class="titulo-input">Setor da máquina </div><input type="text" id="input_setor">
-          <div class="titulo-input">Modelo </div><select name="" id="select_modelo">
-            <option value="">Escolha o modelo</option>
-          </select>
-          <div class="titulo-input">Endereço </div><select name="" id="select_endereco">
-            <option value="">Escolha o endereco</option>
-          </select>
+            <a href="./edicaoMaquinaEndereco.html"><button onclick="cadastrar()">Editar endereço</button></a>
+            <a href="./edicaoMaquinaSetor.html"><button onclick="cadastrar()">Editar setor</button></a>
+            <a href="./edicaoMaquinaExcluir.html"><button onclick="cadastrar()">Excluir máquina</button></a>
+
           <button onclick="cadastrar()">Cadastrar</button>
           <a href="./index.html" class="troca-tela">Voltar para tela inicial</a>
-          <a href="./edicaoMaquina.html" class="troca-tela">Editar maquina</a>
           <a href="./dash_realTime.html" class="troca-tela">Voltar para dashboard</a>
         </div>
     </div>
