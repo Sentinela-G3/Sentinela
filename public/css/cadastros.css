@@ -159,12 +159,41 @@ body {
 }
 .nome{
     background-color: chartreuse;
+    width: 100% !important;
     display: flex;
     flex-direction: row !important;
 }
-input[type=text], input[type=password]{
-    background-color: #909090;
-    border: 1px solid black;
+.nome input[type=text]{
+    background-color: #b1acac;
     border-radius: 5px;
-    height: 25%;
+    height: 100%;
+    width: 50%;
+}
+input[type=text], input[type=password]{
+    background-color: #b1acac;
+    border-radius: 5px;
+    height: 40%;
+    font-size: 180%;
+}
+label {
+    font-size: 150%;
+}
+input::placeholder {
+    color: #0c0c0c;
+    /* font-size: 180%; */
+}
+.div_button{
+    background-color: #ebeae5;
+    width: 100%;
+}
+button{
+    background-color: #FBE969;
+    height: 85%;
+    width: 50%;
+    padding: 10px 20px;
+    border-radius: 35px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }
