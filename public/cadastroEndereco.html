@@ -8,21 +8,37 @@
 </head>
 <body>
     
-  <div class="div-geral">
-    <div class="formulario-container">
-      <img src="./assets/img/svgLogo.svg" alt="">
-      <div class="div-cadastro-titulo">Cadastrar endereço</div>
-      <div class="formulario-inputs">
-      <div class="titulo-input">Insira o logradouro:</div><input type="text" id="input_logradouro">
-      <div class="titulo-input">Insira o CEP:</div><input type="number" id="input_cep" maxlength="8">
-      <div class="titulo-input">Insira o estado:</div><input type="text" id="input_estado">
-      <div class="titulo-input">Insira o complemento:</div><input type="text" id="input_complemento">
-
-      <button onclick="cadastrar()">Cadastrar</button>
-      <a href="./index.html" class="troca-tela">Voltar para tela inicial</a>
-      <a href="./dash_realTime.html" class="troca-tela">Voltar para dashboard</a>
-      <a href="./edicaoEndereco.html" class="troca-tela">Editar endereços</a>
+  <div class="container_section1">
+    <div class="logo">
+      <img src="./assets/img/Icon Container.svg">
+      <h1>Cadastrar endereço</h1>
+    </div>
+    <div class="formulario">
+      <div>
+        <label class="">logradouro:</label>
+        <div class="nome">
+          <input type="text" class="" id="input_logradouro" placeholder="Rua Hadock lobo">
+        </div>
       </div>
+      <div>
+        <label class="">Cep</label>
+        <input type="text" class="" id="input_cep" placeholder="08845795">
+      </div>
+      <div>
+        <label class="">Estado:</label>
+        <input type="text" class="" id="input_estado" placeholder="São Paulo">
+      </div>
+      <div>
+        <label class="">Complemento:</label>
+        <input type="text" class="" id="input_complemento" placeholder="Prédio X">
+      </div>
+    </div>
+    <div class="div_button">
+      <button onclick="cadastrar()">Cadastrar-se</button>
+      <a href="./index.html" class="troca-tela">Voltar para tela inicial</a>
+      <a href="./edicaoFuncionario.html" class="troca-tela">Editar funcionário</a>
+      <a href="./dash_realTime.html" class="troca-tela">Voltar para dashboard</a>
+    </div>
   </div>
 </div>
 
