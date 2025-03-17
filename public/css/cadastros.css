@@ -107,9 +107,7 @@ a{
   
 /* Estilos gerais do body */
 body {
-    /* font-family: 'Poppins', sans-serif; */
     line-height: 1.6;
-    /* background-color: #0e0c02; */
     height: var(--autura-header);
     width: var(--largura-all);
     display: flex;
@@ -126,6 +124,7 @@ body {
     align-items: center;
     justify-content: center;
     border-radius: 20px;
+    box-shadow: 10px 10px 10px 10px rgb(129, 129, 129);
 }
 .logo{
     background-color: #FFF39A;
