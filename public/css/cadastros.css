@@ -128,7 +128,7 @@ body {
 }
 .logo{
     background-color: #FFF39A;
-    height: 15%;
+    height: 12%;
     width: 100%;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -178,7 +178,7 @@ input::placeholder {
 }
 .div_button{
     width: 100%;
-    height: 10%;
+    height: 25%;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
     display: flex;
