@@ -182,11 +182,13 @@ input::placeholder {
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 button{
     background-color: #FBE969;
-    height: 85%;
+    height: 45%;
     width: 50%;
     font-size: 200%;
     padding: 10px 20px;
