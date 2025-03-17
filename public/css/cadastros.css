@@ -164,7 +164,7 @@ body {
     height: 55%;
     width: 100%;
 }
-select, input[type=text], input[type=password]{
+select, input[type=text], input[type=password], input[type=number]{
     background-color: #b1acac;
     border-radius: 5px;
     height: 35%;
@@ -204,4 +204,15 @@ button:hover{
 
 .big_logo{
     height: 25% !important;
+}
+.button_min{
+    /* background-color: #0c0c0c; */
+    height: 50% !important;   
+}
+.button_min div{
+    display: flex;
+    gap: 10%;
+}
+.button_min div button{
+    height: 90% !important;
 }

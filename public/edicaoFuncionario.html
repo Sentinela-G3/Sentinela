@@ -7,37 +7,53 @@
     <link rel="stylesheet" href="./css/cadastros.css">
 </head>
 <body>
-    
-    <div class="div-geral">
-      
-        <div class="formulario-container">
-          <img src="./assets/img/svgLogo.svg" alt="">
-          <div class="div-cadastro-titulo">Editar funcionário</div>
-            <div class="formulario-inputs">
-              <div class="titulo-input">Funcionario que deseja editar:</div>
-              <select name="" id="select_funcionario" onclick="verificarSelectUsuario()">
-                <option value="">Selecione o funcionário</option>
-              </select>
-              <div class="titulo-input">Contato:</div> <input type="text" id="input_contato">
-              <div class="titulo-input">Cargo:</div><select name="select_cargo" id="select_cargo">
-                <option value="">Selecione um cargo</option>
-              </select><br>
-                <div class="titulo-input">Edição de endereço:</div><select name="" id="select_endereco" onclick="verificarSelect()">
-                  <option value="">Selecione o endereco que você deseja editar</option>
-                </select>
-                <div class="titulo-input">Endereço novo:</div><select name="" id="select_endereco2">
-                  <option value="">Selecione o endereco que será o novo endereço</option>
-                </select>
-                <button onclick="editar()">Realizar alterações</button>
-                <a href="./index.html" class="troca-tela">Voltar para tela inicial</a>
-                <a href="./dash_realTime.html" class="troca-tela">Voltar para dashboard</a>
-                <a href="./edicaoFuncionarioAdd.html" class="troca-tela">Adicionar endereço de funcionário</a>
-                <a href="./edicaoFuncionarioDel.html" class="troca-tela">Excluir endereço de funcionário</a>
-                *Caso você não deseje editar algum campo só deixe ele vazio
-            </div>
+
+  <div class="container_section1">
+    <div class="logo">
+      <img src="./assets/img/Icon Container.svg">
+      <h1>Editar Funcionário</h1>
+    </div>
+    <div class="formulario">
+      <div>
+        <label class="">Funcionario que deseja editar:</label>
+        <select class="form-select" aria-label="Default select example" id="select_funcionario">
+          <option value="">Selecione o funcionario</option>
+        </select>
+      </div>
+      <div>
+        <div>
+          <label class="">Novo Contato:</label>
+          <input type="number" class="" id="input_contato" placeholder="(12) 3456-7890">
         </div>
       </div>
-
+      <div>
+        <label class="">Cargo novo:</label>
+        <select class="form-select" aria-label="Default select example" id="select_cargo">
+          <option value="">Selecione o novo cargo</option>
+        </select>
+      </div>
+      <div>
+        <label class="">Eição de Endereço</label>
+        <select class="form-select" aria-label="Defau lt select example" id="select_cargo">
+          <option value="">Selecione O Endereço</option>
+        </select>
+      </div>
+      <div>
+        <label class="">Endereço Novo:</label>
+        <select class="form-select" aria-label="Defau lt select example" id="select_cargo">
+          <option value="">Selecione O Endereço novo:</option>
+        </select>
+      </div>
+    </div>
+    <div class="div_button">
+      <button onclick="editar()">Realizar alterações</button>
+      <a href="./index.html" class="troca-tela">Voltar para tela inicial</a>
+      <a href="./dash_realTime.html" class="troca-tela">Voltar para dashboard</a>
+      <a href="./edicaoFuncionarioAdd.html" class="troca-tela">Adicionar endereço de funcionário</a>
+      <a href="./edicaoFuncionarioDel.html" class="troca-tela">Excluir endereço de funcionário</a>
+      *Caso você não deseje editar algum campo só deixe ele vazio
+    </div>
+  </div>
 </body>
 </html>
 
