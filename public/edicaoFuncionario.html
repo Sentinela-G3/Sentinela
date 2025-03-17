@@ -15,15 +15,18 @@
           <div class="div-cadastro-titulo">Editar funcionário</div>
             <div class="formulario-inputs">
               <div class="titulo-input">Funcionario que deseja editar:</div>
-              <select name="" id="select_funcionario">
+              <select name="" id="select_funcionario" onclick="verificarSelectUsuario()">
                 <option value="">Selecione o funcionário</option>
               </select>
               <div class="titulo-input">Contato:</div> <input type="text" id="input_contato">
               <div class="titulo-input">Cargo:</div><select name="select_cargo" id="select_cargo">
                 <option value="">Selecione um cargo</option>
               </select><br>
-                <div class="titulo-input">Edição de endereço:</div><select name="" id="select_endereco">
-                  <option value="">Selecione o endereco</option>
+                <div class="titulo-input">Edição de endereço:</div><select name="" id="select_endereco" onclick="verificarSelect()">
+                  <option value="">Selecione o endereco que você deseja editar</option>
+                </select>
+                <div class="titulo-input">Endereço novo:</div><select name="" id="select_endereco2">
+                  <option value="">Selecione o endereco que será o novo endereço</option>
                 </select>
                 <button onclick="editar()">Realizar alterações</button>
                 <a href="./index.html" class="troca-tela">Voltar para tela inicial</a>
@@ -37,12 +40,40 @@
 </html>
 
 <script>
+select_endereco2.style.display = 'none';
 var enderecos = []
 var cargos = []
 var funcionarios = []
-obterFkEndereco()
+var idUsuario = "";
 obterFkCargo()
 obterIdFuncionario()
+console.log(select_endereco.value)
+
+function verificarSelectUsuario(){
+  if(select_funcionario.value != ""){
+    for(i = 0; i < funcionarios.length; i++){
+      if(select_funcionario.value == funcionarios[i].nome){
+        idUsuario = i
+        obterFkEndereco()
+        break;
+      }
+    }
+    console.log("aaaaaaaaa", idUsuario)
+
+  }
+  else{
+  select_endereco2.style.display = 'none';
+  }
+}
+
+function verificarSelect(){
+  if(select_endereco.value != ""){
+    select_endereco2.style.display = 'block';
+  }
+  else{
+  select_endereco2.style.display = 'none';
+  }
+}
 
 function obterFkEndereco(){
   var email = sessionStorage.email;
@@ -64,9 +95,14 @@ function obterFkEndereco(){
                     console.log(json);
                     console.log(JSON.stringify(json));
                     for (i = 0; i < json.length; i ++){
-                      var opcao = document.createElement('option')
+                      if(json[i].idEndereco == funcionarios[idUsuario].fkEndereco){
+                        var opcao = document.createElement('option')
                       opcao.innerHTML = `<option value="${json[i].idEndereco}">${json[i].logradouro}</option>`;
                       select_endereco.append(opcao)
+                      }
+                      var opcao = document.createElement('option')
+                      opcao.innerHTML = `<option value="${json[i].idEndereco}">${json[i].logradouro}</option>`;
+                      select_endereco2.append(opcao)
                     }
                     enderecos=json;
 
@@ -156,9 +192,15 @@ function obterIdFuncionario(){
 }
 
 function editar(){
-  var idUsuario = "";
   var fkCargo = "";
   var fkEndereco = "";
+  var fkEnderecoNovo = "";
+  for(i = 0; i < enderecos.length; i++){
+    if(enderecos[i].logradouro == select_endereco.value){
+      fkEndereco = funcionarios[idUsuario].fkEndereco;
+      break;
+    }
+  }
   for(i = 0; i < funcionarios.length; i++){
     if(funcionarios[i].nome == select_funcionario.value){
       idUsuario = funcionarios[i].idUsuario;
@@ -169,14 +211,12 @@ function editar(){
   for(i = 0; i < cargos.length; i++){
     if(cargos[i].nomeCargo == select_cargo.value){
       fkCargo = funcionarios[i].fkCargo;
-      console.log("FKCARGO = ", fkCargo)
       break;
     }
   }
   for(i = 0; i < enderecos.length; i++){
-    if(enderecos[i].logradouro == select_endereco.value){
-      fkEndereco = funcionarios[i].fkEndereco;
-      console.log("FKENDERECO = ", fkEndereco)
+    if(enderecos[i].logradouro == select_endereco2.value){
+      fkEnderecoNovo = enderecos[i].idEndereco;
       break;
     }
   }
@@ -193,6 +233,9 @@ function editar(){
   if(fkEndereco == ""){
     fkEndereco = funcionarios[idUsuario].fkEndereco;
   }
+  if(fkEnderecoNovo == ""){
+    fkEnderecoNovo = funcionarios[idUsuario].fkEndereco;
+  }
 
   fetch("/usuarios/editarFuncionario", {
       method: "POST",
@@ -203,7 +246,8 @@ function editar(){
         idUsuarioServer: idUsuario,
         contatoServer: contato,
         fkCargoServer: fkCargo,
-        fkEnderecoServer: fkEndereco
+        fkEnderecoServer: fkEndereco,
+        fkEnderecoNovoServer: fkEnderecoNovo
       }),
     })
       .then(function (resposta) {

@@ -171,8 +171,9 @@ function editarFuncionario(req, res){
     var contato = req.body.contatoServer;
     var fkCargo = req.body.fkCargoServer;
     var fkEndereco = req.body.fkEnderecoServer;
+    var fkEnderecoNovo = req.body.fkEnderecoNovoServer;
     
-    usuarioModel.editarFuncionario(idUsuario, contato, fkCargo, fkEndereco)
+    usuarioModel.editarFuncionario(idUsuario, contato, fkCargo, fkEndereco, fkEnderecoNovo)
     .then(
         function (resultado) {
             res.json(resultado);
