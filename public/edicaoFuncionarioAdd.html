@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edição Sentinela</title>
+</head>
+<body>
+    
+    <div class="formulario-container">
+        <img src="./assets/img/svgLogo.svg" alt="">
+        <div class="div-cadastro-titulo">Editar funcionário</div>
+          <div class="formulario-inputs">
+            <div class="titulo-input">Funcionário que deseja editar:</div>
+            <select name="" id="select_funcionario" onclick="verificarSelectUsuario()">
+              <option value="">Selecione o funcionário</option>
+            </select>
+              <div class="titulo-input">Edição de endereço:</div><select name="" id="select_endereco">
+                <option value="">Selecione o endereco que você deseja adicionar</option>
+              </select>
+              <button onclick="adicionar()">Realizar alterações</button>
+              <a href="./index.html" class="troca-tela">Voltar para tela inicial</a>
+              <a href="./dash_realTime.html" class="troca-tela">Voltar para dashboard</a>
+          </div>
+      </div>
+    </div>
+
+</body>
+</html>
+
+<script>
+var enderecos = []
+var funcionarios= []
+var idUsuario = "";
+obterFkEndereco()
+obterIdFuncionario()
+
+function verificarSelectUsuario(){
+  if(select_funcionario.value != ""){
+    for(i = 0; i < funcionarios.length; i++){
+      if(select_funcionario.value == funcionarios[i].nome){
+        idUsuario = i
+        obterFkEndereco()
+        break;
+      }
+    }
+}
+}
+
+function obterFkEndereco(){
+  var email = sessionStorage.email;
+
+  fetch("/usuarios/obterFkEndereco", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        emailServer: email
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    for (i = 0; i < json.length; i ++){
+                        if(json[i].idEndereco != funcionarios[idUsuario].fkEndereco){
+                      var opcao = document.createElement('option')
+                      opcao.innerHTML = `<option value="${json[i].idEndereco}">${json[i].logradouro}</option>`;
+                      select_endereco.append(opcao)
+                    }
+                    }
+                    enderecos=json;
+
+                });
+
+        } else {
+          throw "Houve um erro ao tentar obter o endereço!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+}
+
+function obterIdFuncionario(){
+  var nivelAcesso = sessionStorage.nivelAcesso;
+
+  fetch("/usuarios/obterIdFuncionario", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nivelAcessoServer: nivelAcesso
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    var opcoes = []
+                    for (i = 0; i < json.length; i ++){
+                      if(!opcoes.includes(json[i].nome)){
+                        var opcao = document.createElement('option')
+                        opcao.innerHTML = `<option value="${json[i].idUsuario}">${json[i].nome}</option>`;
+                        select_funcionario.append(opcao)
+                        opcoes.push(json[i].nome)
+                      }
+                    }
+                    funcionarios=json;
+
+                });
+
+        } else {
+          throw "Houve um erro ao tentar obter os funcionários!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  
+}
+
+function adicionar(){
+    for(i = 0; i < funcionarios.length; i++){
+        if(funcionarios[i].nome == select_funcionario.value){
+            var idUsuario = funcionarios[i].idUsuario;
+        }
+    }
+    for(i = 0; i < enderecos.length; i++){
+        if(enderecos[i].logradouro == select_endereco.value){
+            var fkEndereco = enderecos[i].idEndereco;
+        }
+    }
+
+    fetch("/usuarios/editarFuncionarioAdd", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        idUsuarioServer: idUsuario,
+        fkEnderecoServer: fkEndereco
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          resposta.json().then(json => {
+              alert("Endereço adicionado.")
+              window.location = './edicaoFuncionarioAdd.html';
+
+                });
+
+        } else {
+          throw "Houve um erro ao tentar editar os funcionários!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+}
+
+</script>

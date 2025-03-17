@@ -31,4 +31,12 @@ router.post("/editarFuncionario", function(req, res){
     usuarioController.editarFuncionario(req, res);
 })
 
+router.post("/editarFuncionarioAdd", function(req, res){
+    usuarioController.editarFuncionarioAdd(req, res);
+})
+
+router.post("/editarFuncionarioDel", function(req, res){
+    usuarioController.editarFuncionarioDel(req, res)
+})
+
 module.exports = router;

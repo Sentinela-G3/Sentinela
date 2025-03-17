@@ -47,7 +47,7 @@ function obterFkCargo(){
 
 function obterIdFuncionario(nivelAcesso){
     var instrucaoSql = `
-    select usuario.*, fkEndereco from usuario join cargo on fkCargo = idCargo join usuarioEndereco on fkUsuario = idUsuario where cargo.nivelAcesso > ${nivelAcesso} group by idUsuario, fkEndereco;
+    select usuario.*, fkEndereco from usuario join cargo on fkCargo = idCargo left join usuarioEndereco on fkUsuario = idUsuario where cargo.nivelAcesso > ${nivelAcesso} group by idUsuario, fkEndereco;
      `;
  console.log("Executando a instrução SQL: \n" + instrucaoSql);
  return database.executar(instrucaoSql);
@@ -61,6 +61,22 @@ function editarFuncionario(idUsuario, contato, fkCargo, fkEndereco, fkEnderecoNo
  return database.executar(instrucaoSql);
 }
 
+function editarFuncionarioAdd(idUsuario, fkEndereco){
+    var instrucaoSql = `
+    INSERT INTO usuarioEndereco (fkEndereco, fkUsuario) values (${fkEndereco}, ${idUsuario});
+     `;
+ console.log("Executando a instrução SQL: \n" + instrucaoSql);
+ return database.executar(instrucaoSql);
+}
+
+function editarFuncionarioDel(idUsuario, fkEndereco){
+    var instrucaoSql = `
+    DELETE FROM usuarioEndereco where fkEndereco = ${fkEndereco} and fkUsuario =  ${idUsuario};
+     `;
+ console.log("Executando a instrução SQL: \n" + instrucaoSql);
+ return database.executar(instrucaoSql);
+}
+
 module.exports = {
     autenticar,
     cadastrar,
@@ -68,5 +84,7 @@ module.exports = {
     cadastrarUsuarioEndereco,
     obterFkCargo,
     obterIdFuncionario,
-    editarFuncionario
+    editarFuncionario,
+    editarFuncionarioAdd,
+    editarFuncionarioDel
 };

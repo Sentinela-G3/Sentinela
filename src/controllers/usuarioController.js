@@ -190,6 +190,48 @@ function editarFuncionario(req, res){
     );    
 }
 
+function editarFuncionarioAdd(req, res){
+    var idUsuario = req.body.idUsuarioServer;
+    var fkEndereco = req.body.fkEnderecoServer;
+
+    usuarioModel.editarFuncionarioAdd(idUsuario, fkEndereco)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao tentar editar os funcionarios! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );    
+}
+
+function editarFuncionarioDel(req, res){
+    var idUsuario = req.body.idUsuarioServer;
+    var fkEndereco = req.body.fkEnderecoServer;
+
+    usuarioModel.editarFuncionarioDel(idUsuario, fkEndereco)
+    .then(
+        function (resultado) {
+            res.json(resultado);
+        }
+    ).catch(
+        function (erro) {
+            console.log(erro);
+            console.log(
+                "\nHouve um erro ao tentar editar os funcionarios! Erro: ",
+                erro.sqlMessage
+            );
+            res.status(500).json(erro.sqlMessage);
+        }
+    );    
+}
+
 module.exports = {
     autenticar,
     cadastrar,
@@ -197,5 +239,7 @@ module.exports = {
     cadastrarUsuarioEndereco,
     obterFkCargo,
     obterIdFuncionario,
-    editarFuncionario
+    editarFuncionario,
+    editarFuncionarioAdd,
+    editarFuncionarioDel
 }
