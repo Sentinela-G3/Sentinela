@@ -4,11 +4,11 @@ import mysql.connector
 import datetime
 
 from mysql.connector import (connection)
-mydb = connection.MySQLConnection(host='192.168.1.109', user='sentinelaAdmin', password='Sentinela@123', database='sentinela')
+mydb = connection.MySQLConnection(host='54.209.134.75', user='sentinelaAdmin', password='Sentinela@123', database='sentinela')
 # mydb = connection.MySQLConnection(host='localhost', user='root', password='Gg1502@#', database='sentinela')
 
 mycursor = mydb.cursor()
-tempoSegundos = int(input("Insira quantos segundos deseja monitorar: "))
+tempoSegundos = int(input("Insira quantos ciclos deseja monitorar: "))
 
 isLinux = psutil.LINUX
 

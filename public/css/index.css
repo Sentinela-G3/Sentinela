@@ -10,8 +10,8 @@
 
 /* Variáveis CSS */
 :root {
-  --autura-header: 2024px;
-  --largura-all: 100%;
+  --autura-header: 250vh;
+  --largura-all: 100%;  
   /* --autura-header: 1000px; */
   /* --largura-all: 1500px; */
 }
@@ -20,7 +20,7 @@
 body {
   font-family: 'Poppins', sans-serif;
   line-height: 1.6;
-  background: linear-gradient(to bottom, #ffffff 50%, #212529 50%);
+  background: linear-gradient(to bottom, #ffffff 70%, #212529 30%);
   height: var(--autura-header);
   width: var(--largura-all);
   display: flex;

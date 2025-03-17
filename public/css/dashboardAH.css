@@ -34,23 +34,25 @@ h4 {
 
 body {
   display: flex;
+  overflow-x: hidden;
 }
 
 .section1 {
   display: flex;
   flex-direction: column;
-  height: max-content;
+  height: 300vh;
+  margin-left: 35%;
   width: 100%;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
+  overflow: hidden;
 }
 
-.sub-section1 {
+.su-section1 {
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 100%;
   height: 200vh;
-
   gap: 4vh;
 }
 

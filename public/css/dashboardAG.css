@@ -33,6 +33,7 @@ body {
   display: flex;
   flex-direction: column;
   height: max-content;
+  margin-left: 20%;
   width: 100%;
   align-items: center;
   justify-content: center;
