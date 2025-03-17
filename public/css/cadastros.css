@@ -162,7 +162,7 @@ body {
     background-color: #b1acac;
     border-radius: 5px;
     height: 55%;
-    width: 50%;
+    width: 100%;
 }
 select, input[type=text], input[type=password]{
     background-color: #b1acac;
