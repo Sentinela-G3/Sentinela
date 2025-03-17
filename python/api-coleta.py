@@ -4,7 +4,7 @@ import mysql.connector
 import datetime
 
 from mysql.connector import (connection)
-mydb = connection.MySQLConnection(host='10.18.32.24', user='sentinelaTestes', password='Sentinela@123', database='sentinela')
+mydb = connection.MySQLConnection(host='192.168.1.109', user='sentinelaAdmin', password='Sentinela@123', database='sentinela')
 # mydb = connection.MySQLConnection(host='localhost', user='root', password='Gg1502@#', database='sentinela')
 
 mycursor = mydb.cursor()
@@ -30,14 +30,18 @@ while tempoSegundos > 0:
     porcentagemUsoProcessador = psutil.cpu_percent()
     frequenciaProcessador = psutil.cpu_freq().current
 
-    sql = "INSERT INTO dados VALUES(default, %s, now(), 1, 1);"
-    val = (porcentagemUsoProcessador,)
-    mycursor.execute(sql, val)
 
-    sql = "INSERT INTO dados VALUES(default, %s, now(), 1, 2);"
+    sql = "INSERT INTO dados VALUES(default, %s, now(), 1, 1);"
     val = (tempoAtivo,)
     mycursor.execute(sql, val)
 
+    sql = "INSERT INTO dados VALUES(default, %s, now(), 1, 2);"
+    val = (tempoInativo,)
+    mycursor.execute(sql, val)
+
+    sql = "INSERT INTO dados VALUES(default, %s, now(), 1, 3);"
+    val = (porcentagemUsoProcessador,)
+    mycursor.execute(sql, val)
 
     sql = "INSERT INTO dados VALUES(default, %s, now(), 1, 4);"
     val = (frequenciaProcessador,)

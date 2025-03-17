@@ -1,206 +1,257 @@
 import time
-import math
+import mysql.connector
 
-# Configuração do Banco de Dados
-from mysql.connector import (connection)
-mydb = connection.MySQLConnection(host='localhost', user='sentinelaSelect', password='sentinela@123', database='sentinela')
+mydb = mysql.connector.connect(
+    host="10.18.32.9",
+    user="sentinelaAdmin",
+    password="Sentinela@123",
+    database="sentinela"
+)
 mycursor = mydb.cursor()
 
-# Listar as máquinas existentes e selecionar uma
+idSelecionado = None
+
 def listarMaquinas():
-  global idSelecionado
-  sql = 'SELECT m.idMaquina, m.nomeModelo, m.fabricanteModelo, m.status  from maquina as m;'
-  
-  mycursor.execute(sql)
-  arrayMaquinas = mycursor.fetchall()
-  mydb.commit()
-  
-  i = 0
-  
-  print("\nMáquinas cadastradas no banco de dados:\n")
-  while i < len(arrayMaquinas):
-    idMaquina = arrayMaquinas[i][0]
-    modeloMaquina = arrayMaquinas[i][1]
-    fabricanteMaquina = arrayMaquinas[i][2]
-    statusMaquina = arrayMaquinas[i][3]
+    global idSelecionado
     
-    print(f"({idMaquina}, {modeloMaquina} - {fabricanteMaquina}, {statusMaquina})", )
-    i+=1
-    
-  # Validação para garantir que o usuário escreveu um número que seja o ID de alguma as maquinas mostradas a ele
-  while True:
-    idSelecionado = int(input("\nDigite número -2 caso queira sair\nDigite o número de identificação para escolher a maquina: "))
-    
-    if idSelecionado == -2:
-      idSelecionado = -2
-      break
-    
-    try: 
-      arrayMaquinas[idSelecionado - 1]
-    except:
-      print('Número de Identificação não existente\n')
-    else:
-      if arrayMaquinas[idSelecionado - 1][0] == idSelecionado:
-        print('Número de Identificação existente\n')
-        break
-          
+    sql = 'SELECT m.idMaquina, m.status, m.setor, m.serial, f.nomeModelo FROM maquina AS m JOIN modelo AS f ON m.fkModelo = f.idModelo;'
+
+    try:
+        mycursor.execute(sql)
+        arrayMaquinas = mycursor.fetchall()
+        mydb.commit()
+        
+        if len(arrayMaquinas) == 0:
+            print("Nenhuma máquina cadastrada no banco de dados.")
+            return
+        
+        i = 0
+        print("\nMáquinas cadastradas no banco de dados:\n")
+        while i < len(arrayMaquinas):
+            idMaquina = arrayMaquinas[i][0]
+            statusMaquina = arrayMaquinas[i][1]
+            setorMaquina = arrayMaquinas[i][2]
+            serialMaquina = arrayMaquinas[i][3]
+            modeloMaquina = arrayMaquinas[i][4]
+            
+            print(f"({idMaquina}) {modeloMaquina} - {statusMaquina} - Setor: {setorMaquina} - Serial: {serialMaquina}")
+            i += 1
+        
+        while True:
+            try:
+                idSelecionado = int(input("\nDigite número -2 caso queira sair\nDigite o número de identificação para escolher a máquina: "))
+                
+                if idSelecionado == -2:
+                    idSelecionado = -2
+                    break
+                
+                if idSelecionado < 1 or idSelecionado > len(arrayMaquinas):
+                    print("Número de Identificação não existente. Tente novamente.\n")
+                else:
+                    print(f'Máquina {idSelecionado} selecionada.')
+                    break
+            except ValueError:
+                print("Por favor, insira um número válido.")
+    except mysql.connector.Error as err:
+        print(f"Erro na execução da consulta SQL: {err}")
+        mydb.rollback()
+
 def exibirDados(idMaquina):
+    if idMaquina == -1:
+        print("MAQUINA NÃO SELECIONADA")
+        return  
+    elif idMaquina == -2:
+        return -2
 
-  if idMaquina == -1:
-    print("MAQUINA NÃO SELECIONADA")
-    return  
-  elif idMaquina == -2:
-    return -2
+    # Tempo Ativo da CPU
+    mycursor.execute("""
+        SELECT c.nome, d.valor, d.tempoColeta 
+        FROM dados AS d
+        JOIN tipo AS t ON t.idTipo = d.fkTipo
+        JOIN componente AS c ON c.idComponente = t.fkComponente
+        WHERE c.fkMaquina = %s AND t.fkComponente = 1 AND t.idTipo = 1
+        ORDER BY d.tempoColeta DESC;
+    """, (idMaquina,))
+    tempoAtivoCPU = mycursor.fetchall()
 
-# VIEW CPU
-  mycursor.execute("SELECT c.nome, cpu.porcentagemUso, cpu.tempoAtivoPorcentagem, cpu.tempoInativoPorcentagem, cpu.frequencia, cpu.tempoColeta from componente as c join processador as cpu on cpu.fkComponente = c.idComponente where fkMaquina = %s order by tempoColeta desc limit 1; ", [idMaquina])
-  arrayCPU = mycursor.fetchall()
-   
-  # VIEW RAM
-  mycursor.execute("SELECT c.nome, ram.capacidadeTotal, ram.capacidadeDisp, ram.porcentagemUso, ram.tempoColeta from componente as c join memoria as ram on ram.fkComponente = c.idComponente where fkMaquina = %s order by tempoColeta desc limit 1; ", [idMaquina])
-  arrayRAM = mycursor.fetchall()  
+    # Tempo Inativo da CPU
+    mycursor.execute("""
+        SELECT c.nome, d.valor, d.tempoColeta 
+        FROM dados AS d
+        JOIN tipo AS t ON t.idTipo = d.fkTipo
+        JOIN componente AS c ON c.idComponente = t.fkComponente
+        WHERE c.fkMaquina = %s AND t.fkComponente = 1 AND t.idTipo = 2
+        ORDER BY d.tempoColeta DESC;
+    """, (idMaquina,))
+    tempoInativoCPU = mycursor.fetchall()
 
-  # VIEW BATERIA
-  mycursor.execute("SELECT c.nome, bat.porcentagemAtual, bat.tempoColeta from componente as c join bateria as bat on bat.fkComponente = c.idComponente where fkMaquina = %s order by tempoColeta desc limit 1; ", [idMaquina])
-  arrayBATERIA = mycursor.fetchall()
+    # Uso da CPU
+    mycursor.execute("""
+        SELECT c.nome, d.valor, d.tempoColeta 
+        FROM dados AS d
+        JOIN tipo AS t ON t.idTipo = d.fkTipo
+        JOIN componente AS c ON c.idComponente = t.fkComponente
+        WHERE c.fkMaquina = %s AND t.fkComponente = 1 AND t.idTipo = 3
+        ORDER BY d.tempoColeta DESC;
+    """, (idMaquina,))
+    usoCPU = mycursor.fetchall()
 
-  mycursor.execute("SELECT c.nome, net.byteEnviado, net.tempoColeta from componente as c join redeChip as net on net.fkComponente = c.idComponente where fkMaquina = %s order by tempoColeta desc limit 1; ", [idMaquina])
-  arrayREDE = mycursor.fetchall()
+    # Frequência da CPU
+    mycursor.execute("""
+        SELECT c.nome, d.valor, d.tempoColeta 
+        FROM dados AS d
+        JOIN tipo AS t ON t.idTipo = d.fkTipo
+        JOIN componente AS c ON c.idComponente = t.fkComponente
+        WHERE c.fkMaquina = %s AND t.fkComponente = 1 AND t.idTipo = 4
+        ORDER BY d.tempoColeta DESC;
+    """, (idMaquina,))
+    frequenciaCPU = mycursor.fetchall()
 
-  mycursor.execute("SELECT c.nome, disco.capacidadeTotal, disco.capacidadeDisp, disco.tempoColeta     from componente as c join armazenamento as disco on disco.fkComponente = c.idComponente where fkMaquina = %s order by tempoColeta desc limit 1;", [idMaquina])
-  arrayDISCO = mycursor.fetchall()
-  
-  mydb.commit()
-  
-  has_dataCPU = True
-  has_dataRAM = True
-  has_dataBATERIA = True
-  has_dataREDE = True
-  has_dataDISCO = True
+    # Memória Disponivel
+    mycursor.execute("""
+        SELECT c.nome, d.valor, d.tempoColeta 
+        FROM dados AS d
+        JOIN tipo AS t ON t.idTipo = d.fkTipo
+        JOIN componente AS c ON c.idComponente = t.fkComponente
+        WHERE c.fkMaquina = %s AND t.fkComponente = 2 AND t.idTipo = 5
+        ORDER BY d.tempoColeta DESC;
+    """, (idMaquina,))
+    MemDispRAM = mycursor.fetchall()
+
+    #Memória Utilizada em porcentagem
+    mycursor.execute("""
+        SELECT c.nome, d.valor, d.tempoColeta 
+        FROM dados AS d
+        JOIN tipo AS t ON t.idTipo = d.fkTipo
+        JOIN componente AS c ON c.idComponente = t.fkComponente
+        WHERE c.fkMaquina = %s AND t.fkComponente = 2 AND t.idTipo = 6
+        ORDER BY d.tempoColeta DESC;
+    """, (idMaquina,))
+    MemUtilRAM = mycursor.fetchall()
+
+    #Memória Não utilizada
+    mycursor.execute("""
+        SELECT c.nome, d.valor, d.tempoColeta 
+        FROM dados AS d
+        JOIN tipo AS t ON t.idTipo = d.fkTipo
+        JOIN componente AS c ON c.idComponente = t.fkComponente
+        WHERE c.fkMaquina = %s AND t.fkComponente = 2 AND t.idTipo = 7
+        ORDER BY d.tempoColeta DESC;
+    """, (idMaquina,))
+    MemNaoUtilRAM = mycursor.fetchall()
+
+    #Memória Total
+    mycursor.execute("""
+        SELECT c.nome, d.valor, d.tempoColeta 
+        FROM dados AS d
+        JOIN tipo AS t ON t.idTipo = d.fkTipo
+        JOIN componente AS c ON c.idComponente = t.fkComponente
+        WHERE c.fkMaquina = %s AND t.fkComponente = 2 AND t.idTipo = 8
+        ORDER BY d.tempoColeta DESC;
+    """, (idMaquina,))
+    MemTotalRAM = mycursor.fetchall()
+
+    # Bateria
+    mycursor.execute("""
+        SELECT c.nome, d.valor, d.tempoColeta 
+        FROM dados AS d
+        JOIN tipo AS t ON t.idTipo = d.fkTipo
+        JOIN componente AS c ON c.idComponente = t.fkComponente
+        WHERE c.fkMaquina = %s AND t.fkComponente = 3 AND t.idTipo = 9
+        ORDER BY d.tempoColeta DESC;
+    """, (idMaquina,))
+    BateriaBAT = mycursor.fetchall()
+
+    # Rede
+    mycursor.execute("""
+        SELECT c.nome, d.valor, d.tempoColeta 
+        FROM dados AS d
+        JOIN tipo AS t ON t.idTipo = d.fkTipo
+        JOIN componente AS c ON c.idComponente = t.fkComponente
+        WHERE c.fkMaquina = %s AND t.fkComponente = 4 AND t.idTipo = 10
+        ORDER BY d.tempoColeta DESC;
+    """, (idMaquina,))
+    BytesEnviadosBYTES = mycursor.fetchall()
+
+    #Armazenamento
+    mycursor.execute("""
+        SELECT c.nome, d.valor, d.tempoColeta 
+        FROM dados AS d
+        JOIN tipo AS t ON t.idTipo = d.fkTipo
+        JOIN componente AS c ON c.idComponente = t.fkComponente
+        WHERE c.fkMaquina = %s AND t.fkComponente = 5 AND t.idTipo = 11
+        ORDER BY d.tempoColeta DESC;
+    """, (idMaquina,))
+    DiscoDispDISCO = mycursor.fetchall()
+
+
+    mycursor.execute("""
+        SELECT c.nome, d.valor, d.tempoColeta 
+        FROM dados AS d
+        JOIN tipo AS t ON t.idTipo = d.fkTipo
+        JOIN componente AS c ON c.idComponente = t.fkComponente
+        WHERE c.fkMaquina = %s AND t.fkComponente = 5 AND t.idTipo = 12
+        ORDER BY d.tempoColeta DESC;
+    """, (idMaquina,))
+    DiscoTotalDISCO = mycursor.fetchall()
+
+    # Pegando os valores mais recentes para cada tipo de dado (da posição 0, que é o mais recente)
+    tempoAtivo = tempoAtivoCPU[0][1] 
+    tempoInativo = tempoInativoCPU[0][1]  
+    uso = usoCPU[0][1]  
+    frequencia = frequenciaCPU[0][1] 
+    MemDisp = MemDispRAM[0][1]
+    MemUtil = MemUtilRAM[0][1]
+    MemNaoUtil = MemNaoUtilRAM[0][1]
+    MemTotal = MemTotalRAM[0][1]
+    Bateria = BateriaBAT[0][1]
+    BytesEnviados = BytesEnviadosBYTES[0][1]
+    DiscoDisp = DiscoDispDISCO[0][1]
+    DiscoTotal = DiscoTotalDISCO[0][1]
+    horarioRegistro = usoCPU[0][2]  
+
+    print(f"""
+    {usoCPU[0][0]}  #(CPU)
+    <:---------------------------------------------------------:>
+    | Tempo Ativo: {tempoAtivo}                 
+    | Tempo Inativo: {tempoInativo}               
+    | % de Uso: {uso}               
+    | Frequência: {frequencia}                 
+    | Horário do Registro: {horarioRegistro}              
+    <:---------------------------------------------------------:>
+    <:---------------------------------------------------------:>
+    | Memória Disponivel: {MemDisp / 1024**3:.2f} GB            
+    | Memória Utilizada: {MemUtil} %               
+    | Memória Não Utilizada: {MemNaoUtil / 1024**3:.2f} GB               
+    | Memória Total: {MemTotal / 1024**3:.2f} GB                 
+    | Horário do Registro: {horarioRegistro}              
+    <:---------------------------------------------------------:>
+    <:---------------------------------------------------------:>
+    | Bateria em porcentagem: {Bateria:.2f}                
+    | Horário do Registro: {horarioRegistro}              
+    <:---------------------------------------------------------:>
+    <:---------------------------------------------------------:>
+    | Bytes em porcentagem: {BytesEnviados:.0f}                
+    | Horário do Registro: {horarioRegistro}              
+    <:---------------------------------------------------------:>
+    <:---------------------------------------------------------:>
+    | Armazenamento Disponivel em Bytes: {DiscoDisp} TB
+    | Armazenamento Total: {DiscoTotal} TB               
+    | Horário do Registro: {horarioRegistro}              
+    <:---------------------------------------------------------:>
     
-  if len(arrayCPU) == 0:
-    print('Sem dados de CPU para esta maquina')
-    has_dataCPU = False
+    """)
 
-  if len(arrayRAM) == 0: 
-    print('Sem dados de RAM para esta maquina')
-    has_dataRAM = False
-
-  if len(arrayBATERIA) == 0: 
-    print('Sem dados de BATERIA para esta maquina')
-    has_dataBATERIA = False
-
-  if len(arrayREDE) == 0: 
-    print('Sem dados de REDE para esta maquina')
-    has_dataREDE = False
-
-  if len(arrayDISCO) == 0:
-    print('Sem dados de DISCO para esta maquina')
-    has_dataDISCO = False
-  
-  # Mostrar dados CPU
-  if has_dataCPU:
-    cpu_nome = arrayCPU[0][0]
-    cpu_porcentagemUso = arrayCPU[0][1]
-    cpu_porcentagemAtivo = arrayCPU[0][2]
-    cpu_porcentagemInativo = arrayCPU[0][3]
-    cpu_frequencia = arrayCPU[0][4] / 1000
-    cpu_tempoColeta = arrayCPU[0][5]
-  
-  # Mostrar dados RAM
-  if has_dataRAM:
-    ram_nome = arrayRAM[0][0]
-    ram_capacidadeTotal = arrayRAM[0][1] / 2**30
-    ram_capacidadeDisp = arrayRAM[0][2] / 2**30
-    ram_porcentagemUso = arrayRAM[0][3]
-    ram_tempoColeta = arrayRAM[0][4]
-  
-  # Mostrar dados BATERIA + REDE + DISCO
-  if has_dataBATERIA:  
-    bat_nome = arrayBATERIA[0][0]
-    bat_porcentagemAtual = arrayBATERIA[0][1]
-    bat_tempoColeta = arrayBATERIA[0][2]
-
-  if has_dataREDE:
-    rede_nome = arrayREDE[0][0]
-    rede_byteEnviado = (arrayREDE[0][1] * 8) / (1000 * 17) # 17 = segs
-    rede_tempoColeta = arrayREDE[0][2]
-
-  if has_dataDISCO:
-    disco_nome = arrayDISCO[0][0]
-    disco_capacidadeTotal = arrayDISCO[0][1] / 2**30
-    disco_capacidadeDisponivel = arrayDISCO[0][2] / 2**30
-    disco_tempoColeta = arrayDISCO[0][3]
-  
-  if has_dataCPU:
-    print(f"""  
-    {cpu_nome}
-    <:---------------------------------------------------------:>
-    | % USO - {cpu_porcentagemUso}              
-    |                                  
-    | % ATIVA - {cpu_porcentagemAtivo}           
-    |                                  
-    | % INATIVA - {cpu_porcentagemInativo}         
-    |                                  
-    | FREQUÊNCIA - {round(cpu_frequencia)} GHz                 
-    |                                  
-    | HORÁRIO DO REGISTRO - {cpu_tempoColeta}             
-    <:---------------------------------------------------------:>""")
-  
-  if has_dataRAM:
-    print(f"""
-    {ram_nome}
-    <:---------------------------------------------------------:>
-    | % USO - {ram_porcentagemUso}             
-    |                                  
-    | CAPACIDADE TOTAL - {round(ram_capacidadeTotal)} Gb           
-    |                                  
-    | CAPACIDADE DISPONIVEL - {round(ram_capacidadeDisp)} Gb         
-    |                                  
-    | HORÁRIO DO REGISTRO - {ram_tempoColeta}             
-    <:---------------------------------------------------------:>""")
-  
-  if has_dataBATERIA:
-    print(f"""
-    {bat_nome}
-    <:---------------------------------------------------------:>
-    | % ATUAL - {bat_porcentagemAtual}             
-    |                                  
-    | HORÁRIO DO REGISTRO - {bat_tempoColeta}           
-    <:---------------------------------------------------------:>""")
-  
-  if has_dataREDE:
-    print(f"""                                 
-    {rede_nome}
-    <:---------------------------------------------------------:>
-    | CAPACIDADE DISPONIVEL - {math.floor(rede_byteEnviado)} Kbps        
-    |                                  
-    | HORÁRIO DO REGISTRO - {rede_tempoColeta}             
-    <:---------------------------------------------------------:>""")
-  
-  if has_dataDISCO:
-    print(f"""
-    {disco_nome}
-    <:---------------------------------------------------------:>
-    | CAPACIDADE TOTAL - {math.floor(disco_capacidadeTotal)} Gb          
-    |                                  
-    | CAPACIDADE DISPONIVEL - {math.floor(disco_capacidadeDisponivel)} Gb         
-    |                                  
-    | HORÁRIO DO REGISTRO - {disco_tempoColeta}          
-    <:---------------------------------------------------------:>\n\n""")    
     return True
 
-  
-
 while True:
-  listarMaquinas()
-  retornoFuncao = exibirDados(idSelecionado)
-  
-  if retornoFuncao == -2:
-    break
-  
-  time.sleep(2)
-  
-
-
-# Após a escolha deve mostrar os dados continuamente da maquina selecionada e ao apertar x deve re-aparecer as opcoes novamente
+    listarMaquinas()
+    if idSelecionado == -2:
+        break
+    
+    retornoFuncao = exibirDados(idSelecionado)
+    
+    if retornoFuncao == -2:
+        break
+    
+    time.sleep(5)
