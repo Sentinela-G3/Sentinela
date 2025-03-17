@@ -201,3 +201,7 @@ button:hover{
     background-color: #c9bf75;
     cursor: pointer;
 }
+
+.big_logo{
+    height: 25% !important;
+}

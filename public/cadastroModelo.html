@@ -7,21 +7,30 @@
     <link rel="stylesheet" href="./css/cadastros.css">
 </head>
 <body>
-    
-  <div class="div-geral">
-    <div class="formulario-container">
-      <img src="./assets/img/svgLogo.svg" alt="">
-      <div class="div-cadastro-titulo">Cadastrar novo modelo</div>
-        <div class="formulario-inputs">
-          <div class="titulo-input">Insira o nome do modelo:</div><input type="text" id="input_modelo">
-          <button onclick="cadastrar()">Cadastrar</button>
-          <a href="./index.html" class="troca-tela">Voltar para tela inicial</a>
-          <a href="./edicaoModelo.html" class="troca-tela">Editar modelo</a>
-          <a href="./dash_realTime.html" class="troca-tela">Voltar para dashboard</a>
+  
+  <div class="container_section1">
+    <div class="logo big_logo">
+      <img src="./assets/img/Icon Container.svg">
+      <h1>Cadastrar novo modelo</h1>
+    </div>
+    <div class="formulario">
+      <div>
+        <label class="">Serial:</label>
+        <div class="nome">
+          <input type="text" class="" id="input_nome">
         </div>
+      </div>
+      <div>
+        <label class="">Setor:</label>
+        <input type="text" class="" id="input_cpf">
+      </div>
+    <div class="div_button">
+      <button onclick="cadastrar()">Cadastrar</button>
+      <a href="./index.html" class="troca-tela">Voltar para tela inicial</a>
+      <a href="./edicaoFuncionario.html" class="troca-tela">Editar funcionário</a>
+      <a href="./dash_realTime.html" class="troca-tela">Voltar para dashboard</a>
     </div>
   </div>
-
 </body>
 </html>
 
