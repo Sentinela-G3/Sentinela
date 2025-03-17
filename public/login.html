@@ -3,15 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/cadastros.css">
     <title>Login Sentinela</title>
 </head>
 <body>
     
-Email: <input type="text" id="input_email">
-Senha: <input type="text" id="input_senha">
-
-<button onclick="login()">Logar</button>
-
+    <div class="container_section1">
+        <div class="logo big_logo">
+          <img src="./assets/img/Icon Container.svg">
+          <h1>Login</h1>
+        </div>
+        <div class="formulario">
+          <div>
+            <label class="">Email:</label>
+            <div class="nome">
+              <input type="text" class="" id="input_email" placeholder="fulano@sentinela.com">
+            </div>
+          </div>
+          <div>
+            <label class="">Senha:</label>
+            <input type="password" class="" id="input_senha" placeholder="********">
+          </div>
+        </div>
+        <div class="div_button">
+          <button onclick="login()">Logar</button>
+          <a href="./index.html" class="troca-tela">Voltar para tela inicial</a>
+          <a href="./edicaoFuncionario.html" class="troca-tela">Editar funcionário</a>
+          <a href="./dash_realTime.html" class="troca-tela">Voltar para dashboard</a>
+        </div>
+      </div>
 </body>
 </html>
 
