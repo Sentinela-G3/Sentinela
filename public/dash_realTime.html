@@ -40,7 +40,7 @@
                     <li><button onclick="btn_alerta()">Alertas</button></li>
                 </div>
                 <div class="btn_sair">
-                    <button>Sair</button>
+                    <button onclick="sair()">Sair</button>
                 </div>
             </div>
         </nav>
@@ -188,6 +188,18 @@
 
 <script>
 
+function btn_rt(){
+        window.location = './dash_realTime.html';
+    }
+
+    function btn_hist(){
+        window.location = './dash_analiseHistorica.html'
+    }
+
+    function btn_geral(){
+        window.location = './dash_analiseGeral.html';
+    }
+
     function btn_func() {
         window.location = './cadastroFuncionario.html';
     }
@@ -202,6 +214,10 @@
 
     function btn_endereco(){
         window.location = './cadastroEndereco.html';
+    }
+
+    function sair(){
+        window.location = './index.html';
     }
 
     // Gráficos

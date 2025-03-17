@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./css/table.css">
     <link rel="stylesheet" href="./css/navbar.css">
     <link rel="stylesheet" href="./css/dashboardAH.css">
+    <link rel="stylesheet" href="./dash_realTime.html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
@@ -19,7 +20,7 @@
 </head>
 
 
-<body id="dash_RT">
+<body class="body_dashRealTime" id="dash_RT">
     <div class="container_navDashRT">
         <nav>
             <div class="perfil">
@@ -39,13 +40,14 @@
                     <li><button onclick="btn_rt()">Análise em tempo real</button></li>
                     <li><button onclick="btn_hist()">Análise histórica</button></li>
                     <li><button onclick="btn_geral()">Ańálise geral</button></li>
-                    <li><button onclick="btn_func()">Gerenciamento de funcionário</button></li>
-                    <li><button onclick="btn_disp()">Gerenciamento de Dispositivo</button></li>
-                    <li><button onclick="btn_alerta()">Alertas</button></li>
                     <li><button onclick="btn_endereco()">Gerenciamento de Endereços</button></li>
+                    <li><button onclick="btn_func()">Gerenciamento de Funcionário</button></li>
+                    <li><button onclick="btn_disp()">Gerenciamento de Modelo</button></li>
+                    <li><button onclick="btn_maquina()">Gerenciamento de Maquina</button></li>
+                    <li><button onclick="btn_alerta()">Alertas</button></li>
                 </div>
                 <div class="btn_sair">
-                    <button>Sair</button>
+                    <button onclick="sair()">Sair</button>
                 </div>
             </div>
         </nav>
@@ -273,6 +275,39 @@
 </html>
 
 <script>
+
+function btn_rt(){
+        window.location = './dash_realTime.html';
+    }
+
+    function btn_hist(){
+        window.location = './dash_analiseHistorica.html'
+    }
+
+    function btn_geral(){
+        window.location = './dash_analiseGeral.html';
+    }
+
+    function btn_func() {
+        window.location = './cadastroFuncionario.html';
+    }
+
+    function btn_disp() {
+        window.location = './cadastroModelo.html';
+    }
+
+    function btn_maquina() {
+        window.location = './cadastroMaquina.html';
+    }
+
+    function btn_endereco(){
+        window.location = './cadastroEndereco.html';
+    }
+
+    function sair(){
+        window.location = './index.html';
+    }
+
     var options = {
         series: [{
             name: "Mês atual",
