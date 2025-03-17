@@ -49,7 +49,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 90%;
-  height: max-content;
+  height: 200vh;
 
   gap: 4vh;
 }
@@ -101,7 +101,9 @@ body {
 #list-cards {
   display: grid;
   grid-template-columns: 75%;
-  gap: 2%;
+  gap: 3%;
+  width: max-content;
+  height: 150vh;
   margin-bottom: calc(2%);
 }
 
@@ -115,6 +117,7 @@ body {
   display: flex;
   flex-direction: row;
   border: var(--borda-padrao-box);
+  height: calc(50vh - 4vh);
   width: 100%;
   gap: 2.5vh;
   padding: 2vh;
@@ -307,9 +310,11 @@ body {
 
 .graficos_align {
   display: flex;
+  width: 60vw;
   flex-direction: row;
 }
 
 .ultimos_graficos {
   display: flex;
+  width: fit-content;
 } 
