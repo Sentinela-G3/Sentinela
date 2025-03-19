@@ -2,8 +2,8 @@ import time
 import mysql.connector
 
 mydb = mysql.connector.connect(
-    host="34.207.88.160",
-    user="sentinelaTestes",
+    host=10.18.32.9",
+    user="sentinelaAdmin",
     password="Sentinela@123",
     database="sentinela"
 )
@@ -152,15 +152,15 @@ def exibirDados(idMaquina):
     MemTotalRAM = mycursor.fetchall()
 
     # Bateria
-    #mycursor.execute("""
-    #    SELECT c.nome, d.valor, d.tempoColeta 
-    #    FROM dados AS d
-    #    JOIN tipo AS t ON t.idTipo = d.fkTipo
-    #    JOIN componente AS c ON c.idComponente = t.fkComponente
-    #    WHERE c.fkMaquina = %s AND t.fkComponente = 3 AND t.idTipo = 9
-    #    ORDER BY d.tempoColeta DESC;
-    #""", (idMaquina,))
-    #BateriaBAT = mycursor.fetchall()
+    mycursor.execute("""
+        SELECT c.nome, d.valor, d.tempoColeta 
+        FROM dados AS d
+        JOIN tipo AS t ON t.idTipo = d.fkTipo
+        JOIN componente AS c ON c.idComponente = t.fkComponente
+        WHERE c.fkMaquina = %s AND t.fkComponente = 3 AND t.idTipo = 9
+        ORDER BY d.tempoColeta DESC;
+    """, (idMaquina,))
+    BateriaBAT = mycursor.fetchall()
 
     # Rede
     mycursor.execute("""
@@ -204,7 +204,7 @@ def exibirDados(idMaquina):
     MemUtil = MemUtilRAM[0][1]
     MemNaoUtil = MemNaoUtilRAM[0][1]
     MemTotal = MemTotalRAM[0][1]
-#    Bateria = BateriaBAT[0][1]
+    Bateria = BateriaBAT[0][1]
     BytesEnviados = BytesEnviadosBYTES[0][1]
     DiscoDisp = DiscoDispDISCO[0][1]
     DiscoTotal = DiscoTotalDISCO[0][1]
@@ -224,6 +224,10 @@ def exibirDados(idMaquina):
     | Memória Utilizada: {MemUtil} %               
     | Memória Não Utilizada: {MemNaoUtil / 1024**3:.2f} GB               
     | Memória Total: {MemTotal / 1024**3:.2f} GB                 
+    | Horário do Registro: {horarioRegistro}              
+    <:---------------------------------------------------------:>
+    <:---------------------------------------------------------:>
+    | Bateria em porcentagem: {Bateria:.2f}                
     | Horário do Registro: {horarioRegistro}              
     <:---------------------------------------------------------:>
     <:---------------------------------------------------------:>
