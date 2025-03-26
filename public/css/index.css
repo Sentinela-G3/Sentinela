@@ -162,7 +162,7 @@ body {
 
 .section1_desc {
   font-size: 200%;
-  height: 10%;
+  height: 30%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -187,14 +187,24 @@ body {
 .motivoTres,
 .motivoQuatro {
   background-color: #dadada;
+  text-align: center;
   padding: 1%;
-  border-radius: 5px;
+  border-radius: 10px;
   width: 21%;
-  height: 70%;
+  height: 85%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  transition: all 0.2s ease-in-out;
+}
+
+.motivoUm:hover,
+.motivoDois:hover,
+.motivoTres:hover,
+.motivoQuatro:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
 }
 
 .motivoUm_desc span,
@@ -302,6 +312,7 @@ body {
 .monitoramento_img_legenda{
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 
@@ -310,12 +321,15 @@ body {
 .monitoramento_imgDois, 
 .monitoramento_imgTres, 
 .monitoramento_imgQuatro{
-  height: 40%;
-  width: 45%;
+  height: 30%;
+  width: 30%;
   display: flex;
+  align-items: center;
+  justify-content: center;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: left;
+  padding-top: 60%;
 }
 
 .monitoramento_imgUm{
