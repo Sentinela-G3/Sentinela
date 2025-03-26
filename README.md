@@ -1,2 +1,0 @@
-# Sentinela
-Site do Sentinela
